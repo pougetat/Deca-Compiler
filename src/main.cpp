@@ -2,10 +2,10 @@
 #include "lexer/lexer.h"
 using namespace std;
 
-int main() {
+int main(int argc, char * argv[])
+{
+    Lexer lexer("hello.txt");
+    lexer.tokenize();
 
-    say_hi();
-
-    cout << "hello world" << endl;
     return 0;
 }
