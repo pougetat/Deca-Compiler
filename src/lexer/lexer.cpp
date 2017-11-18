@@ -1,6 +1,5 @@
 #include <fstream>
 #include "lexer.h"
-#include "token.h"
 
 Lexer::Lexer(string input_file)
 {
@@ -11,7 +10,6 @@ Lexer::Lexer(string input_file)
 		istreambuf_iterator<char>()
 	);
 	m_cur_char_index = 0;
-
 }
 
 void Lexer::tokenize()
@@ -20,10 +18,11 @@ void Lexer::tokenize()
 
 	while (token.m_token_type != TOKEN_EOF)
 	{
-		cout << token.m_token_string << endl;
+		cout << "<" <<
+			token.m_token_string << "," << token_names[token.m_token_type]
+		<< ">" << endl;
 		token = nextToken();
 	}
-
 }
 
 Token Lexer::nextToken()
@@ -43,6 +42,11 @@ Token Lexer::nextToken()
 			case 'A' ... 'Z': case 'a' ... 'z': case '_': case '$':
 			{
 				string ident = get_ident();
+
+				if (keyword_map.find(ident) != keyword_map.end()) {
+					return Token(keyword_map[ident], ident);
+				}
+
 				return Token(TOKEN_IDENT, ident);
 			}
 
