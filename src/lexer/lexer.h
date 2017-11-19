@@ -2,17 +2,19 @@
 #define LEXER_H
 
 #include "token.h"
+#include <vector>
+
+using namespace std;
 
 class Lexer {
 
     public:
-        Lexer(string inputFile);
-        void tokenize();
 
-        string m_content;
-        int m_cur_char_index;
+        Lexer(string inputFile);
+        vector<Token> tokenize();
 
     private:
+
         Token nextToken();
         string get_ident();
         void whitespace();
@@ -20,6 +22,9 @@ class Lexer {
         bool match(char symbol);
         bool is_letter(char symbol);
         bool is_digit(char symbol);
+
+        string m_content;
+        int m_cur_char_index;
 
 };
 

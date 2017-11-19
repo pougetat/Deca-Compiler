@@ -12,17 +12,19 @@ Lexer::Lexer(string input_file)
 	m_cur_char_index = 0;
 }
 
-void Lexer::tokenize()
+vector<Token> Lexer::tokenize()
 {
+	vector<Token> tokens;
 	Token token = nextToken();
+	tokens.push_back(token);
 
 	while (token.m_token_type != TOKEN_EOF)
 	{
-		cout << "<" <<
-			token.m_token_string << "," << token_names[token.m_token_type]
-		<< ">" << endl;
 		token = nextToken();
+		tokens.push_back(token);
 	}
+
+	return tokens;
 }
 
 Token Lexer::nextToken()
