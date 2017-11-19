@@ -1,0 +1,1 @@
+#include "DeclClass.h"
