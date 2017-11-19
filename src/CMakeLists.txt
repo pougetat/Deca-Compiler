@@ -11,4 +11,4 @@ set(SRCS
 	
 add_executable(main ${SRCS})
 
-target_link_libraries(main lexer parser)
+target_link_libraries(main lexer parser AST)

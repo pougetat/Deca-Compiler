@@ -16,13 +16,15 @@ using namespace std;
 class SyntaxParser {
 
     public:
+
         SyntaxParser(vector<Token> tokens);
-        Program CreateAST();
+        void CreateAST();
+        void DisplayAST();
 
     private:
 
         vector<Token> m_tokens;
-        Program m_program;
+        Program * m_program;
 
         bool MatchToken(TokenType token_type, int cur_token_index);
         void ConsumeToken(int * cur_token_index);

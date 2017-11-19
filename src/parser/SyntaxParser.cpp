@@ -3,13 +3,13 @@
 SyntaxParser::SyntaxParser(vector<Token> tokens)
 {
     m_tokens = tokens;
-    m_program = Program();
+    m_program = new Program();
 }
 
-Program SyntaxParser::CreateAST()
+void SyntaxParser::CreateAST()
 {
     int cur_token_index = 0;
-    m_program.main = ParseMain(&cur_token_index);
+    m_program->m_main = ParseMain(&cur_token_index);
 }
 
 AbstractMain * SyntaxParser::ParseMain(int * cur_token_index)
@@ -69,4 +69,9 @@ bool SyntaxParser::MatchToken(TokenType token_type, int cur_token_index)
 void SyntaxParser::ConsumeToken(int * cur_token_index)
 {
     (*cur_token_index)++;
+}
+
+void SyntaxParser::DisplayAST()
+{
+    m_program->Display("-");
 }

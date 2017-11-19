@@ -23,7 +23,6 @@ vector<Token> Lexer::tokenize()
 		token = nextToken();
 		tokens.push_back(token);
 	}
-
 	return tokens;
 }
 

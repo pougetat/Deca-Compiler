@@ -1,6 +1,16 @@
 #ifndef ABSTRACT_MAIN_H
 #define ABSTRACT_MAIN_H
 
-class AbstractMain {};
+#include <ostream>
+
+using namespace std;
+
+class AbstractMain
+{
+    public:
+
+        virtual void Display(string tab);
+
+};
 
 #endif

@@ -4,14 +4,18 @@
 #include "DeclClass.h"
 #include "AbstractMain.h"
 #include <vector>
+#include <ostream>
 
 using namespace std;
 
 class Program {
 
     public:
-        vector<DeclClass> list_decl_class;
-        AbstractMain * main;
+
+        vector<DeclClass> m_list_decl_class;
+        AbstractMain * m_main;
+
+        void Display(string tab);
 
 };
 
