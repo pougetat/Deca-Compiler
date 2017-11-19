@@ -4,7 +4,9 @@
 #include <vector>
 #include <ostream>
 #include "../lexer/token.h"
+#include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
+#include "AST/AbstractPrint.h"
 #include "AST/EmptyMain.h"
 #include "AST/NonEmptyMain.h"
 #include "AST/Program.h"
@@ -22,11 +24,10 @@ class SyntaxParser {
         vector<Token> m_tokens;
         Program m_program;
 
-        vector<DeclClass> ParseListDeclClass(int* cur_token_index);
-        AbstractMain ParseMain(int* cur_token_index);
-        void ParseListDeclVar(int* cur_token_index);
-        void ParseListInst(int* cur_token_index);
-
+        bool ParseMain(int * cur_token_index, AbstractMain * main);
+        bool ParseEmptyMain(int * cur_token_index, AbstractMain * main);
+        bool ParseNonEmptyMain(int * cur_token_index, AbstractMain * main);
+        bool ParseInst(int * cur_token_index, AbstractInst * inst);
 
 };
 

@@ -12,37 +12,49 @@ Program SyntaxParser::CreateAST()
     Token cur_token = m_tokens.at(cur_token_index);
     cur_token_index++;
 
-    vector<DeclClass> list_decl_class;
-    AbstractMain abstract_main;
-
-    //cout << cur_token.m_token_string << endl;
-    if (cur_token.m_token_type == TOKEN_CLASS) {
-        list_decl_class = ParseListDeclClass(&cur_token_index);
-    }
-    if (cur_token.m_token_type == TOKEN_OBRACE) {
-        abstract_main = ParseMain(&cur_token_index);
-    }
-
-    m_program.list_decl_class = list_decl_class;
-    m_program.main = abstract_main;
-
-}
-
-vector<DeclClass> SyntaxParser::ParseListDeclClass(int * cur_token_index)
-{
-    cout << "ParseListDeclClass" << endl;
-}
-
-AbstractMain SyntaxParser::ParseMain(int * cur_token_index)
-{
-    cout << "ParseMain" << endl;
-
-    Token cur_token = m_tokens.at(*cur_token_index);
+    // Parsing rules
     AbstractMain main;
+    ParseMain(&cur_token_index, &main);
 
-    if (cur_token.m_token_type == TOKEN_CBRACE)
+    // setting up Program Node
+    m_program.main = main;
+
+}
+
+bool SyntaxParser::ParseMain(int * cur_token_index, AbstractMain * main)
+{
+    if (!ParseEmptyMain(cur_token_index, main))
     {
-        main = EmptyMain();
-        return main;
+        if (!ParseNonEmptyMain(cur_token_index, main))
+        {
+            throw runtime_error("Expected EMPTY MAIN or NON EMPTY MAIN");
+        }
     }
+}
+
+bool SyntaxParser::ParseEmptyMain(int * cur_token_index, AbstractMain * main)
+{
+    if (m_tokens.at(*cur_token_index).m_token_type != TOKEN_EOF)
+    {
+        return false;
+    }
+    *main = EmptyMain();
+    (*cur_token_index)++;
+}
+
+bool SyntaxParser::ParseNonEmptyMain(int * cur_token_index, AbstractMain * main)
+{
+    if (m_tokens.at(*cur_token_index).m_token_type != TOKEN_OBRACE)
+    {
+        return false;
+    }
+    (*cur_token_index)++;
+
+    AbstractInst inst;
+    bool is_inst = ParseInst(cur_token_index, &inst);
+}
+
+bool SyntaxParser::ParseInst(int * cur_token_index, AbstractInst * inst)
+{
+    return false;
 }
