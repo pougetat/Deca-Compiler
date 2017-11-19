@@ -11,7 +11,7 @@ class Program {
 
     public:
         vector<DeclClass> list_decl_class;
-        AbstractMain main;
+        AbstractMain * main;
 
 };
 

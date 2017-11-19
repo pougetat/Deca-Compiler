@@ -24,10 +24,20 @@ class SyntaxParser {
         vector<Token> m_tokens;
         Program m_program;
 
-        bool ParseMain(int * cur_token_index, AbstractMain * main);
-        bool ParseEmptyMain(int * cur_token_index, AbstractMain * main);
-        bool ParseNonEmptyMain(int * cur_token_index, AbstractMain * main);
-        bool ParseInst(int * cur_token_index, AbstractInst * inst);
+        bool MatchToken(TokenType token_type, int cur_token_index);
+        void ConsumeToken(int * cur_token_index);
+
+        // Main rules
+
+        AbstractMain * ParseMain(int * cur_token_index);
+
+        bool MatchEmptyMain(int cur_token_index);
+        EmptyMain * ParseEmptyMain(int * cur_token_index);
+
+        bool MatchNonEmptyMain(int cur_token_index);
+        NonEmptyMain * ParseNonEmptyMain(int * cur_token_index);
+
+        //
 
 };
 

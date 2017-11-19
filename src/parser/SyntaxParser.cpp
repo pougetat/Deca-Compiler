@@ -9,52 +9,64 @@ SyntaxParser::SyntaxParser(vector<Token> tokens)
 Program SyntaxParser::CreateAST()
 {
     int cur_token_index = 0;
-    Token cur_token = m_tokens.at(cur_token_index);
-    cur_token_index++;
-
-    // Parsing rules
-    AbstractMain main;
-    ParseMain(&cur_token_index, &main);
-
-    // setting up Program Node
-    m_program.main = main;
-
+    m_program.main = ParseMain(&cur_token_index);
 }
 
-bool SyntaxParser::ParseMain(int * cur_token_index, AbstractMain * main)
+AbstractMain * SyntaxParser::ParseMain(int * cur_token_index)
 {
-    if (!ParseEmptyMain(cur_token_index, main))
+    if (MatchEmptyMain(*cur_token_index))
     {
-        if (!ParseNonEmptyMain(cur_token_index, main))
-        {
-            throw runtime_error("Expected EMPTY MAIN or NON EMPTY MAIN");
-        }
+        return ParseEmptyMain(cur_token_index);
+    }
+    else if (MatchNonEmptyMain(*cur_token_index))
+    {
+        return ParseNonEmptyMain(cur_token_index);
+    }
+    else
+    {
+        throw runtime_error("Expected EMPTY MAIN or NON EMPTY MAIN");
     }
 }
 
-bool SyntaxParser::ParseEmptyMain(int * cur_token_index, AbstractMain * main)
+bool SyntaxParser::MatchEmptyMain(int cur_token_index)
 {
-    if (m_tokens.at(*cur_token_index).m_token_type != TOKEN_EOF)
+    return MatchToken(TOKEN_EOF, cur_token_index);
+}
+
+EmptyMain * SyntaxParser::ParseEmptyMain(int * cur_token_index)
+{
+    MatchToken(TOKEN_EOF, *cur_token_index);
+    ConsumeToken(cur_token_index);
+
+    return new EmptyMain();
+}
+
+bool SyntaxParser::MatchNonEmptyMain(int cur_token_index)
+{
+    return MatchToken(TOKEN_OBRACE, cur_token_index);
+}
+
+NonEmptyMain * SyntaxParser::ParseNonEmptyMain(int * cur_token_index)
+{
+    MatchToken(TOKEN_OBRACE, *cur_token_index);
+    ConsumeToken(cur_token_index);
+
+    if (!MatchToken(TOKEN_CBRACE, *cur_token_index))
     {
-        return false;
+        throw runtime_error("Expected '}'");
     }
-    *main = EmptyMain();
+    ConsumeToken(cur_token_index);
+
+}
+
+// Utility methods
+
+bool SyntaxParser::MatchToken(TokenType token_type, int cur_token_index)
+{
+    return (m_tokens.at(cur_token_index).m_token_type == token_type);
+}
+
+void SyntaxParser::ConsumeToken(int * cur_token_index)
+{
     (*cur_token_index)++;
-}
-
-bool SyntaxParser::ParseNonEmptyMain(int * cur_token_index, AbstractMain * main)
-{
-    if (m_tokens.at(*cur_token_index).m_token_type != TOKEN_OBRACE)
-    {
-        return false;
-    }
-    (*cur_token_index)++;
-
-    AbstractInst inst;
-    bool is_inst = ParseInst(cur_token_index, &inst);
-}
-
-bool SyntaxParser::ParseInst(int * cur_token_index, AbstractInst * inst)
-{
-    return false;
 }
