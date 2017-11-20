@@ -20,18 +20,13 @@ void SyntaxParser::CreateAST()
 
 AbstractMain * SyntaxParser::ParseMain(int * cur_token_index)
 {
-    int old_token_index = *cur_token_index;
     if (MatchEmptyMain(*cur_token_index))
     {
-        *cur_token_index = old_token_index;
         return ParseEmptyMain(cur_token_index);
     }
 
-    *cur_token_index = old_token_index;
-
     if (MatchNonEmptyMain(*cur_token_index))
     {
-        *cur_token_index = old_token_index;
         return ParseNonEmptyMain(cur_token_index);
     }
     else
@@ -63,7 +58,6 @@ NonEmptyMain * SyntaxParser::ParseNonEmptyMain(int * cur_token_index)
     MatchToken(TOKEN_OBRACE, *cur_token_index);
     ConsumeToken(cur_token_index);
 
-    int old_token_index = *cur_token_index;
     while (MatchDeclVar(*cur_token_index)) {
         DeclVar * decl_var = ParseDeclVar(cur_token_index);
     }
