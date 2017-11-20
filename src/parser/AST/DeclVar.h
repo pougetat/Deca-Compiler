@@ -3,4 +3,4 @@
 
 class DeclVar {};
 
-#endif DECL_VAR_H
+#endif

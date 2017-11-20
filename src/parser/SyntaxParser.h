@@ -39,8 +39,15 @@ class SyntaxParser {
         bool MatchNonEmptyMain(int cur_token_index);
         NonEmptyMain * ParseNonEmptyMain(int * cur_token_index);
 
-        //
+        bool MatchDeclVar(int cur_token_index);
+        DeclVar * ParseDeclVar(int * cur_token_index);
 
+        bool MatchIdent(int cur_token_index);
+        bool MatchType(int * cur_token_index);
+
+        bool MatchInst(int cur_token_index);
+        AbstractInst * ParseInst(int * cur_token_index);
+        
 };
 
 #endif
