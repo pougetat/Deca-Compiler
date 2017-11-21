@@ -169,6 +169,23 @@ Token Lexer::nextToken()
 				return Token(TOKEN_SEMICOLON, ";");
 			}
 
+			// recognizing literal tokens
+			case '0':
+			{
+				consume();
+				return Token(TOKEN_LITERAL_INT, "0");
+			}
+			case '1'...'9':
+			{
+				string literal_int = get_literal_int();
+				return Token(TOKEN_LITERAL_INT, literal_int);
+			}
+			case '"':
+			{
+				string literal_string = get_literal_string();
+				return Token(TOKEN_LITERAL_STRING, literal_string);
+			}
+
 			default:
 				cout << "LEXING ERROR" << endl;
 				m_cur_char_index = m_content.length();
@@ -221,7 +238,6 @@ bool Lexer::is_digit(char symbol)
 string Lexer::get_ident()
 {
 	string ident(1, m_content[m_cur_char_index]);
-
 	consume();
 
 	while (
@@ -239,5 +255,39 @@ string Lexer::get_ident()
 	}
 
 	return ident;
+}
+
+string Lexer::get_literal_int()
+{
+	string literal_int(1, m_content[m_cur_char_index]);
+	consume();
+
+	while (is_digit(m_content[m_cur_char_index]))
+	{
+		literal_int += string(1, m_content[m_cur_char_index]);
+		consume();
+	}
+
+	return literal_int;
+}
+
+string Lexer::get_literal_string()
+{
+	consume();
+	string literal_string("");
+
+	while (!match('"') && m_cur_char_index < m_content.length())
+	{
+		literal_string += string(1, m_content[m_cur_char_index]);
+		consume();
+	}
+	if (m_cur_char_index == m_content.length())
+	{
+		throw runtime_error("YOU FORGOT TO CLOSE THE LITERAL STRING");
+	}
+
+	consume();
+
+	return literal_string;
 
 }

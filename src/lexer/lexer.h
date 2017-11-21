@@ -17,6 +17,8 @@ class Lexer {
 
         Token nextToken();
         string get_ident();
+        string get_literal_int();
+        string get_literal_string();
         void whitespace();
         void consume();
         bool match(char symbol);
