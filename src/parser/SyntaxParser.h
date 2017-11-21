@@ -4,11 +4,17 @@
 #include <vector>
 #include <ostream>
 #include "../lexer/token.h"
+#include "AST/AbstractExpr.h"
 #include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
 #include "AST/AbstractPrint.h"
+#include "AST/DeclClass.h"
+#include "AST/DeclVar.h"
 #include "AST/EmptyMain.h"
+#include "AST/Identifier.h"
+#include "AST/Initialization.h"
 #include "AST/NonEmptyMain.h"
+#include "AST/Print.h"
 #include "AST/Program.h"
 
 using namespace std;
@@ -36,14 +42,25 @@ class SyntaxParser {
         bool MatchEmptyMain(int cur_token_index);
         EmptyMain * ParseEmptyMain(int * cur_token_index);
 
-        bool MatchNonEmptyMain(int cur_token_index);
-        NonEmptyMain * ParseNonEmptyMain(int * cur_token_index);
+        bool MatchBlock(int cur_token_index);
+        NonEmptyMain * ParseBlock(int * cur_token_index);
+
+        bool MatchListDecl(int cur_token_index);
+        vector<DeclVar> * ParseListDecl(int * cur_token_index);
+
+        bool MatchDeclVarSet(int cur_toke_index);
+        vector<DeclVar> * ParseDeclVarSet(int * cur_token_index);
+
+        vector<DeclVar> * ParseListDeclVar(int * cur_token_index);
 
         bool MatchDeclVar(int cur_token_index);
         DeclVar * ParseDeclVar(int * cur_token_index);
 
         bool MatchIdent(int cur_token_index);
-        bool MatchType(int * cur_token_index);
+        Identifier * ParseIdentifier(int * cur_token_index);
+
+        bool MatchInitialization(int cur_toke_index);
+        Initialization * ParseInitialization(int * cur_token_index);
 
         bool MatchInst(int cur_token_index);
         AbstractInst * ParseInst(int * cur_token_index);

@@ -2,5 +2,5 @@
 
 void Program::Display(string tab)
 {
-    m_main->Display(tab + "-");
+    m_main->Display(tab + "--");
 }
