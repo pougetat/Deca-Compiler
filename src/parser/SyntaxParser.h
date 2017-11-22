@@ -33,6 +33,7 @@ class SyntaxParser {
         Program * m_program;
 
         bool MatchToken(TokenType token_type, int cur_token_index);
+        void ShouldMatchToken(TokenType token_type, int * cur_token_index);
         void ConsumeToken(int * cur_token_index);
 
         // Main rules
@@ -46,24 +47,28 @@ class SyntaxParser {
         NonEmptyMain * ParseBlock(int * cur_token_index);
 
         bool MatchListDecl(int cur_token_index);
-        vector<DeclVar> * ParseListDecl(int * cur_token_index);
+        vector<DeclVar *> * ParseListDecl(int * cur_token_index);
 
         bool MatchDeclVarSet(int cur_toke_index);
-        vector<DeclVar> * ParseDeclVarSet(int * cur_token_index);
+        vector<DeclVar *> * ParseDeclVarSet(int * cur_token_index);
 
-        vector<DeclVar> * ParseListDeclVar(int * cur_token_index);
+        vector<DeclVar *> * ParseListDeclVar(int * cur_token_index);
 
         bool MatchDeclVar(int cur_token_index);
         DeclVar * ParseDeclVar(int * cur_token_index);
 
-        bool MatchIdent(int cur_token_index);
-        Identifier * ParseIdentifier(int * cur_token_index);
-
-        bool MatchInitialization(int cur_toke_index);
-        Initialization * ParseInitialization(int * cur_token_index);
+        bool MatchListInst(int cur_token_index);
+        vector<AbstractInst *> * ParseListInst(int * cur_token_index);
 
         bool MatchInst(int cur_token_index);
         AbstractInst * ParseInst(int * cur_token_index);
+
+        bool MatchListExpr(int cur_token_index);
+        vector<AbstractExpr *> * ParseListExpr(int * cur_token_index);
+
+        bool MatchIdentifier(int cur_token_index);
+        Identifier * ParseIdentifier(int * cur_token_index);
+
         
 };
 

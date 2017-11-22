@@ -13,8 +13,8 @@ class NonEmptyMain : public AbstractMain
 {
     public:
 
-        vector<DeclVar> * list_decl_var;
-        vector<AbstractInst> * list_inst;
+        vector<DeclVar *> * list_decl_var;
+        vector<AbstractInst *> * list_inst;
 
         void Display(string tab);
 };

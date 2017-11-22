@@ -4,7 +4,6 @@ set(SRCS
     AbstractExpr.cpp
     AbstractInst.cpp
 	AbstractMain.cpp
-    AbstractPrint.cpp
     DeclClass.cpp
     DeclVar.cpp
     EmptyMain.cpp
@@ -19,7 +18,6 @@ set(HEADERS
     AbstractExpr.h
     AbstractInst.h
 	AbstractMain.h
-    AbstractPrint.h
     DeclClass.h
     DeclVar.h
 	EmptyMain.h

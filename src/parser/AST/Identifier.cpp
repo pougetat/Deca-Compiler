@@ -7,6 +7,5 @@ Identifier::Identifier(string symbol)
 
 void Identifier::Display(string tab)
 {
-    cout << tab << ">" << "[IDENTIFIER]" << endl;
-    cout << tab << "-->" << "VALUE : " << m_symbol << endl;
+    cout << tab << ">" << "[IDENTIFIER] VALUE : " << m_symbol << endl;
 }
