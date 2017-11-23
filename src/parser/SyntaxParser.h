@@ -7,6 +7,7 @@
 #include "AST/AbstractExpr.h"
 #include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
+#include "AST/AbstractTreeNode.h"
 #include "AST/DeclClass.h"
 #include "AST/DeclVar.h"
 #include "AST/EmptyMain.h"
@@ -51,6 +52,7 @@ class SyntaxParser {
         bool MatchDeclVarSet(int cur_toke_index);
         vector<DeclVar *> * ParseDeclVarSet(int * cur_token_index);
 
+        bool MatchListDeclVar(int cur_token_index);
         vector<DeclVar *> * ParseListDeclVar(int * cur_token_index);
 
         bool MatchDeclVar(int cur_token_index);
@@ -68,7 +70,6 @@ class SyntaxParser {
         bool MatchExpr(int cur_token_index);
         AbstractExpr * ParseExpr(int * cur_token_index);
 
-        bool MatchAssignExpr(int cur_token_index);
         AbstractExpr * ParseAssignExpr(int * cur_token_index);
 
         bool MatchOrExpr(int cur_token_index);
@@ -97,6 +98,9 @@ class SyntaxParser {
 
         bool MatchPrimaryExpr(int cur_token_index);
         AbstractExpr * ParsePrimaryExpr(int * cur_toke_index);
+
+        bool MatchType(int cur_token_index);
+        Identifier * ParseType(int * cur_token_index);
 
         bool MatchLiteral(int cur_token_index);
         AbstractExpr * ParseLiteral(int * cur_token_index);

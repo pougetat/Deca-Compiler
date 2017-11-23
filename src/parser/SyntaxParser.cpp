@@ -113,7 +113,7 @@ vector<DeclVar *> * SyntaxParser::ParseListDecl(int * cur_token_index)
 
 bool SyntaxParser::MatchDeclVarSet(int cur_token_index)
 {
-    return MatchIdentifier(cur_token_index) && MatchIdentifier(cur_token_index+1);
+    return MatchType(cur_token_index) && MatchListDeclVar(cur_token_index+1);
 }
 
 vector<DeclVar *> * SyntaxParser::ParseDeclVarSet(int * cur_token_index)
@@ -129,6 +129,11 @@ vector<DeclVar *> * SyntaxParser::ParseDeclVarSet(int * cur_token_index)
     ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
 
     return list_decl_var;
+}
+
+bool SyntaxParser::MatchListDeclVar(int cur_token_index)
+{
+    return MatchDeclVar(cur_token_index);
 }
 
 /*
@@ -155,6 +160,12 @@ vector<DeclVar *> * SyntaxParser::ParseListDeclVar(int * cur_token_index)
     decl_var ->
         ident ('=' expr)?
 */
+
+bool SyntaxParser::MatchDeclVar(int cur_token_index)
+{
+    return MatchIdentifier(cur_token_index);
+}
+
 DeclVar * SyntaxParser::ParseDeclVar(int * cur_token_index)
 {
     DeclVar * decl_var = new DeclVar();
@@ -181,7 +192,12 @@ vector<AbstractInst *> * SyntaxParser::ParseListInst(int * cur_token_index)
 
     while (MatchInst(*cur_token_index))
     {
-        list_inst->push_back(ParseInst(cur_token_index));
+        AbstractInst * inst = ParseInst(cur_token_index);
+        if (inst != NULL)
+        {
+            list_inst->push_back(inst);
+        }
+
     }
 
     return list_inst;
@@ -217,7 +233,7 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
     if (MatchToken(TOKEN_SEMICOLON, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
-        //return new AbstractInst();
+        return NULL;
     }
     else if (
         MatchToken(TOKEN_PRINT, *cur_token_index) ||
@@ -226,12 +242,12 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         MatchToken(TOKEN_PRINTLNX, *cur_token_index)
     )
     {
-        ConsumeToken(cur_token_index);
-        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
-        
         Print * printInst = new Print(m_tokens.at(*cur_token_index).m_token_type);
-        //printInst->list_expr = ParseListExpr(cur_token_index);
+        ConsumeToken(cur_token_index);
         
+        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+        //printInst->list_expr = ParseListExpr(cur_token_index);
+
         ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
 
@@ -274,6 +290,29 @@ bool SyntaxParser::MatchExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseExpr(int * cur_token_index)
 {
+    return ParseAssignExpr(cur_token_index);
+}
+
+/*
+    
+*/
+
+AbstractExpr * SyntaxParser::ParseAssignExpr(int * cur_token_index)
+{
+    return ParseOrExpr(cur_token_index);
+}
+
+/*
+
+*/
+
+bool SyntaxParser::MatchOrExpr(int cur_token_index)
+{
+    return false;
+}
+
+AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
+{
 
 }
 
@@ -307,7 +346,29 @@ bool SyntaxParser::MatchPrimaryExpr(int cur_token_index)
 }
 
 /*
+    type ->
+        ident
+*/
 
+bool SyntaxParser::MatchType(int cur_token_index)
+{
+    return MatchIdentifier(cur_token_index);
+}
+
+Identifier * SyntaxParser::ParseType(int * cur_token_index)
+{
+    return ParseIdentifier(cur_token_index);
+}
+
+/*
+    literal ->
+        | INT
+        | FLOAT
+        | STRING
+        | 'true''
+        | 'false'
+        | 'this'
+        | 'null'
 */
 
 bool SyntaxParser::MatchLiteral(int cur_token_index)
@@ -324,7 +385,8 @@ bool SyntaxParser::MatchLiteral(int cur_token_index)
 }
 
 /*
-
+    ident ->
+        IDENT
 */
 
 bool SyntaxParser::MatchIdentifier(int cur_token_index)

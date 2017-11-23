@@ -3,12 +3,13 @@
 
 #include "DeclClass.h"
 #include "AbstractMain.h"
+#include "AbstractTreeNode.h"
 #include <vector>
 #include <ostream>
 
 using namespace std;
 
-class Program {
+class Program : public AbstractTreeNode {
 
     public:
 

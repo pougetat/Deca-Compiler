@@ -2,10 +2,11 @@
 #define ABSTRACT_MAIN_H
 
 #include <ostream>
+#include "AbstractTreeNode.h"
 
 using namespace std;
 
-class AbstractMain
+class AbstractMain : public AbstractTreeNode
 {
     public:
 

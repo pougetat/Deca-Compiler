@@ -2,10 +2,11 @@
 #define ABSTRACT_EXPR_H
 
 #include <iostream>
+#include "AbstractTreeNode.h"
 
 using namespace std;
 
-class AbstractExpr 
+class AbstractExpr : public AbstractTreeNode
 {
 
 };
