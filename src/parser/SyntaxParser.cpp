@@ -230,7 +230,7 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
         
         Print * printInst = new Print(m_tokens.at(*cur_token_index).m_token_type);
-        printInst->list_expr = ParseListExpr(cur_token_index);
+        //printInst->list_expr = ParseListExpr(cur_token_index);
         
         ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
@@ -247,12 +247,80 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
 
 bool SyntaxParser::MatchListExpr(int cur_token_index)
 {
-
+    return MatchExpr(cur_token_index);
 }
 
 vector<AbstractExpr *> * SyntaxParser::ParseListExpr(int * cur_token_index)
 {
+    vector<AbstractExpr *> * list_expr = new vector<AbstractExpr *>();
 
+    while(MatchExpr(*cur_token_index))
+    {
+        list_expr->push_back(ParseExpr(cur_token_index));
+    }
+
+    return list_expr;
+}
+
+/*
+    expr ->
+        assign_expr
+*/
+
+bool SyntaxParser::MatchExpr(int cur_token_index)
+{
+    return MatchUnaryExpr(cur_token_index);
+}
+
+AbstractExpr * SyntaxParser::ParseExpr(int * cur_token_index)
+{
+
+}
+
+/*
+
+*/
+
+bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
+{
+    return (
+        MatchToken(TOKEN_OP_MINUS, cur_token_index) ||
+        MatchToken(TOKEN_NEQ, cur_token_index) ||
+        MatchPrimaryExpr(cur_token_index)
+    );
+}
+
+/*
+
+*/
+
+bool SyntaxParser::MatchPrimaryExpr(int cur_token_index)
+{
+    return (
+        MatchIdentifier(cur_token_index) ||
+        MatchToken(TOKEN_OPARENT, cur_token_index) ||
+        MatchToken(TOKEN_READINT, cur_token_index) ||
+        MatchToken(TOKEN_READFLOAT, cur_token_index) ||
+        MatchToken(TOKEN_NEW, cur_token_index) ||
+        MatchLiteral(cur_token_index)
+    );
+}
+
+/*
+
+*/
+
+bool SyntaxParser::MatchLiteral(int cur_token_index)
+{
+    return (
+        MatchToken(TOKEN_LITERAL_INT, cur_token_index) ||
+        MatchToken(TOKEN_LITERAL_FLOAT, cur_token_index) ||
+        MatchToken(TOKEN_LITERAL_STRING, cur_token_index) ||
+        MatchToken(TOKEN_TRUE, cur_token_index) ||
+        MatchToken(TOKEN_FALSE, cur_token_index) ||
+        MatchToken(TOKEN_THIS, cur_token_index) ||
+        MatchToken(TOKEN_NULL, cur_token_index)
+    );
 }
 
 /*

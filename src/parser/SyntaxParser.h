@@ -65,6 +65,42 @@ class SyntaxParser {
         bool MatchListExpr(int cur_token_index);
         vector<AbstractExpr *> * ParseListExpr(int * cur_token_index);
 
+        bool MatchExpr(int cur_token_index);
+        AbstractExpr * ParseExpr(int * cur_token_index);
+
+        bool MatchAssignExpr(int cur_token_index);
+        AbstractExpr * ParseAssignExpr(int * cur_token_index);
+
+        bool MatchOrExpr(int cur_token_index);
+        AbstractExpr * ParseOrExpr(int * cur_token_index);
+
+        bool MatchAndExpr(int cur_token_expr);
+        AbstractExpr * ParseAndExpr(int * cur_token_index);
+
+        bool MatchEqNeqExpr(int cur_token_expr);
+        AbstractExpr * ParseEqNeqExpr(int * cur_token_expr);
+
+        bool MatchInequalityExpr(int cur_token_expr);
+        AbstractExpr * ParseInequalityExpr(int * cur_token_expr);
+
+        bool MatchSumExpr(int cur_token_expr);
+        AbstractExpr * ParseSumExpr(int * cur_token_expr);
+
+        bool MatchMultExpr(int cur_token_index);
+        AbstractExpr * ParseMultExpr(int * cur_token_expr);
+
+        bool MatchUnaryExpr(int cur_token_index);
+        AbstractExpr * ParseUnaryExpr(int * cur_token_expr);
+
+        bool MatchSelectExpr(int cur_toke_index);
+        AbstractExpr * ParseSelectExpr(int * cur_token_index);
+
+        bool MatchPrimaryExpr(int cur_token_index);
+        AbstractExpr * ParsePrimaryExpr(int * cur_toke_index);
+
+        bool MatchLiteral(int cur_token_index);
+        AbstractExpr * ParseLiteral(int * cur_token_index);
+
         bool MatchIdentifier(int cur_token_index);
         Identifier * ParseIdentifier(int * cur_token_index);
 

@@ -4,6 +4,7 @@ set(SRCS
     AbstractExpr.cpp
     AbstractInst.cpp
 	AbstractMain.cpp
+    AbstractTreeNode.cpp
     DeclClass.cpp
     DeclVar.cpp
     EmptyMain.cpp
@@ -18,6 +19,7 @@ set(HEADERS
     AbstractExpr.h
     AbstractInst.h
 	AbstractMain.h
+    AbstractTreeNode.h
     DeclClass.h
     DeclVar.h
 	EmptyMain.h
