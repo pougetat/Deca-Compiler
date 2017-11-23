@@ -293,7 +293,7 @@ vector<AbstractExpr *> * SyntaxParser::ParseListExpr(int * cur_token_index)
 
 bool SyntaxParser::MatchExpr(int cur_token_index)
 {
-    return MatchUnaryExpr(cur_token_index);
+    return MatchAssignExpr(cur_token_index);
 }
 
 AbstractExpr * SyntaxParser::ParseExpr(int * cur_token_index)
@@ -302,8 +302,17 @@ AbstractExpr * SyntaxParser::ParseExpr(int * cur_token_index)
 }
 
 /*
-    
+    assign_expr ->
+        or_expr (
+            { condition: expression e must be a "lvalue"}
+            '=' assign_expr
+        | E )
 */
+
+bool SyntaxParser::MatchAssignExpr(int cur_token_index)
+{
+    return MatchOrExpr(cur_token_index);
+}
 
 AbstractExpr * SyntaxParser::ParseAssignExpr(int * cur_token_index)
 {
@@ -311,12 +320,14 @@ AbstractExpr * SyntaxParser::ParseAssignExpr(int * cur_token_index)
 }
 
 /*
-
+    or_expr ->
+        | and_expr
+        | or_expr '||' and_expr
 */
 
 bool SyntaxParser::MatchOrExpr(int cur_token_index)
 {
-    return false;
+    return MatchAndExpr(cur_token_index);
 }
 
 AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
@@ -325,7 +336,73 @@ AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
 }
 
 /*
+    and_expr ->
+        | eq_neq_expr
+        | and_expr '&&' eq_neq_expr
+*/
 
+bool SyntaxParser::MatchAndExpr(int cur_token_index)
+{
+    return MatchEqNeqExpr(cur_token_index);
+}
+
+/*
+    eq_neq_expr ->
+        | inequality_expr
+        | eq_neq_expr '==' inequality_expr
+        | eq_neq_expr '!=' inequality_expr
+*/
+
+bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
+{
+    return MatchInequalityExpr(cur_token_index);
+}
+
+/*
+    inequality_expr ->
+        | sum_expr
+        | inequality_expr '<=' sum_expr
+        | inequality_expr '>=' sum_expr
+        | inequality_expr '<' sum_expr
+        | inequality_expr '>' sum_expr
+        | inequality_expr 'instanceof' type
+*/
+
+bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
+{
+    return MatchSumExpr(cur_token_index);
+}
+
+/*
+    sum_expr ->
+        | mult_expr
+        | sum_expr '+' mult_expr
+        | sum_expr '-' mult_expr
+*/
+
+bool SyntaxParser::MatchSumExpr(int cur_token_index)
+{
+    return MatchMultExpr(cur_token_index);
+}
+
+/*
+    mult_expr ->
+        | unary_expr
+        | mult_expr '*' unary_expr
+        | mult_expr '/' unary_expr
+        | mult_expr '%' unary_expr
+*/
+
+bool SyntaxParser::MatchMultExpr(int cur_token_index)
+{
+    return MatchUnaryExpr(cur_token_index);
+}
+
+/*
+    unary_expr ->
+        | '-' unary_expr
+        | '!' unary_expr
+        | select_expr
 */
 
 bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
@@ -333,13 +410,22 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
     return (
         MatchToken(TOKEN_OP_MINUS, cur_token_index) ||
         MatchToken(TOKEN_NEQ, cur_token_index) ||
-        MatchPrimaryExpr(cur_token_index)
+        MatchSelectExpr(cur_token_index)
     );
 }
 
 /*
-
+    select_expr ->
+        | primary_expr
+        | select_expr '.' ident
+            ('(' list_expr ')'
+            | E )
 */
+
+bool SyntaxParser::MatchSelectExpr(int cur_token_index)
+{
+    return MatchPrimaryExpr(cur_token_index);
+}
 
 bool SyntaxParser::MatchPrimaryExpr(int cur_token_index)
 {

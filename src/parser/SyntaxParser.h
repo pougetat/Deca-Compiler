@@ -70,6 +70,7 @@ class SyntaxParser {
         bool MatchExpr(int cur_token_index);
         AbstractExpr * ParseExpr(int * cur_token_index);
 
+        bool MatchAssignExpr(int cur_token_index);
         AbstractExpr * ParseAssignExpr(int * cur_token_index);
 
         bool MatchOrExpr(int cur_token_index);
