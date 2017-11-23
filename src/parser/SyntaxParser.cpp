@@ -68,10 +68,18 @@ NonEmptyMain * SyntaxParser::ParseBlock(int * cur_token_index)
     {
         block->list_decl_var = ParseListDecl(cur_token_index);
     }
+    else
+    {
+        block->list_decl_var = new vector<DeclVar *>();
+    }
     
     if (MatchListInst(*cur_token_index))
     {
         block->list_inst = ParseListInst(cur_token_index);
+    }
+    else
+    {
+        block->list_inst = new vector<AbstractInst *>();
     }
 
     ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
