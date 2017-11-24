@@ -9,6 +9,7 @@
 #include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
 #include "AST/AbstractTreeNode.h"
+#include "AST/AndExpr.h"
 #include "AST/DeclClass.h"
 #include "AST/DeclVar.h"
 #include "AST/EmptyMain.h"

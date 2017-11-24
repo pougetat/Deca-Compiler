@@ -363,21 +363,16 @@ AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseAndExpr(int * cur_token_index)
 {
-    if (MatchEqNeqExpr(*cur_token_index))
+    AbstractExpr * expr1 = ParseEqNeqExpr(cur_token_index);
+
+    if (MatchToken(TOKEN_AND, *cur_token_index))
     {
-        return ParseEqNeqExpr(cur_token_index);
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseAndExpr(cur_token_index);
+        return new AndExpr(expr1, expr2);
     }
-    else if (MatchAndExpr(*cur_token_index))
-    {
-        AbstractExpr * expr1 = ParseAndExpr(cur_token_index);
-        ShouldMatchToken(TOKEN_AND, cur_token_index);
-        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
-        //return new AndExpr(expr1, expr2);
-        return NULL;
-    }
-    else
-    {
-        throw runtime_error("No viable alternative");
+    else {
+        return expr1;
     }
 }
 
