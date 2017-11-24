@@ -7,7 +7,7 @@ class Initialization {
 
     public:
         
-        AbstractExpr expression;
+        AbstractExpr * expression;
 
 };
 

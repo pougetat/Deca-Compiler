@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 set(SRCS
+    AbstractBinaryExpr.cpp
     AbstractExpr.cpp
     AbstractInst.cpp
 	AbstractMain.cpp
@@ -11,11 +12,13 @@ set(SRCS
     Identifier.cpp
     Initialization.cpp
     NonEmptyMain.cpp
+    OrExpr.cpp
     Print.cpp
     Program.cpp
 	)
 	
 set(HEADERS
+    AbstractBinaryExpr.h
     AbstractExpr.h
     AbstractInst.h
 	AbstractMain.h
@@ -26,6 +29,7 @@ set(HEADERS
     Identifier.h
     Initialization.h
 	NonEmptyMain.h
+    OrExpr.h
     Print.h
     Program.h
     )

@@ -226,6 +226,7 @@ vector<AbstractInst *> * SyntaxParser::ParseListInst(int * cur_token_index)
 bool SyntaxParser::MatchInst(int cur_token_index)
 {
     return (
+        MatchExpr(cur_token_index) ||
         MatchToken(TOKEN_SEMICOLON, cur_token_index) ||
         MatchToken(TOKEN_PRINT, cur_token_index) ||
         MatchToken(TOKEN_PRINTLN, cur_token_index) ||
@@ -238,9 +239,17 @@ bool SyntaxParser::MatchInst(int cur_token_index)
 
 AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
 {
+    if (MatchExpr(*cur_token_index))
+    {
+        AbstractExpr * expr = ParseExpr(cur_token_index);
+        cout << m_tokens.at(*cur_token_index).m_token_string << endl;
+        ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
+        return expr;
+    }
     if (MatchToken(TOKEN_SEMICOLON, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
+        // return new NoOperation();
         return NULL;
     }
     else if (
@@ -332,7 +341,18 @@ bool SyntaxParser::MatchOrExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
 {
-
+    AbstractExpr * expr1 = ParseAndExpr(cur_token_index);
+    
+    if (MatchToken(TOKEN_OR, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseOrExpr(cur_token_index);
+        return new OrExpr(expr1, expr2);
+    }
+    else
+    {
+        return expr1;
+    }
 }
 
 /*
@@ -340,6 +360,26 @@ AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
         | eq_neq_expr
         | and_expr '&&' eq_neq_expr
 */
+
+AbstractExpr * SyntaxParser::ParseAndExpr(int * cur_token_index)
+{
+    if (MatchEqNeqExpr(*cur_token_index))
+    {
+        return ParseEqNeqExpr(cur_token_index);
+    }
+    else if (MatchAndExpr(*cur_token_index))
+    {
+        AbstractExpr * expr1 = ParseAndExpr(cur_token_index);
+        ShouldMatchToken(TOKEN_AND, cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        //return new AndExpr(expr1, expr2);
+        return NULL;
+    }
+    else
+    {
+        throw runtime_error("No viable alternative");
+    }
+}
 
 bool SyntaxParser::MatchAndExpr(int cur_token_index)
 {
@@ -352,6 +392,11 @@ bool SyntaxParser::MatchAndExpr(int cur_token_index)
         | eq_neq_expr '==' inequality_expr
         | eq_neq_expr '!=' inequality_expr
 */
+
+AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
+{
+    return ParseInequalityExpr(cur_token_index);
+}
 
 bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
 {
@@ -368,6 +413,11 @@ bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
         | inequality_expr 'instanceof' type
 */
 
+AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
+{
+    return ParseSumExpr(cur_token_index);
+}
+
 bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
 {
     return MatchSumExpr(cur_token_index);
@@ -379,6 +429,11 @@ bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
         | sum_expr '+' mult_expr
         | sum_expr '-' mult_expr
 */
+
+AbstractExpr * SyntaxParser::ParseSumExpr(int * cur_token_index)
+{
+    return ParseMultExpr(cur_token_index);
+}
 
 bool SyntaxParser::MatchSumExpr(int cur_token_index)
 {
@@ -393,6 +448,11 @@ bool SyntaxParser::MatchSumExpr(int cur_token_index)
         | mult_expr '%' unary_expr
 */
 
+AbstractExpr * SyntaxParser::ParseMultExpr(int * cur_token_index)
+{
+    return ParseUnaryExpr(cur_token_index);
+}
+
 bool SyntaxParser::MatchMultExpr(int cur_token_index)
 {
     return MatchUnaryExpr(cur_token_index);
@@ -404,6 +464,11 @@ bool SyntaxParser::MatchMultExpr(int cur_token_index)
         | '!' unary_expr
         | select_expr
 */
+
+AbstractExpr * SyntaxParser::ParseUnaryExpr(int * cur_token_index)
+{
+    return ParseSelectExpr(cur_token_index);
+}
 
 bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
 {
@@ -422,9 +487,31 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
             | E )
 */
 
+AbstractExpr * SyntaxParser::ParseSelectExpr(int * cur_token_index)
+{
+    return ParsePrimaryExpr(cur_token_index);
+}
+
 bool SyntaxParser::MatchSelectExpr(int cur_token_index)
 {
     return MatchPrimaryExpr(cur_token_index);
+}
+
+/*
+    primary_expr ->
+        | ident
+        | ident '(' list_expr ')'
+        | '(' expr ')'
+        | 'readInt' '(' ')'
+        | 'readFloat' '(' ')'
+        | 'new' ident '(' ')'
+        | '(' type ')' '(' expr ')'
+        | literal
+*/
+
+AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
+{
+    return ParseIdentifier(cur_token_index);
 }
 
 bool SyntaxParser::MatchPrimaryExpr(int cur_token_index)

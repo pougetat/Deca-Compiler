@@ -4,6 +4,7 @@
 #include <vector>
 #include <ostream>
 #include "../lexer/token.h"
+#include "AST/AbstractBinaryExpr.h"
 #include "AST/AbstractExpr.h"
 #include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
@@ -14,6 +15,7 @@
 #include "AST/Identifier.h"
 #include "AST/Initialization.h"
 #include "AST/NonEmptyMain.h"
+#include "AST/OrExpr.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
 

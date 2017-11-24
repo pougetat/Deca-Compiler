@@ -2,10 +2,11 @@
 #define IDENTIFIER_H
 
 #include <iostream>
+#include "AbstractExpr.h"
 
 using namespace std;
 
-class Identifier
+class Identifier : public AbstractExpr
 {
     public:
 
