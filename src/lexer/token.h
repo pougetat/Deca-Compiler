@@ -44,7 +44,7 @@ enum TokenType
     TOKEN_OP_MOD,
     TOKEN_OP_DOT,
     TOKEN_NOT,
-    TOKEN_NEQ,
+    TOKEN_COMP_NEQ,
     TOKEN_OP_ASSIGN,
     TOKEN_COMP_EQ,
     TOKEN_AND,

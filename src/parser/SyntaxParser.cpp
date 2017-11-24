@@ -242,7 +242,6 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
     if (MatchExpr(*cur_token_index))
     {
         AbstractExpr * expr = ParseExpr(cur_token_index);
-        cout << m_tokens.at(*cur_token_index).m_token_string << endl;
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
         return expr;
     }
@@ -390,7 +389,23 @@ bool SyntaxParser::MatchAndExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
 {
-    return ParseInequalityExpr(cur_token_index);
+    AbstractExpr * expr1 = ParseInequalityExpr(cur_token_index);
+
+    if (MatchToken(TOKEN_COMP_EQ, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new EqualityExpr(expr1, expr2);
+    }
+    else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new InequalityExpr(expr1, expr2);
+    }
+    else {
+        return expr1;
+    }
 }
 
 bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
@@ -469,7 +484,7 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
 {
     return (
         MatchToken(TOKEN_OP_MINUS, cur_token_index) ||
-        MatchToken(TOKEN_NEQ, cur_token_index) ||
+        MatchToken(TOKEN_NOT, cur_token_index) ||
         MatchSelectExpr(cur_token_index)
     );
 }

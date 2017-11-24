@@ -105,7 +105,7 @@ Token Lexer::nextToken()
 				consume();
 				if (match('=')) {
 					consume();
-					return Token(TOKEN_NEQ, "!=");
+					return Token(TOKEN_COMP_NEQ, "!=");
 				}
 				return Token(TOKEN_NOT, "!");
 			}

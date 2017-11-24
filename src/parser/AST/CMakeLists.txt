@@ -10,7 +10,9 @@ set(SRCS
     DeclClass.cpp
     DeclVar.cpp
     EmptyMain.cpp
+    EqualityExpr.cpp
     Identifier.cpp
+    InequalityExpr.cpp
     Initialization.cpp
     NonEmptyMain.cpp
     OrExpr.cpp
@@ -28,7 +30,9 @@ set(HEADERS
     DeclClass.h
     DeclVar.h
 	EmptyMain.h
+    EqualityExpr.h
     Identifier.h
+    InequalityExpr.h
     Initialization.h
 	NonEmptyMain.h
     OrExpr.h
