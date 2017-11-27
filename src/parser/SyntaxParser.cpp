@@ -523,7 +523,23 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
 {
     if (MatchIdentifier(*cur_token_index))
     {
-        return ParseIdentifier(cur_token_index);
+        Identifier * ident = ParseIdentifier(cur_token_index);
+        
+        if (MatchToken(TOKEN_OPARENT, *cur_token_index))
+        {
+            cout << "hello" << endl;
+            ConsumeToken(cur_token_index);
+            // parse list expr
+            ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        }
+        return ident;
+    }
+    if (MatchToken(TOKEN_OPARENT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr = ParseExpr(cur_token_index);
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        return expr;
     }
     if (MatchLiteral(*cur_token_index))
     {
