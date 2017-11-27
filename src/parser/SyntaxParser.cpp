@@ -521,7 +521,14 @@ bool SyntaxParser::MatchSelectExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
 {
-    return ParseIdentifier(cur_token_index);
+    if (MatchIdentifier(*cur_token_index))
+    {
+        return ParseIdentifier(cur_token_index);
+    }
+    if (MatchLiteral(*cur_token_index))
+    {
+        return ParseLiteral(cur_token_index);
+    }
 }
 
 bool SyntaxParser::MatchPrimaryExpr(int cur_token_index)
@@ -573,6 +580,20 @@ bool SyntaxParser::MatchLiteral(int cur_token_index)
         MatchToken(TOKEN_THIS, cur_token_index) ||
         MatchToken(TOKEN_NULL, cur_token_index)
     );
+}
+
+AbstractExpr * SyntaxParser::ParseLiteral(int * cur_token_index)
+{
+    if (MatchToken(TOKEN_TRUE, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        return new BooleanLiteral(true);
+    }
+    if (MatchToken(TOKEN_FALSE, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        return new BooleanLiteral(false);
+    }
 }
 
 /*

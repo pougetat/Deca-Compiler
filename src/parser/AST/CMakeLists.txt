@@ -7,6 +7,7 @@ set(SRCS
 	AbstractMain.cpp
     AbstractTreeNode.cpp
     AndExpr.cpp
+    BooleanLiteral.cpp
     DeclClass.cpp
     DeclVar.cpp
     EmptyMain.cpp
@@ -27,6 +28,7 @@ set(HEADERS
 	AbstractMain.h
     AbstractTreeNode.h
     AndExpr.h
+    BooleanLiteral.h
     DeclClass.h
     DeclVar.h
 	EmptyMain.h
