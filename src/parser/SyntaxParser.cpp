@@ -594,6 +594,11 @@ AbstractExpr * SyntaxParser::ParseLiteral(int * cur_token_index)
         ConsumeToken(cur_token_index);
         return new BooleanLiteral(false);
     }
+    if (MatchToken(TOKEN_THIS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        return new This(true);
+    }
 }
 
 /*

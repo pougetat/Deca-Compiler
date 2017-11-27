@@ -19,6 +19,7 @@ set(SRCS
     OrExpr.cpp
     Print.cpp
     Program.cpp
+    This.cpp
 	)
 	
 set(HEADERS
@@ -40,6 +41,7 @@ set(HEADERS
     OrExpr.h
     Print.h
     Program.h
+    This.h
     )
 
 add_library(AST ${SRCS} ${HEADERS})

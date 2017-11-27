@@ -22,6 +22,7 @@
 #include "AST/OrExpr.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
+#include "AST/This.h"
 
 using namespace std;
 
