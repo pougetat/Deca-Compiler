@@ -21,6 +21,7 @@
 #include "AST/Initialization.h"
 #include "AST/IntLiteral.h"
 #include "AST/NonEmptyMain.h"
+#include "AST/Null.h"
 #include "AST/OrExpr.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
