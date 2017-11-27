@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <ostream>
+#include <string>
 #include "../lexer/token.h"
 #include "AST/AbstractBinaryExpr.h"
 #include "AST/AbstractExpr.h"
@@ -18,6 +19,7 @@
 #include "AST/Identifier.h"
 #include "AST/InequalityExpr.h"
 #include "AST/Initialization.h"
+#include "AST/IntLiteral.h"
 #include "AST/NonEmptyMain.h"
 #include "AST/OrExpr.h"
 #include "AST/Print.h"

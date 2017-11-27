@@ -584,6 +584,13 @@ bool SyntaxParser::MatchLiteral(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseLiteral(int * cur_token_index)
 {
+    if (MatchToken(TOKEN_LITERAL_INT, *cur_token_index))
+    {
+        IntLiteral * int_literal = 
+            new IntLiteral(stoi(m_tokens.at(*cur_token_index).m_token_string));
+        ConsumeToken(cur_token_index);
+        return int_literal;
+    }
     if (MatchToken(TOKEN_TRUE, *cur_token_index))
     {
         ConsumeToken(cur_token_index);

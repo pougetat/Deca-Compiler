@@ -15,6 +15,7 @@ set(SRCS
     Identifier.cpp
     InequalityExpr.cpp
     Initialization.cpp
+    IntLiteral.cpp
     NonEmptyMain.cpp
     OrExpr.cpp
     Print.cpp
@@ -37,6 +38,7 @@ set(HEADERS
     Identifier.h
     InequalityExpr.h
     Initialization.h
+    IntLiteral.h
 	NonEmptyMain.h
     OrExpr.h
     Print.h
