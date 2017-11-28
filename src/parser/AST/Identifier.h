@@ -13,6 +13,7 @@ class Identifier : public AbstractExpr
         string m_symbol;
 
         Identifier(string symbol);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

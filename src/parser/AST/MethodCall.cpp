@@ -21,6 +21,23 @@ MethodCall::MethodCall(
     m_method_args = method_args;
 }
 
+AbstractExpr * MethodCall::Clone()
+{
+    vector<AbstractExpr *> * method_args;
+    for (AbstractExpr * expr : *m_method_args)
+    {
+        method_args->push_back(expr->Clone());
+    }
+
+    MethodCall * method_call = new MethodCall(
+        m_selection_expr->Clone(),
+        new Identifier(m_method_identifier->m_symbol),
+        method_args
+    );
+
+    return method_call;
+}
+
 void MethodCall::Display(string tab)
 {
     cout << tab << ">" << "[METHOD CALL]" << endl;

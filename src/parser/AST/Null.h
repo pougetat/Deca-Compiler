@@ -10,6 +10,7 @@ class Null : public AbstractExpr
 {
     public:
 
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

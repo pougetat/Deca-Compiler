@@ -13,6 +13,7 @@ class This : public AbstractExpr
         bool m_value;
 
         This(bool value);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

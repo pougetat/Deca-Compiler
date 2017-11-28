@@ -23,6 +23,7 @@ class MethodCall : public AbstractExpr
             AbstractExpr * selection_expr, 
             Identifier * method_name, 
             vector<AbstractExpr *> * method_args);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

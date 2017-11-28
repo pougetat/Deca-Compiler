@@ -13,6 +13,7 @@ class IntLiteral : public AbstractExpr
         int m_value;
 
         IntLiteral(int value);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

@@ -12,6 +12,7 @@ class Cast : public AbstractExpr
         AbstractExpr * m_expr;
 
         Cast(Identifier * cast_type, AbstractExpr * expr);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

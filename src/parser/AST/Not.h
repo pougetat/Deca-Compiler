@@ -10,6 +10,7 @@ class Not : public AbstractUnaryExpr
         AbstractExpr * m_expr;
 
         Not(AbstractExpr * expr);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

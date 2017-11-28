@@ -4,6 +4,7 @@ set(SRCS
     AbstractBinaryExpr.cpp
     AbstractExpr.cpp
     AbstractInst.cpp
+    AbstractLValue.cpp
 	AbstractMain.cpp
     AbstractReadExpr.cpp
     AbstractTreeNode.cpp
@@ -22,12 +23,14 @@ set(SRCS
     MethodCall.cpp
     New.cpp
     NonEmptyMain.cpp
+    Not.cpp
     Null.cpp
     OrExpr.cpp
     Print.cpp
     Program.cpp
     ReadFloat.cpp
     ReadInt.cpp
+    Selection.cpp
     This.cpp
     UnaryMinus.cpp
 	)
@@ -36,6 +39,7 @@ set(HEADERS
     AbstractBinaryExpr.h
     AbstractExpr.h
     AbstractInst.h
+    AbstractLValue.h
 	AbstractMain.h
     AbstractReadExpr.h
     AbstractTreeNode.h
@@ -54,12 +58,14 @@ set(HEADERS
     MethodCall.h
     New.h
 	NonEmptyMain.h
+    Not.h
     Null.h
     OrExpr.h
     Print.h
     Program.h
     ReadFloat.h
     ReadInt.h
+    Selection.h
     This.h
     UnaryMinus.h
     )

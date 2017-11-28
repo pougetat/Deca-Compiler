@@ -10,6 +10,7 @@ class BooleanLiteral : public AbstractExpr
         bool m_value;
 
         BooleanLiteral(bool value);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

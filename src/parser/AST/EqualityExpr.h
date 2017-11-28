@@ -15,6 +15,7 @@ class EqualityExpr : public AbstractBinaryExpr
         AbstractExpr * m_expr2;
 
         EqualityExpr(AbstractExpr * expr1, AbstractExpr * expr2);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

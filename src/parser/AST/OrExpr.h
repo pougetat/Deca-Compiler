@@ -15,6 +15,7 @@ class OrExpr : public AbstractBinaryExpr
         AbstractExpr * m_expr2;
 
         OrExpr(AbstractExpr * expr1, AbstractExpr * expr2);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

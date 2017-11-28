@@ -5,6 +5,11 @@ IntLiteral::IntLiteral(int value)
     m_value = value;
 }
 
+AbstractExpr * IntLiteral::Clone()
+{
+    return new IntLiteral(m_value);
+}
+
 void IntLiteral::Display(string tab)
 {
     cout << tab << ">" << "[INT_LITERAL] VALUE : " << m_value << endl;

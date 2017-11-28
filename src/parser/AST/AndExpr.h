@@ -11,6 +11,7 @@ class AndExpr : public AbstractBinaryExpr
         AbstractExpr * m_expr2;
 
         AndExpr(AbstractExpr * expr1, AbstractExpr * expr2);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 

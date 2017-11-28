@@ -290,7 +290,6 @@ vector<AbstractExpr *> * SyntaxParser::ParseListExpr(int * cur_token_index)
     
     while(MatchToken(TOKEN_COMMA, *cur_token_index))
     {
-        cout << "hello" << endl;
         ConsumeToken(cur_token_index);
         list_expr->push_back(ParseExpr(cur_token_index));
     }
@@ -511,31 +510,52 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
             | E )
 */
 
-// a.b.c
+// a.b
 
 
 AbstractExpr * SyntaxParser::ParseSelectExpr(int * cur_token_index)
 {
     AbstractExpr * expr = ParsePrimaryExpr(cur_token_index);
-    Selection * select = new Selection();
-    while (MatchToken(TOKEN_OP_DOT, *cur_token_index))
+    
+    if (MatchToken(TOKEN_OP_DOT, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
-        Identifier * ident = ParseIdentifier(cur_token_index);
-        select->m_selection_expr = expr;
-        select->m_identifier = ident;
-        expr = select;
-    }
-    if (MatchToken(TOKEN_OPARENT, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        vector<AbstractExpr *> * list_args = new vector<AbstractExpr *>();
-        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
-        return new MethodCall(
-            select->m_selection_expr, 
-            select->m_identifier, 
-            list_args
-        );
+        
+        Selection * prev_select = new Selection();
+        prev_select->m_selection_expr = expr;
+        prev_select->m_identifier = ParseIdentifier(cur_token_index);
+
+        while (MatchToken(TOKEN_OP_DOT, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            Selection * cur_select = new Selection();
+            cur_select->m_selection_expr = prev_select->Clone();
+            cur_select->m_identifier = ParseIdentifier(cur_token_index);
+            prev_select = cur_select;
+
+        }
+
+        if (MatchToken(TOKEN_OPARENT, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            vector<AbstractExpr *> * list_args = new vector<AbstractExpr *>();
+            if (MatchListExpr(*cur_token_index))
+            {
+                list_args = ParseListExpr(cur_token_index);
+            }
+
+            ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+
+            return new MethodCall(
+                prev_select->m_selection_expr,
+                prev_select->m_identifier,
+                list_args        
+            );
+        }
+
+        return prev_select;
     }
     return expr;
 }

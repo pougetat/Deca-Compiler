@@ -10,6 +10,7 @@ class UnaryMinus : public AbstractUnaryExpr
         AbstractExpr * m_expr;
 
         UnaryMinus(AbstractExpr * expr);
+        AbstractExpr * Clone();
         void Display(string tab);
 };
 
