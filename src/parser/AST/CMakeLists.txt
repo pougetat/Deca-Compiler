@@ -18,6 +18,7 @@ set(SRCS
     Initialization.cpp
     IntLiteral.cpp
     MethodCall.cpp
+    New.cpp
     NonEmptyMain.cpp
     Null.cpp
     OrExpr.cpp
@@ -46,6 +47,7 @@ set(HEADERS
     Initialization.h
     IntLiteral.h
     MethodCall.h
+    New.h
 	NonEmptyMain.h
     Null.h
     OrExpr.h

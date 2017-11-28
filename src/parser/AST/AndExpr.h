@@ -1,11 +1,7 @@
 #ifndef AND_EXPR_H
 #define AND_EXPR_H
 
-#include "AbstractExpr.h"
 #include "AbstractBinaryExpr.h"
-#include <iostream>
-
-using namespace std;
 
 class AndExpr : public AbstractBinaryExpr
 {

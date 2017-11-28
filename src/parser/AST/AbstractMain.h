@@ -8,7 +8,7 @@ using namespace std;
 class AbstractMain
 {
     public:
-        virtual void Display(string tab);
+        virtual void Display(string tab) = 0;
 
 };
 
