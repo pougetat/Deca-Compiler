@@ -7,6 +7,7 @@ set(SRCS
 	AbstractMain.cpp
     AbstractReadExpr.cpp
     AbstractTreeNode.cpp
+    AbstractUnaryExpr.cpp
     AndExpr.cpp
     BooleanLiteral.cpp
     Cast.cpp
@@ -28,6 +29,7 @@ set(SRCS
     ReadFloat.cpp
     ReadInt.cpp
     This.cpp
+    UnaryMinus.cpp
 	)
 	
 set(HEADERS
@@ -37,6 +39,7 @@ set(HEADERS
 	AbstractMain.h
     AbstractReadExpr.h
     AbstractTreeNode.h
+    AbstractUnaryExpr.h
     AndExpr.h
     BooleanLiteral.h
     Cast.h
@@ -58,6 +61,7 @@ set(HEADERS
     ReadFloat.h
     ReadInt.h
     This.h
+    UnaryMinus.h
     )
 
 add_library(AST ${SRCS} ${HEADERS})

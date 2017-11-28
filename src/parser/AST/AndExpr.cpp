@@ -8,7 +8,7 @@ AndExpr::AndExpr(AbstractExpr * e1, AbstractExpr * e2)
 
 void AndExpr::Display(string tab)
 {
-    cout << tab << ">" << "[AND EXPR]" << endl;
+    cout << tab << ">" << "[AND]" << endl;
     m_expr1->Display(tab + "--");
     m_expr2->Display(tab + "--");
 }

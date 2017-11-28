@@ -11,6 +11,7 @@
 #include "AST/AbstractMain.h"
 #include "AST/AbstractReadExpr.h"
 #include "AST/AbstractTreeNode.h"
+#include "AST/AbstractUnaryExpr.h"
 #include "AST/AndExpr.h"
 #include "AST/BooleanLiteral.h"
 #include "AST/Cast.h"
@@ -32,6 +33,7 @@
 #include "AST/ReadFloat.h"
 #include "AST/ReadInt.h"
 #include "AST/This.h"
+#include "AST/UnaryMinus.h"
 
 using namespace std;
 

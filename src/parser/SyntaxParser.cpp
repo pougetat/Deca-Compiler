@@ -220,7 +220,7 @@ vector<AbstractInst *> * SyntaxParser::ParseListInst(int * cur_token_index)
         | 'printlnx' '(' list_expr ')'
         | if_then_else
         | 'while' '(' expr ')' '{' list_inst '}'
-        | 'return'expr ';'
+        | 'return' expr ';'
 */
 
 bool SyntaxParser::MatchInst(int cur_token_index)
@@ -398,13 +398,13 @@ AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
     if (MatchToken(TOKEN_COMP_EQ, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
         return new EqualityExpr(expr1, expr2);
     }
     else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
         return new InequalityExpr(expr1, expr2);
     }
     else {
@@ -481,6 +481,11 @@ bool SyntaxParser::MatchMultExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseUnaryExpr(int * cur_token_index)
 {
+    if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        return new UnaryMinus(ParseUnaryExpr(cur_token_index));
+    }
     return ParseSelectExpr(cur_token_index);
 }
 
@@ -686,7 +691,6 @@ Identifier * SyntaxParser::ParseIdentifier(int * cur_token_index)
 
     return ident;
 }
-
 
 // Utility methods
 
