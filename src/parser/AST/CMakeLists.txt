@@ -5,6 +5,7 @@ set(SRCS
     AbstractExpr.cpp
     AbstractInst.cpp
 	AbstractMain.cpp
+    AbstractReadExpr.cpp
     AbstractTreeNode.cpp
     AndExpr.cpp
     BooleanLiteral.cpp
@@ -21,6 +22,7 @@ set(SRCS
     OrExpr.cpp
     Print.cpp
     Program.cpp
+    ReadInt.cpp
     This.cpp
 	)
 	
@@ -29,6 +31,7 @@ set(HEADERS
     AbstractExpr.h
     AbstractInst.h
 	AbstractMain.h
+    AbstractReadExpr.h
     AbstractTreeNode.h
     AndExpr.h
     BooleanLiteral.h
@@ -45,6 +48,7 @@ set(HEADERS
     OrExpr.h
     Print.h
     Program.h
+    ReadInt.h
     This.h
     )
 

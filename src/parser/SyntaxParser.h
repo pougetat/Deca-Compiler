@@ -9,6 +9,7 @@
 #include "AST/AbstractExpr.h"
 #include "AST/AbstractInst.h"
 #include "AST/AbstractMain.h"
+#include "AST/AbstractReadExpr.h"
 #include "AST/AbstractTreeNode.h"
 #include "AST/AndExpr.h"
 #include "AST/BooleanLiteral.h"
@@ -25,6 +26,7 @@
 #include "AST/OrExpr.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
+#include "AST/ReadInt.h"
 #include "AST/This.h"
 
 using namespace std;
