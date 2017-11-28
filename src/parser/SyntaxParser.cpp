@@ -286,8 +286,12 @@ vector<AbstractExpr *> * SyntaxParser::ParseListExpr(int * cur_token_index)
 {
     vector<AbstractExpr *> * list_expr = new vector<AbstractExpr *>();
 
-    while(MatchExpr(*cur_token_index))
+    list_expr->push_back(ParseExpr(cur_token_index));
+    
+    while(MatchToken(TOKEN_COMMA, *cur_token_index))
     {
+        cout << "hello" << endl;
+        ConsumeToken(cur_token_index);
         list_expr->push_back(ParseExpr(cur_token_index));
     }
 
@@ -528,9 +532,9 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
         if (MatchToken(TOKEN_OPARENT, *cur_token_index))
         {
             ConsumeToken(cur_token_index);
-            // parse list expr
+            vector<AbstractExpr *>  * method_args = ParseListExpr(cur_token_index);
             ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
-            return new MethodCall(ident, new vector<AbstractExpr *>());
+            return new MethodCall(ident, method_args);
         }
         return ident;
     }

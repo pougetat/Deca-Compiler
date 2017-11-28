@@ -31,7 +31,7 @@ void MethodCall::Display(string tab)
     m_method_identifier->Display(tab + "---");
     if (m_method_args->size() > 0)
     {
-        cout << tab << "-->" << "[LIST INST]" << endl;
+        cout << tab << "-->" << "[LIST EXPR]" << endl;
         for (AbstractExpr * arg : *m_method_args)
         {
             arg->Display(tab + "----");
