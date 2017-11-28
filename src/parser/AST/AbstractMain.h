@@ -1,15 +1,13 @@
 #ifndef ABSTRACT_MAIN_H
 #define ABSTRACT_MAIN_H
 
-#include <ostream>
-#include "AbstractTreeNode.h"
+#include <iostream>
 
 using namespace std;
 
-class AbstractMain : public AbstractTreeNode
+class AbstractMain
 {
     public:
-
         virtual void Display(string tab);
 
 };

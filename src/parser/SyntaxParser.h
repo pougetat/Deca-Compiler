@@ -26,6 +26,7 @@
 #include "AST/OrExpr.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
+#include "AST/ReadFloat.h"
 #include "AST/ReadInt.h"
 #include "AST/This.h"
 

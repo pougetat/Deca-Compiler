@@ -547,6 +547,13 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
         ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
         return new ReadInt();
     }
+    if (MatchToken(TOKEN_READFLOAT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        return new ReadFloat();
+    }
     if (MatchLiteral(*cur_token_index))
     {
         return ParseLiteral(cur_token_index);

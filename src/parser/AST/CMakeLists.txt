@@ -22,6 +22,7 @@ set(SRCS
     OrExpr.cpp
     Print.cpp
     Program.cpp
+    ReadFloat.cpp
     ReadInt.cpp
     This.cpp
 	)
@@ -48,6 +49,7 @@ set(HEADERS
     OrExpr.h
     Print.h
     Program.h
+    ReadFloat.h
     ReadInt.h
     This.h
     )

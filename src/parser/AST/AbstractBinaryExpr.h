@@ -5,7 +5,6 @@
 
 class AbstractBinaryExpr : public AbstractExpr
 {
-
 };
 
 #endif
