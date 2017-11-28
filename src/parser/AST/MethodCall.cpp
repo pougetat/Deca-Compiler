@@ -26,9 +26,9 @@ void MethodCall::Display(string tab)
     cout << tab << ">" << "[METHOD CALL]" << endl;
     if (m_selection_expr != NULL)
     {
-        m_selection_expr->Display(tab + "----");
+        m_selection_expr->Display(tab + "--");
     }
-    m_method_identifier->Display(tab + "---");
+    m_method_identifier->Display(tab + "--");
     if (m_method_args->size() > 0)
     {
         cout << tab << "-->" << "[LIST EXPR]" << endl;

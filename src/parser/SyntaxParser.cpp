@@ -486,6 +486,11 @@ AbstractExpr * SyntaxParser::ParseUnaryExpr(int * cur_token_index)
         ConsumeToken(cur_token_index);
         return new UnaryMinus(ParseUnaryExpr(cur_token_index));
     }
+    if (MatchToken(TOKEN_NOT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        return new Not(ParseUnaryExpr(cur_token_index));
+    }
     return ParseSelectExpr(cur_token_index);
 }
 
@@ -506,9 +511,33 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
             | E )
 */
 
+// a.b.c
+
+
 AbstractExpr * SyntaxParser::ParseSelectExpr(int * cur_token_index)
 {
-    return ParsePrimaryExpr(cur_token_index);
+    AbstractExpr * expr = ParsePrimaryExpr(cur_token_index);
+    Selection * select = new Selection();
+    while (MatchToken(TOKEN_OP_DOT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        Identifier * ident = ParseIdentifier(cur_token_index);
+        select->m_selection_expr = expr;
+        select->m_identifier = ident;
+        expr = select;
+    }
+    if (MatchToken(TOKEN_OPARENT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        vector<AbstractExpr *> * list_args = new vector<AbstractExpr *>();
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        return new MethodCall(
+            select->m_selection_expr, 
+            select->m_identifier, 
+            list_args
+        );
+    }
+    return expr;
 }
 
 bool SyntaxParser::MatchSelectExpr(int cur_token_index)
@@ -537,7 +566,11 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
         if (MatchToken(TOKEN_OPARENT, *cur_token_index))
         {
             ConsumeToken(cur_token_index);
-            vector<AbstractExpr *>  * method_args = ParseListExpr(cur_token_index);
+            vector<AbstractExpr *> * method_args = new vector<AbstractExpr *>();
+            if (MatchExpr(*cur_token_index))
+            {
+                method_args = ParseListExpr(cur_token_index);
+            }
             ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
             return new MethodCall(ident, method_args);
         }
