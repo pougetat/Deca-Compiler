@@ -21,6 +21,7 @@
 #include "AST/InequalityExpr.h"
 #include "AST/Initialization.h"
 #include "AST/IntLiteral.h"
+#include "AST/MethodCall.h"
 #include "AST/NonEmptyMain.h"
 #include "AST/Null.h"
 #include "AST/OrExpr.h"

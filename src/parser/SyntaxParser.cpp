@@ -530,6 +530,7 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
             ConsumeToken(cur_token_index);
             // parse list expr
             ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+            return new MethodCall(ident, new vector<AbstractExpr *>());
         }
         return ident;
     }

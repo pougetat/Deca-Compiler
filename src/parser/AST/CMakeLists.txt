@@ -17,6 +17,7 @@ set(SRCS
     InequalityExpr.cpp
     Initialization.cpp
     IntLiteral.cpp
+    MethodCall.cpp
     NonEmptyMain.cpp
     Null.cpp
     OrExpr.cpp
@@ -44,6 +45,7 @@ set(HEADERS
     InequalityExpr.h
     Initialization.h
     IntLiteral.h
+    MethodCall.h
 	NonEmptyMain.h
     Null.h
     OrExpr.h

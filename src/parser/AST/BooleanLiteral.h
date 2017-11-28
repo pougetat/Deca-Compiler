@@ -2,9 +2,6 @@
 #define BOOLEAN_LITERAL_H
 
 #include "AbstractExpr.h"
-#include <iostream>
-
-using namespace std;
 
 class BooleanLiteral : public AbstractExpr
 {
