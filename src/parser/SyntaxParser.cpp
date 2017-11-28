@@ -538,6 +538,18 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
         }
         return ident;
     }
+    if (MatchToken(TOKEN_OPARENT, *cur_token_index)
+        && MatchType(*cur_token_index+1) 
+        && MatchToken(TOKEN_CPARENT, *cur_token_index+2))
+    {
+        ConsumeToken(cur_token_index);
+        Identifier * type = ParseType(cur_token_index);
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+        AbstractExpr * expr = ParseExpr(cur_token_index);
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        return new Cast(type, expr);
+    }
     if (MatchToken(TOKEN_OPARENT, *cur_token_index))
     {
         ConsumeToken(cur_token_index);

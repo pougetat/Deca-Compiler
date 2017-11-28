@@ -13,6 +13,7 @@
 #include "AST/AbstractTreeNode.h"
 #include "AST/AndExpr.h"
 #include "AST/BooleanLiteral.h"
+#include "AST/Cast.h"
 #include "AST/DeclClass.h"
 #include "AST/DeclVar.h"
 #include "AST/EmptyMain.h"
