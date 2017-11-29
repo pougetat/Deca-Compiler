@@ -1,5 +1,5 @@
-#ifndef INEQUALITY_EXPR
-#define INEQUALITY_EXPR
+#ifndef EQUALS_EXPR
+#define EQUALS_EXPR
 
 #include "AbstractExpr.h"
 #include "AbstractBinaryExpr.h"
@@ -7,14 +7,14 @@
 
 using namespace std;
 
-class InequalityExpr : public AbstractBinaryExpr
+class Equals : public AbstractBinaryExpr
 {
     public:
         
         AbstractExpr * m_expr1;
         AbstractExpr * m_expr2;
 
-        InequalityExpr(AbstractExpr * expr1, AbstractExpr * expr2);
+        Equals(AbstractExpr * expr1, AbstractExpr * expr2);
         AbstractExpr * Clone();
         void Display(string tab);
 };

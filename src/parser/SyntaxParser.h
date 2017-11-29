@@ -1,8 +1,6 @@
 #ifndef SYNTAX_PARSER_H
 #define SYNTAX_PARSER_H
 
-#include <vector>
-#include <ostream>
 #include <string>
 #include "../lexer/token.h"
 #include "AST/AbstractBinaryExpr.h"
@@ -12,6 +10,7 @@
 #include "AST/AbstractMain.h"
 #include "AST/AbstractOpArith.h"
 #include "AST/AbstractOpCmp.h"
+#include "AST/AbstractOpExactCmp.h"
 #include "AST/AbstractOpIneq.h"
 #include "AST/AbstractReadExpr.h"
 #include "AST/AbstractUnaryExpr.h"
@@ -20,12 +19,12 @@
 #include "AST/Cast.h"
 #include "AST/DeclClass.h"
 #include "AST/DeclVar.h"
+#include "AST/Divide.h"
 #include "AST/EmptyMain.h"
-#include "AST/EqualityExpr.h"
+#include "AST/Equals.h"
 #include "AST/Greater.h"
 #include "AST/GreaterOrEqual.h"
 #include "AST/Identifier.h"
-#include "AST/InequalityExpr.h"
 #include "AST/Initialization.h"
 #include "AST/IntLiteral.h"
 #include "AST/Lower.h"
@@ -33,8 +32,11 @@
 #include "AST/Main.h"
 #include "AST/MethodCall.h"
 #include "AST/Minus.h"
+#include "AST/Modulo.h"
+#include "AST/Multiply.h"
 #include "AST/New.h"
 #include "AST/Not.h"
+#include "AST/NotEquals.h"
 #include "AST/Null.h"
 #include "AST/Or.h"
 #include "AST/Plus.h"
@@ -45,8 +47,6 @@
 #include "AST/Selection.h"
 #include "AST/This.h"
 #include "AST/UnaryMinus.h"
-
-using namespace std;
 
 class SyntaxParser {
 

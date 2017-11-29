@@ -8,6 +8,7 @@ set(SRCS
 	AbstractMain.cpp
     AbstractOpArith.cpp
     AbstractOpCmp.cpp
+    AbstractOpExactCmp.cpp
     AbstractOpIneq.cpp
     AbstractReadExpr.cpp
     AbstractUnaryExpr.cpp
@@ -16,12 +17,12 @@ set(SRCS
     Cast.cpp
     DeclClass.cpp
     DeclVar.cpp
+    Divide.cpp
     EmptyMain.cpp
-    EqualityExpr.cpp
+    Equals.cpp
     Greater.cpp
     GreaterOrEqual.cpp
     Identifier.cpp
-    InequalityExpr.cpp
     Initialization.cpp
     IntLiteral.cpp
     Lower.cpp
@@ -29,8 +30,11 @@ set(SRCS
     Main.cpp
     MethodCall.cpp
     Minus.cpp
+    Modulo.cpp
+    Multiply.cpp
     New.cpp
     Not.cpp
+    NotEquals.cpp
     Null.cpp
     Or.cpp
     Plus.cpp
@@ -51,6 +55,7 @@ set(HEADERS
 	AbstractMain.h
     AbstractOpArith.h
     AbstractOpCmp.h
+    AbstractOpExactCmp.h
     AbstractOpIneq.h
     AbstractReadExpr.h
     AbstractUnaryExpr.h
@@ -59,12 +64,12 @@ set(HEADERS
     Cast.h
     DeclClass.h
     DeclVar.h
+    Divide.h
 	EmptyMain.h
-    EqualityExpr.h
+    Equals.h
     Greater.h
     GreaterOrEqual.h
     Identifier.h
-    InequalityExpr.h
     Initialization.h
     IntLiteral.h
     Lower.h
@@ -72,8 +77,11 @@ set(HEADERS
     Main.h
     MethodCall.h
     Minus.h
+    Modulo.h
+    Multiply.h
     New.h
     Not.h
+    NotEquals.h
     Null.h
     Or.h
     Plus.h

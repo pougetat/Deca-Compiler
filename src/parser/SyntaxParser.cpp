@@ -398,13 +398,13 @@ AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
     {
         ConsumeToken(cur_token_index);
         AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
-        return new EqualityExpr(expr1, expr2);
+        return new Equals(expr1, expr2);
     }
     else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
         AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
-        return new InequalityExpr(expr1, expr2);
+        return new NotEquals(expr1, expr2);
     }
     else {
         return expr1;
@@ -505,7 +505,28 @@ bool SyntaxParser::MatchSumExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseMultExpr(int * cur_token_index)
 {
-    return ParseUnaryExpr(cur_token_index);
+    AbstractExpr * expr1 = ParseUnaryExpr(cur_token_index);
+    
+    if (MatchToken(TOKEN_OP_MULT, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Multiply(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_DIV, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Divide(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_MOD, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Modulo(expr1, expr2);
+    }
+
+    return expr1;
 }
 
 bool SyntaxParser::MatchMultExpr(int cur_token_index)
