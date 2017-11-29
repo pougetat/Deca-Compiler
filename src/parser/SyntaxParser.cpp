@@ -248,8 +248,7 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
     if (MatchToken(TOKEN_SEMICOLON, *cur_token_index))
     {
         ConsumeToken(cur_token_index);
-        // return new NoOperation();
-        return NULL;
+        return new NoOperation();
     }
     else if (
         MatchToken(TOKEN_PRINT, *cur_token_index) ||
@@ -263,7 +262,6 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         
         ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
         //printInst->list_expr = ParseListExpr(cur_token_index);
-
         ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
 

@@ -34,6 +34,7 @@ set(SRCS
     Modulo.cpp
     Multiply.cpp
     New.cpp
+    NoOperation.cpp
     Not.cpp
     NotEquals.cpp
     Null.cpp
@@ -82,6 +83,7 @@ set(HEADERS
     Modulo.h
     Multiply.h
     New.h
+    NoOperation.h
     Not.h
     NotEquals.h
     Null.h
