@@ -12,12 +12,11 @@ class Print : public AbstractInst {
 
     public:
 
-        vector<AbstractExpr *> * list_expr;
+        vector<AbstractExpr *> * m_list_args;
         TokenType m_token_type;
 
         Print(TokenType token_type);
         void Display(string tab);
-
 };
 
 #endif

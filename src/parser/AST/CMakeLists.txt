@@ -45,8 +45,10 @@ set(SRCS
     ReadFloat.cpp
     ReadInt.cpp
     Selection.cpp
+    StringLiteral.cpp
     This.cpp
     UnaryMinus.cpp
+    While.cpp
 	)
 	
 set(HEADERS
@@ -94,8 +96,10 @@ set(HEADERS
     ReadFloat.h
     ReadInt.h
     Selection.h
+    StringLiteral.h
     This.h
     UnaryMinus.h
+    While.h
     )
 
 add_library(AST ${SRCS} ${HEADERS})

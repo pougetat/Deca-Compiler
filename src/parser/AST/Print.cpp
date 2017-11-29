@@ -7,5 +7,9 @@ Print::Print(TokenType token_type)
 
 void Print::Display(string tab)
 {
-    cout << tab << ">[PRINT]"  << token_names[m_token_type] << endl;
+    cout << tab << ">[PRINT]"<< endl;
+    for (AbstractExpr * expr : *m_list_args)
+    {
+        expr->Display(tab + "--");
+    }
 }

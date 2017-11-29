@@ -250,7 +250,7 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         ConsumeToken(cur_token_index);
         return new NoOperation();
     }
-    else if (
+    if (
         MatchToken(TOKEN_PRINT, *cur_token_index) ||
         MatchToken(TOKEN_PRINTLN, *cur_token_index) ||
         MatchToken(TOKEN_PRINTX, *cur_token_index) ||
@@ -261,11 +261,37 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         ConsumeToken(cur_token_index);
         
         ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
-        //printInst->list_expr = ParseListExpr(cur_token_index);
+        printInst->m_list_args = new vector<AbstractExpr *>();
+        if (MatchListExpr(*cur_token_index))
+        {
+            printInst->m_list_args = ParseListExpr(cur_token_index);
+        }
         ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
 
         return printInst;
+    }
+    if (MatchToken(TOKEN_WHILE, *cur_token_index))
+    {
+        AbstractExpr * condition = NULL;
+        vector<AbstractInst *> * insts = new vector<AbstractInst *>();
+
+        ConsumeToken(cur_token_index);
+        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+        if (MatchExpr(*cur_token_index))
+        {
+            condition = ParseExpr(cur_token_index);
+        }
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+
+        ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
+        if (MatchListInst(*cur_token_index))
+        {
+            insts = ParseListInst(cur_token_index);
+        }
+        ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
+
+        return new While(condition, insts);
     }
 }
 
@@ -789,6 +815,13 @@ AbstractExpr * SyntaxParser::ParseLiteral(int * cur_token_index)
             new IntLiteral(stoi(m_tokens.at(*cur_token_index).m_token_string));
         ConsumeToken(cur_token_index);
         return int_literal;
+    }
+    if (MatchToken(TOKEN_LITERAL_STRING, *cur_token_index))
+    {
+        StringLiteral * string_literal =
+            new StringLiteral(m_tokens.at(*cur_token_index).m_token_string);
+        ConsumeToken(cur_token_index);
+        return string_literal;
     }
     if (MatchToken(TOKEN_TRUE, *cur_token_index))
     {

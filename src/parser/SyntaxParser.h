@@ -47,8 +47,10 @@
 #include "AST/ReadFloat.h"
 #include "AST/ReadInt.h"
 #include "AST/Selection.h"
+#include "AST/StringLiteral.h"
 #include "AST/This.h"
 #include "AST/UnaryMinus.h"
+#include "AST/While.h"
 
 class SyntaxParser {
 
