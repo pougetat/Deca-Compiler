@@ -11,27 +11,32 @@
 #include "AST/AbstractLValue.h"
 #include "AST/AbstractMain.h"
 #include "AST/AbstractOpArith.h"
+#include "AST/AbstractOpCmp.h"
+#include "AST/AbstractOpIneq.h"
 #include "AST/AbstractReadExpr.h"
-#include "AST/AbstractTreeNode.h"
 #include "AST/AbstractUnaryExpr.h"
-#include "AST/AndExpr.h"
+#include "AST/And.h"
 #include "AST/BooleanLiteral.h"
 #include "AST/Cast.h"
 #include "AST/DeclClass.h"
 #include "AST/DeclVar.h"
 #include "AST/EmptyMain.h"
 #include "AST/EqualityExpr.h"
+#include "AST/Greater.h"
+#include "AST/GreaterOrEqual.h"
 #include "AST/Identifier.h"
 #include "AST/InequalityExpr.h"
 #include "AST/Initialization.h"
 #include "AST/IntLiteral.h"
+#include "AST/Lower.h"
+#include "AST/LowerOrEqual.h"
+#include "AST/Main.h"
 #include "AST/MethodCall.h"
 #include "AST/Minus.h"
 #include "AST/New.h"
-#include "AST/NonEmptyMain.h"
 #include "AST/Not.h"
 #include "AST/Null.h"
-#include "AST/OrExpr.h"
+#include "AST/Or.h"
 #include "AST/Plus.h"
 #include "AST/Print.h"
 #include "AST/Program.h"
@@ -60,7 +65,7 @@ class SyntaxParser {
         void ShouldMatchToken(TokenType token_type, int * cur_token_index);
         void ConsumeToken(int * cur_token_index);
 
-        // Main rules
+        // GRAMMAR RULES
 
         AbstractMain * ParseMain(int * cur_token_index);
 
@@ -68,7 +73,7 @@ class SyntaxParser {
         EmptyMain * ParseEmptyMain(int * cur_token_index);
 
         bool MatchBlock(int cur_token_index);
-        NonEmptyMain * ParseBlock(int * cur_token_index);
+        Main * ParseBlock(int * cur_token_index);
 
         bool MatchListDecl(int cur_token_index);
         vector<DeclVar *> * ParseListDecl(int * cur_token_index);
@@ -131,9 +136,7 @@ class SyntaxParser {
         AbstractExpr * ParseLiteral(int * cur_token_index);
 
         bool MatchIdentifier(int cur_token_index);
-        Identifier * ParseIdentifier(int * cur_token_index);
-
-        
+        Identifier * ParseIdentifier(int * cur_token_index);    
 };
 
 #endif

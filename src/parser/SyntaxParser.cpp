@@ -58,9 +58,9 @@ bool SyntaxParser::MatchBlock(int cur_token_index)
     return MatchToken(TOKEN_OBRACE, cur_token_index);
 }
 
-NonEmptyMain * SyntaxParser::ParseBlock(int * cur_token_index)
+Main * SyntaxParser::ParseBlock(int * cur_token_index)
 {
-    NonEmptyMain * block = new NonEmptyMain();
+    Main * block = new Main();
 
     ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
     
@@ -349,7 +349,7 @@ AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
     {
         ConsumeToken(cur_token_index);
         AbstractExpr * expr2 = ParseOrExpr(cur_token_index);
-        return new OrExpr(expr1, expr2);
+        return new Or(expr1, expr2);
     }
     else
     {
@@ -371,7 +371,7 @@ AbstractExpr * SyntaxParser::ParseAndExpr(int * cur_token_index)
     {
         ConsumeToken(cur_token_index);
         AbstractExpr * expr2 = ParseAndExpr(cur_token_index);
-        return new AndExpr(expr1, expr2);
+        return new And(expr1, expr2);
     }
     else {
         return expr1;
@@ -428,7 +428,34 @@ bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
 {
-    return ParseSumExpr(cur_token_index);
+    AbstractExpr * expr1 = ParseSumExpr(cur_token_index);
+
+    if (MatchToken(TOKEN_COMP_LESSEQ, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new LowerOrEqual(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_COMP_MOREEQ, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new GreaterOrEqual(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_COMP_LESS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new Lower(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_COMP_MORE, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
+        return new Greater(expr1, expr2);
+    }
+
+    return expr1;
 }
 
 bool SyntaxParser::MatchInequalityExpr(int cur_token_index)

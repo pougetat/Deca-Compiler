@@ -7,27 +7,32 @@ set(SRCS
     AbstractLValue.cpp
 	AbstractMain.cpp
     AbstractOpArith.cpp
+    AbstractOpCmp.cpp
+    AbstractOpIneq.cpp
     AbstractReadExpr.cpp
-    AbstractTreeNode.cpp
     AbstractUnaryExpr.cpp
-    AndExpr.cpp
+    And.cpp
     BooleanLiteral.cpp
     Cast.cpp
     DeclClass.cpp
     DeclVar.cpp
     EmptyMain.cpp
     EqualityExpr.cpp
+    Greater.cpp
+    GreaterOrEqual.cpp
     Identifier.cpp
     InequalityExpr.cpp
     Initialization.cpp
     IntLiteral.cpp
+    Lower.cpp
+    LowerOrEqual.cpp
+    Main.cpp
     MethodCall.cpp
     Minus.cpp
     New.cpp
-    NonEmptyMain.cpp
     Not.cpp
     Null.cpp
-    OrExpr.cpp
+    Or.cpp
     Plus.cpp
     Print.cpp
     Program.cpp
@@ -45,27 +50,32 @@ set(HEADERS
     AbstractLValue.h
 	AbstractMain.h
     AbstractOpArith.h
+    AbstractOpCmp.h
+    AbstractOpIneq.h
     AbstractReadExpr.h
-    AbstractTreeNode.h
     AbstractUnaryExpr.h
-    AndExpr.h
+    And.h
     BooleanLiteral.h
     Cast.h
     DeclClass.h
     DeclVar.h
 	EmptyMain.h
     EqualityExpr.h
+    Greater.h
+    GreaterOrEqual.h
     Identifier.h
     InequalityExpr.h
     Initialization.h
     IntLiteral.h
+    Lower.h
+    LowerOrEqual.h
+    Main.h
     MethodCall.h
     Minus.h
     New.h
-	NonEmptyMain.h
     Not.h
     Null.h
-    OrExpr.h
+    Or.h
     Plus.h
     Print.h
     Program.h

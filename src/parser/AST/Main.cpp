@@ -1,6 +1,6 @@
-#include "NonEmptyMain.h"
+#include "Main.h"
 
-void NonEmptyMain::Display(string tab)
+void Main::Display(string tab)
 {
     cout << tab << ">" << "[NON EMPTY MAIN]" << endl;
     if (list_decl_var->size() > 0)

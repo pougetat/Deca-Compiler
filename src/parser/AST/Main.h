@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class NonEmptyMain : public AbstractMain 
+class Main : public AbstractMain 
 {
     public:
 
