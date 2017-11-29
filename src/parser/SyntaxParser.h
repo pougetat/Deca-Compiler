@@ -46,6 +46,7 @@
 #include "AST/Program.h"
 #include "AST/ReadFloat.h"
 #include "AST/ReadInt.h"
+#include "AST/Return.h"
 #include "AST/Selection.h"
 #include "AST/StringLiteral.h"
 #include "AST/This.h"

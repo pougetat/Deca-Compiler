@@ -293,6 +293,19 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
 
         return new While(condition, insts);
     }
+    if (MatchToken(TOKEN_RETURN, *cur_token_index))
+    {
+        AbstractExpr * return_expr = NULL;
+
+        ConsumeToken(cur_token_index);
+        if (MatchExpr(*cur_token_index))
+        {
+            return_expr = ParseExpr(cur_token_index);
+        }
+        ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
+
+        return new Return(return_expr);
+    }
 }
 
 /*

@@ -44,6 +44,7 @@ set(SRCS
     Program.cpp
     ReadFloat.cpp
     ReadInt.cpp
+    Return.cpp
     Selection.cpp
     StringLiteral.cpp
     This.cpp
@@ -95,6 +96,7 @@ set(HEADERS
     Program.h
     ReadFloat.h
     ReadInt.h
+    Return.h
     Selection.h
     StringLiteral.h
     This.h
