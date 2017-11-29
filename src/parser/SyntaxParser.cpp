@@ -445,7 +445,22 @@ bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseSumExpr(int * cur_token_index)
 {
-    return ParseMultExpr(cur_token_index);
+    AbstractExpr * expr1 = ParseMultExpr(cur_token_index);
+
+    if (MatchToken(TOKEN_OP_PLUS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
+        return new Plus(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
+        return new Minus(expr1, expr2);
+    }
+
+    return expr1;
 }
 
 bool SyntaxParser::MatchSumExpr(int cur_token_index)
@@ -510,9 +525,6 @@ bool SyntaxParser::MatchUnaryExpr(int cur_token_index)
             | E )
 */
 
-// a.b
-
-
 AbstractExpr * SyntaxParser::ParseSelectExpr(int * cur_token_index)
 {
     AbstractExpr * expr = ParsePrimaryExpr(cur_token_index);
@@ -554,7 +566,6 @@ AbstractExpr * SyntaxParser::ParseSelectExpr(int * cur_token_index)
                 list_args        
             );
         }
-
         return prev_select;
     }
     return expr;

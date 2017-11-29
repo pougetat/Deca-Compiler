@@ -6,6 +6,7 @@ set(SRCS
     AbstractInst.cpp
     AbstractLValue.cpp
 	AbstractMain.cpp
+    AbstractOpArith.cpp
     AbstractReadExpr.cpp
     AbstractTreeNode.cpp
     AbstractUnaryExpr.cpp
@@ -21,11 +22,13 @@ set(SRCS
     Initialization.cpp
     IntLiteral.cpp
     MethodCall.cpp
+    Minus.cpp
     New.cpp
     NonEmptyMain.cpp
     Not.cpp
     Null.cpp
     OrExpr.cpp
+    Plus.cpp
     Print.cpp
     Program.cpp
     ReadFloat.cpp
@@ -41,6 +44,7 @@ set(HEADERS
     AbstractInst.h
     AbstractLValue.h
 	AbstractMain.h
+    AbstractOpArith.h
     AbstractReadExpr.h
     AbstractTreeNode.h
     AbstractUnaryExpr.h
@@ -56,11 +60,13 @@ set(HEADERS
     Initialization.h
     IntLiteral.h
     MethodCall.h
+    Minus.h
     New.h
 	NonEmptyMain.h
     Not.h
     Null.h
     OrExpr.h
+    Plus.h
     Print.h
     Program.h
     ReadFloat.h
