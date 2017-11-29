@@ -426,6 +426,13 @@ bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
         | inequality_expr 'instanceof' type
 */
 
+/*
+    WARNING : ANNOYING BUG
+    TRY THIS AND ALL GOES TO SHIT : a <= e > 3 instanceof f >= d;
+    BASICALLY YOU NEED TO BE ABLE TO POTENTIALLY PARSE A TOKEN + SUM_EXPR AFTER
+    THE TYPE PARSING FOR THE INSTANCEOF RULE
+*/
+
 AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
 {
     AbstractExpr * expr1 = ParseSumExpr(cur_token_index);
@@ -453,6 +460,29 @@ AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
         ConsumeToken(cur_token_index);
         AbstractExpr * expr2 = ParseInequalityExpr(cur_token_index);
         return new Greater(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_INSTANCEOF, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        
+        InstanceOf * prev_instanceof = new InstanceOf(
+            expr1, 
+            ParseType(cur_token_index)
+        );
+
+        while (MatchToken(TOKEN_INSTANCEOF, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            InstanceOf * cur_instanceof = new InstanceOf(
+                prev_instanceof->Clone(),
+                ParseIdentifier(cur_token_index)
+            );
+            prev_instanceof = cur_instanceof;
+
+        }
+
+        return prev_instanceof;
     }
 
     return expr1;

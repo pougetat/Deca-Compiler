@@ -26,6 +26,7 @@
 #include "AST/GreaterOrEqual.h"
 #include "AST/Identifier.h"
 #include "AST/Initialization.h"
+#include "AST/InstanceOf.h"
 #include "AST/IntLiteral.h"
 #include "AST/Lower.h"
 #include "AST/LowerOrEqual.h"

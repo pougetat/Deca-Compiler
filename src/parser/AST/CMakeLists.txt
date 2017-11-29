@@ -24,6 +24,7 @@ set(SRCS
     GreaterOrEqual.cpp
     Identifier.cpp
     Initialization.cpp
+    InstanceOf.cpp
     IntLiteral.cpp
     Lower.cpp
     LowerOrEqual.cpp
@@ -71,6 +72,7 @@ set(HEADERS
     GreaterOrEqual.h
     Identifier.h
     Initialization.h
+    InstanceOf.h
     IntLiteral.h
     Lower.h
     LowerOrEqual.h
