@@ -7,7 +7,10 @@ class Initialization {
 
     public:
         
-        AbstractExpr * expression;
+        AbstractExpr * m_expr;
+        
+        Initialization(AbstractExpr * expr);
+        void Display(string tab);
 
 };
 

@@ -177,9 +177,16 @@ bool SyntaxParser::MatchDeclVar(int cur_token_index)
 DeclVar * SyntaxParser::ParseDeclVar(int * cur_token_index)
 {
     DeclVar * decl_var = new DeclVar();
+    decl_var->m_symbol = ParseIdentifier(cur_token_index);
 
-    Identifier * ident = ParseIdentifier(cur_token_index);
-    decl_var->m_symbol = ident;
+    AbstractExpr * assign_expr;
+    if (MatchToken(TOKEN_OP_ASSIGN, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        decl_var->m_init = new Initialization(
+            ParseExpr(cur_token_index)
+        );
+    }
 
     return decl_var;
 }
