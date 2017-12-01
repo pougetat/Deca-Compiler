@@ -1,13 +1,11 @@
 #ifndef OR_H
 #define OR_H
 
-#include "AbstractExpr.h"
-#include "AbstractBinaryExpr.h"
-#include <iostream>
+#include "AbstractOpBool.h"
 
 using namespace std;
 
-class Or : public AbstractBinaryExpr
+class Or : public AbstractOpBool
 {
     public:
         

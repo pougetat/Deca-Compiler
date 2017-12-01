@@ -4,7 +4,6 @@
 #include "DeclClass.h"
 #include "AbstractMain.h"
 #include <vector>
-#include <ostream>
 
 using namespace std;
 

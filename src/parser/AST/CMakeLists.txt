@@ -7,6 +7,7 @@ set(SRCS
     AbstractLValue.cpp
 	AbstractMain.cpp
     AbstractOpArith.cpp
+    AbstractOpBool.cpp
     AbstractOpCmp.cpp
     AbstractOpExactCmp.cpp
     AbstractOpIneq.cpp
@@ -60,6 +61,7 @@ set(HEADERS
     AbstractLValue.h
 	AbstractMain.h
     AbstractOpArith.h
+    AbstractOpBool.h
     AbstractOpCmp.h
     AbstractOpExactCmp.h
     AbstractOpIneq.h

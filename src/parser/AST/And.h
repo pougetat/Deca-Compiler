@@ -1,7 +1,7 @@
 #ifndef AND_EXPR_H
 #define AND_EXPR_H
 
-#include "AbstractBinaryExpr.h"
+#include "AbstractOpBool.h"
 
 class And : public AbstractBinaryExpr
 {
