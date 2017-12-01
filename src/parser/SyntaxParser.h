@@ -37,6 +37,7 @@
 #include "AST/Modulo.h"
 #include "AST/Multiply.h"
 #include "AST/New.h"
+#include "AST/NoInitialization.h"
 #include "AST/NoOperation.h"
 #include "AST/Not.h"
 #include "AST/NotEquals.h"

@@ -187,6 +187,10 @@ DeclVar * SyntaxParser::ParseDeclVar(int * cur_token_index)
             ParseExpr(cur_token_index)
         );
     }
+    else
+    {
+        decl_var->m_init = new NoInitialization();
+    }
 
     return decl_var;
 }

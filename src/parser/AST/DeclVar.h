@@ -2,7 +2,7 @@
 #define DECL_VAR_H
 
 #include "Identifier.h"
-#include "Initialization.h"
+#include "AbstractInitialization.h"
 
 class DeclVar {
 
@@ -10,7 +10,7 @@ class DeclVar {
 
         Identifier * m_type;
         Identifier * m_symbol;
-        Initialization * m_init;
+        AbstractInitialization * m_init;
 
         void Display(string tab);
 

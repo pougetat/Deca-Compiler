@@ -1,9 +1,9 @@
 #ifndef INITIALIZATION_H
 #define INITIALIZATION_H
 
-#include "AbstractExpr.h"
+#include "AbstractInitialization.h"
 
-class Initialization {
+class Initialization : public AbstractInitialization {
 
     public:
         

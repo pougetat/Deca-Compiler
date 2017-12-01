@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 set(SRCS
     AbstractBinaryExpr.cpp
     AbstractExpr.cpp
+    AbstractInitialization.cpp
     AbstractInst.cpp
     AbstractLValue.cpp
 	AbstractMain.cpp
@@ -36,6 +37,7 @@ set(SRCS
     Modulo.cpp
     Multiply.cpp
     New.cpp
+    NoInitialization.cpp
     NoOperation.cpp
     Not.cpp
     NotEquals.cpp
@@ -57,6 +59,7 @@ set(SRCS
 set(HEADERS
     AbstractBinaryExpr.h
     AbstractExpr.h
+    AbstractInitialization.h
     AbstractInst.h
     AbstractLValue.h
 	AbstractMain.h
@@ -90,6 +93,7 @@ set(HEADERS
     Modulo.h
     Multiply.h
     New.h
+    NoInitialization.h
     NoOperation.h
     Not.h
     NotEquals.h
