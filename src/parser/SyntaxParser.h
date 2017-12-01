@@ -25,6 +25,7 @@
 #include "AST/Greater.h"
 #include "AST/GreaterOrEqual.h"
 #include "AST/Identifier.h"
+#include "AST/IfThenElse.h"
 #include "AST/Initialization.h"
 #include "AST/InstanceOf.h"
 #include "AST/IntLiteral.h"
@@ -97,6 +98,9 @@ class SyntaxParser {
 
         bool MatchInst(int cur_token_index);
         AbstractInst * ParseInst(int * cur_token_index);
+
+        bool MatchIfThenElse(int cur_token_index);
+        AbstractInst * ParseIfThenElse(int * cur_toke_index);
 
         bool MatchListExpr(int cur_token_index);
         vector<AbstractExpr *> * ParseListExpr(int * cur_token_index);

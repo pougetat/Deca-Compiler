@@ -232,6 +232,7 @@ bool SyntaxParser::MatchInst(int cur_token_index)
         MatchToken(TOKEN_PRINTLN, cur_token_index) ||
         MatchToken(TOKEN_PRINTX, cur_token_index) ||
         MatchToken(TOKEN_PRINTLNX, cur_token_index) ||
+        MatchIfThenElse(cur_token_index) ||
         MatchToken(TOKEN_WHILE, cur_token_index) ||
         MatchToken(TOKEN_RETURN, cur_token_index)
     );
@@ -271,6 +272,10 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
 
         return printInst;
     }
+    if (MatchIfThenElse(*cur_token_index))
+    {
+        return ParseIfThenElse(cur_token_index);
+    }
     if (MatchToken(TOKEN_WHILE, *cur_token_index))
     {
         AbstractExpr * condition = NULL;
@@ -306,6 +311,57 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
 
         return new Return(return_expr);
     }
+}
+
+/*
+    if_then_else ->
+        'if' '(' expr ')' '{' list_inst '}'
+        ( 'else' 'if' '(' expr ')' '{' list_inst '}')*
+        ( 'else' '{' list_inst '}' )?
+*/
+
+bool SyntaxParser::MatchIfThenElse(int cur_token_index)
+{
+    return MatchToken(TOKEN_IF, cur_token_index);
+}
+
+AbstractInst * SyntaxParser::ParseIfThenElse(int * cur_token_index)
+{
+    AbstractExpr * condition = NULL;
+    vector<AbstractInst *> * insts = new vector<AbstractInst *>();
+    vector<AbstractInst *> * else_insts = new vector<AbstractInst *>();
+
+    ConsumeToken(cur_token_index);
+    ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+    if (MatchExpr(*cur_token_index))
+    {
+        condition = ParseExpr(cur_token_index);
+    }
+    ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+
+    ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
+    if (MatchInst(*cur_token_index))
+    {
+        insts = ParseListInst(cur_token_index);
+    }
+    ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
+
+    if (MatchToken(TOKEN_ELSE, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+
+        if (MatchToken(TOKEN_OBRACE, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+            if (MatchInst(*cur_token_index))
+            {
+                else_insts = ParseListInst(cur_token_index);
+            }
+            ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
+        }
+    }
+
+    return new IfThenElse(condition, insts, else_insts);
 }
 
 /*

@@ -23,6 +23,7 @@ set(SRCS
     Greater.cpp
     GreaterOrEqual.cpp
     Identifier.cpp
+    IfThenElse.cpp
     Initialization.cpp
     InstanceOf.cpp
     IntLiteral.cpp
@@ -75,6 +76,7 @@ set(HEADERS
     Greater.h
     GreaterOrEqual.h
     Identifier.h
+    IfThenElse.h
     Initialization.h
     InstanceOf.h
     IntLiteral.h
