@@ -15,6 +15,7 @@ set(SRCS
     AbstractReadExpr.cpp
     AbstractUnaryExpr.cpp
     And.cpp
+    Assign.cpp
     BooleanLiteral.cpp
     Cast.cpp
     DeclClass.cpp
@@ -71,6 +72,7 @@ set(HEADERS
     AbstractReadExpr.h
     AbstractUnaryExpr.h
     And.h
+    Assign.h
     BooleanLiteral.h
     Cast.h
     DeclClass.h

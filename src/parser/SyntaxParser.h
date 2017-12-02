@@ -15,6 +15,7 @@
 #include "AST/AbstractReadExpr.h"
 #include "AST/AbstractUnaryExpr.h"
 #include "AST/And.h"
+#include "AST/Assign.h"
 #include "AST/BooleanLiteral.h"
 #include "AST/Cast.h"
 #include "AST/DeclClass.h"

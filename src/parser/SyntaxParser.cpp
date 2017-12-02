@@ -431,7 +431,19 @@ bool SyntaxParser::MatchAssignExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseAssignExpr(int * cur_token_index)
 {
-    return ParseOrExpr(cur_token_index);
+    AbstractExpr * expr = ParseOrExpr(cur_token_index);
+    
+    if (MatchToken(TOKEN_OP_ASSIGN, *cur_token_index))
+    {
+        if (AbstractLValue * lval = dynamic_cast<AbstractLValue*>(expr))
+        {
+            ConsumeToken(cur_token_index);
+            AbstractExpr * assign_expr = ParseAssignExpr(cur_token_index);
+            return new Assign(expr, assign_expr);
+        }
+        throw runtime_error("Expected LVALUE");
+    }
+    return expr;
 }
 
 /*
@@ -944,6 +956,10 @@ Identifier * SyntaxParser::ParseIdentifier(int * cur_token_index)
 
     return ident;
 }
+
+// CLASS RELATED RULES
+
+
 
 // Utility methods
 

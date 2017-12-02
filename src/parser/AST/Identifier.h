@@ -1,12 +1,9 @@
 #ifndef IDENTIFIER_H
 #define IDENTIFIER_H
 
-#include <iostream>
-#include "AbstractExpr.h"
+#include "AbstractLValue.h"
 
-using namespace std;
-
-class Identifier : public AbstractExpr
+class Identifier : public AbstractLValue
 {
     public:
 

@@ -13,8 +13,6 @@ class DeclVar {
         AbstractInitialization * m_init;
 
         void Display(string tab);
-
-
 };
 
 #endif
