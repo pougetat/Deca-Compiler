@@ -1,6 +1,7 @@
 #include <iostream>
 #include "lexer/lexer.h"
 #include "syntax/SyntaxParser.h"
+#include "context/ContextChecker.h"
 
 using namespace std;
 
@@ -42,6 +43,8 @@ int main(int argc, char * argv[])
     }
 
     // stage 3 : semantics checking : walking AST
+    ContextChecker context_checker;
+    context_checker.CheckContext(syntax_parser.m_program);
 
     // stage 4 : code generating : walking AST
 

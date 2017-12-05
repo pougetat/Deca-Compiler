@@ -14,3 +14,8 @@ void Main::Display(string tab)
         inst->Display(tab + "----");
     }
 }
+
+void Main::VerifyMain(EnvironmentType * env_types)
+{
+    
+}

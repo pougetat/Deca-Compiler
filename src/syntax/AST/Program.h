@@ -3,6 +3,7 @@
 
 #include "DeclClass.h"
 #include "AbstractMain.h"
+#include "../../context/EnvironmentType.h"
 #include <vector>
 
 using namespace std;
@@ -15,6 +16,7 @@ class Program
         AbstractMain * m_main;
 
         void Display(string tab);
+        void VerifyProgramPass3(EnvironmentType * env_type);
 };
 
 #endif

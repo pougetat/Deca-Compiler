@@ -17,6 +17,7 @@ class Main : public AbstractMain
         vector<AbstractInst *> * list_inst;
 
         void Display(string tab);
+        void VerifyMain(EnvironmentType * env_types);
 };
 
 #endif

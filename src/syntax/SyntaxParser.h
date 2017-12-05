@@ -60,6 +60,8 @@ class SyntaxParser {
 
     public:
 
+        Program * m_program;
+
         SyntaxParser(vector<Token> tokens);
         void CreateAST();
         void DisplayAST();
@@ -67,7 +69,6 @@ class SyntaxParser {
     private:
 
         vector<Token> m_tokens;
-        Program * m_program;
 
         bool MatchToken(TokenType token_type, int cur_token_index);
         void ShouldMatchToken(TokenType token_type, int * cur_token_index);

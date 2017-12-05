@@ -11,6 +11,7 @@ class EmptyMain : public AbstractMain
     public:
 
         void Display(string tab);
+        void VerifyMain(EnvironmentType * env_types);
 };
 
 #endif
