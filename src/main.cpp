@@ -1,26 +1,45 @@
 #include <iostream>
 #include "lexer/lexer.h"
-#include "parser/SyntaxParser.h"
+#include "syntax/SyntaxParser.h"
 
 using namespace std;
 
 int main(int argc, char * argv[])
 {
+    bool flag_lexer = false;
+    bool flag_syntax = false;
+
+    for (int arg_index = 0; arg_index < argc; arg_index++)
+    {
+        flag_lexer = flag_lexer || (string("-l").compare(argv[arg_index]) == 0);
+        flag_syntax = flag_syntax || (string("-p").compare(argv[arg_index]) == 0);
+    }
+
     // stage 1 : lexing
-    Lexer lexer("hello.txt");
+    string filename(argv[1]);
+    Lexer lexer(filename);
     vector<Token> tokens = lexer.tokenize();
 
-    for (Token token : tokens)
+    if (flag_lexer)
     {
-        cout << "<" <<
-			token.m_token_string << "," << token_names[token.m_token_type]
-		<< ">" << endl;
+        for (Token token : tokens)
+        {
+            cout << "<" <<
+                token.m_token_string << "," << token_names[token.m_token_type]
+            << ">" << endl;
+        }
+        return 0;
     }
 
     // stage 2 : syntax parsing : creating AST
     SyntaxParser syntax_parser(tokens);
     syntax_parser.CreateAST();
-    syntax_parser.DisplayAST();
+
+    if (flag_syntax)
+    {
+        syntax_parser.DisplayAST();
+        return 0;
+    }
 
     // stage 3 : semantics checking : walking AST
 

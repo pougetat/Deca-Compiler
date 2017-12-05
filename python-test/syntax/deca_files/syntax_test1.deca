@@ -1,0 +1,25 @@
+{
+    -(new A()).a;
+    1+2+(new A()).b-3-2 == 3 != b && e && f || e;
+    a <= (b == b) > 1+2 < r >= (new A()).c.d();
+    a != b == e * 4;
+    a * (-5) / 4 - (3 + 45) && e % 34;
+    (a + 4)*2;
+    a + 4 * 2;
+    a <= e > 3 instanceof f;
+    ;;;;;
+    println((new A()).b.f(),2,3);
+    while ()
+    {
+    }
+    return;
+
+    if (efewf) {
+        uhewfw;
+        wfuegf;
+        print("hello");
+    } else {
+        killme;
+    };
+
+}
