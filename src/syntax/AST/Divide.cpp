@@ -20,3 +20,12 @@ void Divide::Display(string tab)
     m_expr1->Display(tab + "--");
     m_expr2->Display(tab + "--");
 }
+
+void Divide::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType return_type)
+{
+    
+}

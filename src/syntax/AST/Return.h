@@ -14,6 +14,12 @@ class Return : public AbstractInst
 
         Return(AbstractExpr * return_expr);
         void Display(string tab);
+        void VerifyInst(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name,
+            AbstractType * return_type
+        );
 };
 
 #endif

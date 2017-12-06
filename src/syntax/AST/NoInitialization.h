@@ -4,14 +4,13 @@
 #include "AbstractExpr.h"
 #include "AbstractInitialization.h"
 
-class NoInitialization : public AbstractInitialization {
-
+class NoInitialization : public AbstractInitialization
+{
     public:
         
         AbstractExpr * m_expr;
         
         void Display(string tab);
-
 };
 
 #endif

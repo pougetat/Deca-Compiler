@@ -13,3 +13,12 @@ void Print::Display(string tab)
         expr->Display(tab + "--");
     }
 }
+
+void Print::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType * return_type)
+{
+    
+}

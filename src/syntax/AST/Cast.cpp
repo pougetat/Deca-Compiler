@@ -20,3 +20,12 @@ void Cast::Display(string tab)
     m_cast_type->Display(tab + "--");
     m_expr->Display(tab + "--");
 }
+
+void Cast::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType return_type)
+{
+    
+}

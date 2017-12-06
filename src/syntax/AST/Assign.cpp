@@ -20,3 +20,12 @@ void Assign::Display(string tab)
     m_lvalue->Display(tab + "--");
     m_assign->Display(tab + "--");
 }
+
+void Assign::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType return_type)
+{
+
+}

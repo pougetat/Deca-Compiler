@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "../../context/EnvironmentType.h"
+#include "../../context/EnvironmentExp.h"
+#include "../../context/VoidType.h"
 
 using namespace std;
 

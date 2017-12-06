@@ -23,3 +23,12 @@ void While::Display(string tab)
         }
     }
 }
+
+void While::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType * return_type)
+{
+    
+}

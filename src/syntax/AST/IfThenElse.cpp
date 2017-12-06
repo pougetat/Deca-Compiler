@@ -29,3 +29,12 @@ void IfThenElse::Display(string tab)
         inst->Display(tab + "----");
     }
 }
+
+void IfThenElse::VerifyInst(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name,
+    AbstractType * return_type)
+{
+    
+}

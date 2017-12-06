@@ -5,7 +5,6 @@
 #include "AbstractInst.h"
 #include "DeclVar.h"
 #include <vector>
-#include <iostream>
 
 using namespace std;
 
@@ -13,8 +12,10 @@ class Main : public AbstractMain
 {
     public:
 
-        vector<DeclVar *> * list_decl_var;
-        vector<AbstractInst *> * list_inst;
+        vector<DeclVar *> * m_list_decl_var;
+        vector<AbstractInst *> * m_list_inst;
+
+        EnvironmentExp * m_env_main_exp;
 
         void Display(string tab);
         void VerifyMain(EnvironmentType * env_types);

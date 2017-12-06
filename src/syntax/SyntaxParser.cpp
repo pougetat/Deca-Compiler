@@ -66,20 +66,20 @@ Main * SyntaxParser::ParseBlock(int * cur_token_index)
     
     if (MatchListDecl(*cur_token_index))
     {
-        block->list_decl_var = ParseListDecl(cur_token_index);
+        block->m_list_decl_var = ParseListDecl(cur_token_index);
     }
     else
     {
-        block->list_decl_var = new vector<DeclVar *>();
+        block->m_list_decl_var = new vector<DeclVar *>();
     }
     
     if (MatchListInst(*cur_token_index))
     {
-        block->list_inst = ParseListInst(cur_token_index);
+        block->m_list_inst = ParseListInst(cur_token_index);
     }
     else
     {
-        block->list_inst = new vector<AbstractInst *>();
+        block->m_list_inst = new vector<AbstractInst *>();
     }
 
     ShouldMatchToken(TOKEN_CBRACE, cur_token_index);

@@ -13,6 +13,12 @@ class Assign : public AbstractBinaryExpr
         Assign(AbstractExpr * lvalue, AbstractExpr * assign);
         AbstractExpr * Clone();
         void Display(string tab);
+        void VerifyInst(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name,
+            AbstractType return_type
+        );
 };
 
 #endif
