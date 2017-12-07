@@ -6,8 +6,14 @@
 class AbstractOpArith : public AbstractBinaryExpr
 {
     public:
-        
-        virtual AbstractType * VerifyExpr(
+	
+		virtual bool IsPlus() = 0;
+		virtual bool IsMinus() = 0;
+		virtual bool IsMultiply() = 0;
+		virtual bool IsDivide() = 0;
+		virtual bool IsModulo() = 0;
+
+        AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string class_name

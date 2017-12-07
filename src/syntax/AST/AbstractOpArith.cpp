@@ -16,5 +16,24 @@ AbstractType * AbstractOpArith::VerifyExpr(
         class_name
     );
 
-    return NULL;
+    if (IsModulo())
+    {
+        cout << "hello" << endl;
+        if (!type_left_operand->IsIntType() || !type_right_operand->IsIntType())
+        {
+            cout << "hey" << endl;
+            throw runtime_error("[MODULO OPERATION : INT OPERAND EXPECTED");
+        }
+    }
+
+    if (type_left_operand->IsFloatType() || type_right_operand->IsFloatType())
+    {
+        return new FloatType();
+    }
+    if (type_left_operand->IsIntType() && type_right_operand->IsIntType())
+    {
+        return new IntType();
+    }
+
+    throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
 }
