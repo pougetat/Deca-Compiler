@@ -1,6 +1,6 @@
-#include "AbstractLValue.h"
+#include "AbstractLiteral.h"
 
-AbstractType * AbstractLValue::VerifyExpr(
+AbstractType * AbstractLiteral::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string class_name)

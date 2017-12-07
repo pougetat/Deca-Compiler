@@ -13,7 +13,6 @@ void Main::Display(string tab)
     {
         inst->Display(tab + "----");
     }
-    cout << m_list_decl_var->size() << endl;
 }
 
 void Main::VerifyMain(EnvironmentType * env_types)

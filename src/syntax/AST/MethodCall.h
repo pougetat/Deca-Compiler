@@ -19,12 +19,20 @@ class MethodCall : public AbstractExpr
             Identifier * method_name, 
             vector<AbstractExpr *> * method_args
         );
+
         MethodCall(
             AbstractExpr * selection_expr, 
             Identifier * method_name, 
             vector<AbstractExpr *> * method_args);
         AbstractExpr * Clone();
+        
         void Display(string tab);
+
+        virtual AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        );
 };
 
 #endif

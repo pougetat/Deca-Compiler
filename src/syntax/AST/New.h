@@ -14,8 +14,16 @@ class New : public AbstractExpr
         Identifier * m_class_name;
 
         New(Identifier * class_name);
+
         AbstractExpr * Clone();
+        
         void Display(string tab);
+
+        AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        );
 };
 
 #endif

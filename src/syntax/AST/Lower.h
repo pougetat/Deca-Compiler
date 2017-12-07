@@ -11,7 +11,9 @@ class Lower : public AbstractOpIneq
         AbstractExpr * m_expr2;
 
         Lower(AbstractExpr * expr1, AbstractExpr * expr2);
+
         AbstractExpr * Clone();
+        
         void Display(string tab);
 };
 

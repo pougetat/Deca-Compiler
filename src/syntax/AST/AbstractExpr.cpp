@@ -6,5 +6,14 @@ void AbstractExpr::VerifyInst(
     string class_name,
     AbstractType * return_type)
 {
-    
+    VerifyExpr(env_types, env_exp, class_name);
+}
+
+AbstractType * AbstractExpr::VerifyExpr(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name
+)
+{
+    cout << "verifying expr" << endl;
 }

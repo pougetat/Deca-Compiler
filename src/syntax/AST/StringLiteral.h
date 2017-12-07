@@ -1,12 +1,12 @@
 #ifndef STRING_LITERAL_H
 #define STRING_LITERAL_H
 
-#include "AbstractExpr.h"
+#include "AbstractLiteral.h"
 #include <iostream>
 
 using namespace std;
 
-class StringLiteral : public AbstractExpr
+class StringLiteral : public AbstractLiteral
 {
     public:
         

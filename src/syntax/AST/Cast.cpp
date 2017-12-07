@@ -1,5 +1,7 @@
 #include "Cast.h"
 
+// GRAMMAR PARSING RELATED METHODS
+
 Cast::Cast(Identifier * cast_type, AbstractExpr * expr)
 {
     m_cast_type = cast_type;
@@ -21,6 +23,8 @@ void Cast::Display(string tab)
     m_expr->Display(tab + "--");
 }
 
+// CONTEXT CHECKING RELATED METHODS
+
 void Cast::VerifyInst(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
@@ -28,4 +32,13 @@ void Cast::VerifyInst(
     AbstractType return_type)
 {
     
+}
+
+AbstractType * Cast::VerifyExpr(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name)
+{
+    throw runtime_error("NOT IMPLEMENTED YET");
+    return NULL;
 }

@@ -14,6 +14,11 @@ class AbstractExpr : public AbstractInst
             string class_name,
             AbstractType * return_type
         );
+        virtual AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        ) = 0;
 };
 
 #endif

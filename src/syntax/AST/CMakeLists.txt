@@ -5,6 +5,7 @@ set(SRCS
     AbstractExpr.cpp
     AbstractInitialization.cpp
     AbstractInst.cpp
+    AbstractLiteral.cpp
     AbstractLValue.cpp
 	AbstractMain.cpp
     AbstractOpArith.cpp
@@ -62,6 +63,7 @@ set(HEADERS
     AbstractExpr.h
     AbstractInitialization.h
     AbstractInst.h
+    AbstractLiteral.h
     AbstractLValue.h
 	AbstractMain.h
     AbstractOpArith.h

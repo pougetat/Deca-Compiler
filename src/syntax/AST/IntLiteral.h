@@ -1,19 +1,21 @@
 #ifndef INT_LITERAL_H
 #define INT_LITERAL_H
 
-#include "AbstractExpr.h"
+#include "AbstractLiteral.h"
 #include <iostream>
 
 using namespace std;
 
-class IntLiteral : public AbstractExpr
+class IntLiteral : public AbstractLiteral
 {
     public:
         
         int m_value;
 
         IntLiteral(int value);
+
         AbstractExpr * Clone();
+        
         void Display(string tab);
 };
 
