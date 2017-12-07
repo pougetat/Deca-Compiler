@@ -24,10 +24,5 @@ AbstractType * AbstractOpCmp::VerifyExpr(
         );
     }
 
-    if (type_left_operand->IsFloatType() || type_right_operand->IsFloatType())
-    {
-        return new FloatType();
-    }
-
-    return new IntType();
+    return new BooleanType();
 }
