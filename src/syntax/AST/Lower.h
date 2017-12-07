@@ -6,9 +6,6 @@
 class Lower : public AbstractOpIneq
 {
     public:
-        
-        AbstractExpr * m_expr1;
-        AbstractExpr * m_expr2;
 
         Lower(AbstractExpr * expr1, AbstractExpr * expr2);
 
