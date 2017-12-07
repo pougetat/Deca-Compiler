@@ -1,13 +1,11 @@
 #ifndef EQUALS_EXPR
 #define EQUALS_EXPR
 
-#include "AbstractExpr.h"
-#include "AbstractBinaryExpr.h"
-#include <iostream>
+#include "AbstractOpExactCmp.h"
 
 using namespace std;
 
-class Equals : public AbstractBinaryExpr
+class Equals : public AbstractOpExactCmp
 {
     public:
 

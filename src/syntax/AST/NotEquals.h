@@ -1,18 +1,16 @@
 #ifndef NOT_EQUALS_EXPR
 #define NOT_EQUALS_EXPR
 
-#include "AbstractExpr.h"
-#include "AbstractBinaryExpr.h"
+#include "AbstractOpExactCmp.h"
 
-class NotEquals : public AbstractBinaryExpr
+class NotEquals : public AbstractOpExactCmp
 {
     public:
-        
-        AbstractExpr * m_expr1;
-        AbstractExpr * m_expr2;
 
         NotEquals(AbstractExpr * expr1, AbstractExpr * expr2);
+
         AbstractExpr * Clone();
+        
         void Display(string tab);
 };
 

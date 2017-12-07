@@ -21,5 +21,5 @@ AbstractType * AbstractOpBool::VerifyExpr(
         return new BooleanType();
     }
 
-    throw runtime_error("BOOLEAN EXPR : OPERANDS MUST BE OF BOOLEAN TYPE");
+    throw runtime_error("[BOOL OPERATION : BOOLEAN OPERAND EXPECTED]");
 }
