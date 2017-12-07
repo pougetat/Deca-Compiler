@@ -42,7 +42,7 @@ int main(int argc, char * argv[])
         return 0;
     }
 
-    // stage 3 : semantics checking : walking AST
+    // stage 3 : context checking : walking AST
     ContextChecker context_checker;
     context_checker.CheckContext(syntax_parser.m_program);
 

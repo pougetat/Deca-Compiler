@@ -6,7 +6,11 @@ using namespace std;
 class AbstractType
 {
     public:
-        
+        virtual bool IsBooleanType() = 0;
+        virtual bool IsFloatType() = 0;
+        virtual bool IsIntType() = 0;
+        virtual bool IsStringType() = 0;
+        virtual bool IsVoidType() = 0;
 };
 
 #endif

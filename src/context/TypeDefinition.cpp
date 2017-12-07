@@ -7,3 +7,8 @@ TypeDefinition::TypeDefinition(
     m_type_nature = type_nature;
     m_type = type;
 }
+
+AbstractType * TypeDefinition::GetType()
+{
+    return m_type;
+}

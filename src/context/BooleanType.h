@@ -5,7 +5,12 @@
 
 class BooleanType : public AbstractType
 {
-
+    public:
+        bool IsBooleanType();
+        bool IsFloatType();
+        bool IsIntType();
+        bool IsStringType();
+        bool IsVoidType();
 };
 
 #endif

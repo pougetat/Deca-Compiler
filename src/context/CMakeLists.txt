@@ -7,7 +7,6 @@ set(SRCS
 	AbstractType.cpp
 	AbstractTypeNature.cpp
 	BooleanType.cpp
-	ClassType.cpp
 	ClassTypeNature.cpp
 	ContextChecker.cpp
 	EnvironmentExp.cpp
@@ -27,7 +26,6 @@ set(HEADERS
 	AbstractType.h
 	AbstractTypeNature.h	
 	BooleanType.h
-	ClassType.h
 	ClassTypeNature.h
 	ContextChecker.h
 	EnvironmentExp.h

@@ -21,10 +21,10 @@ void And::Display(string tab)
     m_expr2->Display(tab + "--");
 }
 
-void VerifyInst(
+void And::VerifyInst(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string class_name,
-    AbstractType return_type)
+    AbstractType * return_type)
 {
 };

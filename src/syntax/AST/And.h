@@ -17,7 +17,7 @@ class And : public AbstractBinaryExpr
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string class_name,
-            AbstractType return_type
+            AbstractType * return_type
         );
 };
 

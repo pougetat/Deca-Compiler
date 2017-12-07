@@ -16,6 +16,12 @@ void DeclVar::VerifyDeclVar(
 {
     if (!env_types->TypeExists(m_type->m_symbol))
     {
-        throw runtime_error("THIS TYPE DOES NOT EXIST");
+        throw runtime_error("UNKNOWN TYPE " + m_type->m_symbol);
     }
+    AbstractType * type = env_types->GetType(m_type->m_symbol);
+    if (type->IsVoidType())
+    {
+        throw runtime_error("VARIABLE CANNOT BE OF TYPE VOID");
+    }
+
 }

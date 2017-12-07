@@ -2,6 +2,8 @@
 
 EnvironmentType::EnvironmentType()
 {
+    m_env_types = new map<string, TypeDefinition>();
+
     m_env_types->insert(
         pair<string, TypeDefinition>(
             "int",
@@ -29,9 +31,23 @@ EnvironmentType::EnvironmentType()
             ))
         )
     );
+    m_env_types->insert(
+        pair<string, TypeDefinition>(
+            "void",
+            *(new TypeDefinition(
+                new TypeTypeNature(),
+                new VoidType()
+            ))
+        )
+    );
 }
 
 bool EnvironmentType::TypeExists(string type_symbol)
 {
-    return m_env_types->find(type_symbol) == m_env_types->end();
+    return m_env_types->find(type_symbol) != m_env_types->end();
+}
+
+AbstractType * EnvironmentType::GetType(string type_symbol)
+{
+    return m_env_types->find(type_symbol)->second.GetType();
 }

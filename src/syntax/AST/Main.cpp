@@ -13,11 +13,13 @@ void Main::Display(string tab)
     {
         inst->Display(tab + "----");
     }
+    cout << m_list_decl_var->size() << endl;
 }
 
 void Main::VerifyMain(EnvironmentType * env_types)
 {
     m_env_main_exp = new EnvironmentExp();
+
     for (DeclVar * declvar : *m_list_decl_var)
     {
         declvar->VerifyDeclVar(env_types, NULL, m_env_main_exp, NULL);
@@ -26,4 +28,5 @@ void Main::VerifyMain(EnvironmentType * env_types)
     {
         inst->VerifyInst(env_types, m_env_main_exp, NULL, new VoidType());
     }
+
 }
