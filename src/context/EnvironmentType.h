@@ -14,6 +14,7 @@
 #include "FloatType.h"
 #include "BooleanType.h"
 #include "VoidType.h"
+#include "StringType.h"
 
 using namespace std;
 

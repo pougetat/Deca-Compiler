@@ -5,6 +5,5 @@ AbstractType * AbstractBinaryExpr::VerifyExpr(
     EnvironmentExp * env_exp,
     string class_name)
 {
-    throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+    throw runtime_error("NOT YET IMPLEMENTED");
 }

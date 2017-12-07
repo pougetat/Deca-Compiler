@@ -12,7 +12,9 @@ using namespace std;
 class AbstractInst 
 {
     public:
+
         virtual void Display(string tab) = 0;
+        
         virtual void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,

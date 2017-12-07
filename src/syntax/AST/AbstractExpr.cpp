@@ -15,5 +15,6 @@ AbstractType * AbstractExpr::VerifyExpr(
     string class_name
 )
 {
-    cout << "verifying expr" << endl;
+    throw runtime_error("NOT IMPLEMENTED YET");
+    return NULL;
 }

@@ -15,11 +15,10 @@ void BooleanLiteral::Display(string tab)
     cout << tab << ">" << "[BOOLEAN_LITERAL] VALUE : " << m_value << endl;
 }
 
-void BooleanLiteral::VerifyInst(
+AbstractType * BooleanLiteral::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name,
-    AbstractType return_type)
+    string class_name)
 {
-
+    return new BooleanType();
 }
