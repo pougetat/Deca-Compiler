@@ -6,12 +6,18 @@
 class UnaryMinus : public AbstractUnaryExpr
 {
     public:
-        
-        AbstractExpr * m_expr;
 
         UnaryMinus(AbstractExpr * expr);
+        
         AbstractExpr * Clone();
+        
         void Display(string tab);
+
+        AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        );
 };
 
 #endif

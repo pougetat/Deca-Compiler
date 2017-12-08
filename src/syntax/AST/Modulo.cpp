@@ -21,6 +21,30 @@ void Modulo::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
+AbstractType * Modulo::VerifyExpr(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string class_name)
+{
+    AbstractType * type_left_operand = m_left_operand->VerifyExpr(
+        env_types,
+        env_exp,
+        class_name
+    );
+    AbstractType * type_right_operand = m_right_operand->VerifyExpr(
+        env_types,
+        env_exp,
+        class_name
+    );
+
+    if (!type_left_operand->IsIntType() || !type_right_operand->IsIntType())
+    {
+        throw runtime_error("[MODULO OPERATION : INT OPERAND EXPECTED]");
+    }
+
+    return new IntType();
+}
+
 bool Modulo::IsPlus()
 {
     return false;

@@ -13,7 +13,7 @@ class AbstractOpArith : public AbstractBinaryExpr
 		virtual bool IsDivide() = 0;
 		virtual bool IsModulo() = 0;
 
-        AbstractType * VerifyExpr(
+        virtual AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string class_name

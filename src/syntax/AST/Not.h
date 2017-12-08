@@ -6,12 +6,18 @@
 class Not : public AbstractUnaryExpr
 {
     public:
-        
-        AbstractExpr * m_expr;
 
         Not(AbstractExpr * expr);
+
         AbstractExpr * Clone();
+        
         void Display(string tab);
+
+        virtual AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        );
 };
 
 #endif

@@ -6,11 +6,14 @@
 class AbstractUnaryExpr : public AbstractExpr
 {
     public:
-        AbstractType * VerifyExpr(
-                EnvironmentType * env_types,
-                EnvironmentExp * env_exp,
-                string class_name
-        );
+
+        AbstractExpr * m_operand;
+
+        virtual AbstractType * VerifyExpr(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string class_name
+        ) = 0;
 };
 
 #endif

@@ -16,14 +16,6 @@ AbstractType * AbstractOpArith::VerifyExpr(
         class_name
     );
 
-    if (IsModulo())
-    {
-        if (!type_left_operand->IsIntType() || !type_right_operand->IsIntType())
-        {
-            throw runtime_error("[MODULO OPERATION : INT OPERAND EXPECTED");
-        }
-    }
-
     if (type_left_operand->IsFloatType())
     {
         if (type_right_operand->IsFloatType() || type_right_operand->IsIntType())
