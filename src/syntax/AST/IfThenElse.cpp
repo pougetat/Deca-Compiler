@@ -36,5 +36,33 @@ void IfThenElse::VerifyInst(
     string * class_name,
     AbstractType * return_type)
 {
-    
+    AbstractType * condition_type = m_condition->VerifyExpr(
+        env_types,
+        env_exp,
+        class_name
+    );
+
+    if (!condition_type->IsBooleanType())
+    {
+        throw runtime_error("[IF THEN ELSE : BOOLEAN CONDITION EXPECTED]");
+    }
+
+    for (AbstractInst * inst : *m_insts)
+    {
+        inst->VerifyInst(
+            env_types,
+            env_exp,
+            class_name,
+            return_type
+        );
+    }
+    for (AbstractInst * inst : *m_else_insts)
+    {
+        inst->VerifyInst(
+            env_types,
+            env_exp,
+            class_name,
+            return_type
+        );
+    }
 }
