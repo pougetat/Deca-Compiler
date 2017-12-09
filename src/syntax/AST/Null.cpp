@@ -17,7 +17,7 @@ void Null::Display(string tab)
 AbstractType * Null::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name)
+    string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
     return NULL;

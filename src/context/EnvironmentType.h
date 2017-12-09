@@ -21,9 +21,13 @@ using namespace std;
 class EnvironmentType
 {
     public:
-        map<string, TypeDefinition> * m_env_types;
+        
+        map<string, TypeDefinition*> * m_env_types;
+        
         EnvironmentType();
+        
         bool TypeExists(string type_symbol);
+        
         AbstractType * GetType(string type_symbol);
 };
 

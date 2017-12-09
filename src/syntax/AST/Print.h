@@ -16,11 +16,13 @@ class Print : public AbstractInst {
         TokenType m_token_type;
 
         Print(TokenType token_type);
+        
         void Display(string tab);
+        
         void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name,
+            string * class_name,
             AbstractType * return_type
         );
 };

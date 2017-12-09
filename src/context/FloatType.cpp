@@ -24,3 +24,8 @@ bool FloatType::IsVoidType()
 {
     return false;
 }
+
+bool FloatType::IsSameType(AbstractType * other_type)
+{
+    return other_type->IsFloatType();
+}

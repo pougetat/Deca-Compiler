@@ -24,7 +24,7 @@ void Modulo::Display(string tab)
 AbstractType * Modulo::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name)
+    string * class_name)
 {
     AbstractType * type_left_operand = m_left_operand->VerifyExpr(
         env_types,

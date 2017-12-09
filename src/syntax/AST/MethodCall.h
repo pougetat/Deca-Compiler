@@ -12,7 +12,9 @@ class MethodCall : public AbstractExpr
     public:
  
         AbstractExpr * m_selection_expr;
+        
         Identifier * m_method_identifier;
+        
         vector<AbstractExpr *> * m_method_args;
 
         MethodCall(
@@ -23,7 +25,9 @@ class MethodCall : public AbstractExpr
         MethodCall(
             AbstractExpr * selection_expr, 
             Identifier * method_name, 
-            vector<AbstractExpr *> * method_args);
+            vector<AbstractExpr *> * method_args
+        );
+
         AbstractExpr * Clone();
         
         void Display(string tab);
@@ -31,7 +35,7 @@ class MethodCall : public AbstractExpr
         virtual AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name
+            string * class_name
         );
 };
 

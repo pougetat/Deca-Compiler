@@ -14,15 +14,28 @@ class AbstractExpr : public AbstractInst
         void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name,
+            string * class_name,
             AbstractType * return_type
         );
         
         virtual AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name
-        ) = 0;
+            string * class_name
+        );
+
+        virtual void VerifyRValue(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name,
+            AbstractType * type
+        );
+
+        virtual AbstractType * VerifyLValue(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name
+        );
 };
 
 #endif

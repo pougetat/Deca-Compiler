@@ -11,6 +11,13 @@ class NoInitialization : public AbstractInitialization
         AbstractExpr * m_expr;
         
         void Display(string tab);
+
+        void VerifyInitialization(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name,
+            AbstractType * type
+        );
 };
 
 #endif

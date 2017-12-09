@@ -17,7 +17,7 @@ void Return::Display(string tab)
 void Return::VerifyInst(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name,
+    string * class_name,
     AbstractType * return_type)
 {
     

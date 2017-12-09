@@ -21,7 +21,7 @@ void Not::Display(string tab)
 AbstractType * Not::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name)
+    string * class_name)
 {
     AbstractType * type_operand = m_operand->VerifyExpr(
         env_types,

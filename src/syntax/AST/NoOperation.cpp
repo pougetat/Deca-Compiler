@@ -8,7 +8,7 @@ void NoOperation::Display(string tab)
 void NoOperation::VerifyInst(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name,
+    string * class_name,
     AbstractType * return_type)
 {
 

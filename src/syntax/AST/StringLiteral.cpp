@@ -18,7 +18,7 @@ void StringLiteral::Display(string tab)
 AbstractType * StringLiteral::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name)
+    string * class_name)
 {
     return new StringType();
 }

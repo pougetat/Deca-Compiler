@@ -16,12 +16,29 @@ void DeclVar::VerifyDeclVar(
 {
     if (!env_types->TypeExists(m_type->m_symbol))
     {
-        throw runtime_error("UNKNOWN TYPE " + m_type->m_symbol);
+        throw runtime_error("[DECL VAR : UNKNOWN TYPE '" + m_type->m_symbol + "']");
     }
-    AbstractType * type = env_types->GetType(m_type->m_symbol);
-    if (type->IsVoidType())
+
+    AbstractType * variable_type = env_types->GetType(m_type->m_symbol);
+    
+    if (variable_type->IsVoidType())
     {
-        throw runtime_error("VARIABLE CANNOT BE OF TYPE VOID");
+        throw runtime_error("[DECL VAR : VOID IS INVALID TYPE]");
     }
+
+    m_init->VerifyInitialization(
+        env_types,
+        env_exp,
+        class_name,
+        variable_type
+    );
+
+    env_exp->AddSymbol(
+        m_symbol->m_symbol,
+        new ExpDefinition(
+            new VarExpNature(),
+            variable_type
+        )
+    );
 
 }

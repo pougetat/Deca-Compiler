@@ -25,7 +25,7 @@ void Main::VerifyMain(EnvironmentType * env_types)
     }
     for (AbstractInst * inst: *m_list_inst)
     {
-        inst->VerifyInst(env_types, m_env_main_exp, "", new VoidType());
+        inst->VerifyInst(env_types, m_env_main_exp, new string(""), new VoidType());
     }
 
 }

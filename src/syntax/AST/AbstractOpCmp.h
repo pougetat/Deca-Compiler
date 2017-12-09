@@ -10,7 +10,7 @@ class AbstractOpCmp : public AbstractBinaryExpr
         AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name
+            string * class_name
         );
 };
 

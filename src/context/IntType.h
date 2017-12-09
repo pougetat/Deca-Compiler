@@ -11,6 +11,7 @@ class IntType : public AbstractType
         bool IsIntType();
         bool IsStringType();
         bool IsVoidType();
+        bool IsSameType(AbstractType * other_type);
 };
 
 #endif

@@ -6,18 +6,17 @@
 class Assign : public AbstractBinaryExpr
 {
     public:
-        
-        AbstractExpr * m_lvalue;
-        AbstractExpr * m_assign;
 
         Assign(AbstractExpr * lvalue, AbstractExpr * assign);
+        
         AbstractExpr * Clone();
+        
         void Display(string tab);
-        void VerifyInst(
+
+        AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name,
-            AbstractType return_type
+            string * class_name
         );
 };
 

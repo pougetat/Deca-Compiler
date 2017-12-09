@@ -17,7 +17,7 @@ class Return : public AbstractInst
         void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
-            string class_name,
+            string * class_name,
             AbstractType * return_type
         );
 };

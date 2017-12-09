@@ -18,7 +18,7 @@ void BooleanLiteral::Display(string tab)
 AbstractType * BooleanLiteral::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name)
+    string * class_name)
 {
     return new BooleanType();
 }

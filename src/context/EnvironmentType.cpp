@@ -2,42 +2,42 @@
 
 EnvironmentType::EnvironmentType()
 {
-    m_env_types = new map<string, TypeDefinition>();
+    m_env_types = new map<string, TypeDefinition *>();
 
     m_env_types->insert(
-        pair<string, TypeDefinition>(
+        pair<string, TypeDefinition *>(
             "int",
-            *(new TypeDefinition(
+            new TypeDefinition(
                 new TypeTypeNature(),
                 new IntType()
-            ))
+            )
         )
     );
     m_env_types->insert(
-        pair<string, TypeDefinition>(
+        pair<string, TypeDefinition *>(
             "float",
-            *(new TypeDefinition(
+            new TypeDefinition(
                 new TypeTypeNature(),
                 new FloatType()
-            ))
+            )
         )
     );
     m_env_types->insert(
-        pair<string, TypeDefinition>(
+        pair<string, TypeDefinition *>(
             "boolean",
-            *(new TypeDefinition(
+            new TypeDefinition(
                 new TypeTypeNature(),
                 new BooleanType()
-            ))
+            )
         )
     );
     m_env_types->insert(
-        pair<string, TypeDefinition>(
+        pair<string, TypeDefinition *>(
             "void",
-            *(new TypeDefinition(
+            new TypeDefinition(
                 new TypeTypeNature(),
                 new VoidType()
-            ))
+            )
         )
     );
 }
@@ -49,5 +49,5 @@ bool EnvironmentType::TypeExists(string type_symbol)
 
 AbstractType * EnvironmentType::GetType(string type_symbol)
 {
-    return m_env_types->find(type_symbol)->second.GetType();
+    return m_env_types->find(type_symbol)->second->GetType();
 }

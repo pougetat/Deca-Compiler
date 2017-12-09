@@ -10,7 +10,15 @@ class Initialization : public AbstractInitialization {
         AbstractExpr * m_expr;
         
         Initialization(AbstractExpr * expr);
+        
         void Display(string tab);
+
+        virtual void VerifyInitialization(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name,
+            AbstractType * type
+        );
 
 };
 

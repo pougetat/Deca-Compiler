@@ -11,9 +11,11 @@ class TypeDefinition : public AbstractDefinition
     public:
         
         AbstractTypeNature * m_type_nature;
+        
         AbstractType * m_type;
         
         TypeDefinition(AbstractTypeNature * type_nature, AbstractType * type);
+        
         AbstractType * GetType();
 
 

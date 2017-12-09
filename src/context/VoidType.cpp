@@ -24,3 +24,8 @@ bool VoidType::IsVoidType()
 {
     return true;
 }
+
+bool VoidType::IsSameType(AbstractType * other_type)
+{
+    return other_type->IsVoidType();
+}

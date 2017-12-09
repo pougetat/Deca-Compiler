@@ -2,30 +2,40 @@
 
 Assign::Assign(AbstractExpr * expr, AbstractExpr * assign)
 {
-    m_lvalue = expr;
-    m_assign = assign;
+    m_left_operand = expr;
+    m_right_operand = assign;
 }
 
 AbstractExpr * Assign::Clone()
 {
     return new Assign(
-        m_lvalue->Clone(), 
-        m_assign->Clone()
+        m_left_operand->Clone(), 
+        m_right_operand->Clone()
     );
 }
 
 void Assign::Display(string tab)
 {
     cout << tab << ">" << "[ASSIGN]" << endl;
-    m_lvalue->Display(tab + "--");
-    m_assign->Display(tab + "--");
+    m_left_operand->Display(tab + "--");
+    m_right_operand->Display(tab + "--");
 }
 
-void Assign::VerifyInst(
+AbstractType * Assign::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
-    string class_name,
-    AbstractType return_type)
+    string * class_name)
 {
+    AbstractType * lvalue_type = m_left_operand->VerifyLValue(
+        env_types,
+        env_exp,
+        class_name
+    );
 
+    m_right_operand->VerifyRValue(
+        env_types,
+        env_exp,
+        class_name,
+        lvalue_type
+    );
 }

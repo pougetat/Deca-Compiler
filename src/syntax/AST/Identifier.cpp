@@ -14,3 +14,11 @@ void Identifier::Display(string tab)
 {
     cout << tab << ">" << "[IDENTIFIER] VALUE : " << m_symbol << endl;
 }
+
+AbstractType * Identifier::VerifyLValue(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string * class_name)
+{
+    return env_exp->GetDefinition(m_symbol)->GetType();
+}

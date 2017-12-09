@@ -24,3 +24,8 @@ bool StringType::IsVoidType()
 {
     return false;
 }
+
+bool StringType::IsSameType(AbstractType * other_type)
+{
+    return other_type->IsStringType();
+}
