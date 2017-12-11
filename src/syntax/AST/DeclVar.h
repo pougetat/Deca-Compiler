@@ -3,9 +3,7 @@
 
 #include "Identifier.h"
 #include "AbstractInitialization.h"
-
 #include "../../context/EnvironmentType.h"
-
 #include "../../context/EnvironmentExp.h"
 #include "../../context/ExpDefinition.h"
 #include "../../context/VarExpNature.h"

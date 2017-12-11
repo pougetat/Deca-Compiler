@@ -162,6 +162,24 @@ class SyntaxParser {
 
         bool MatchClassExtension(int cur_token_index);
         Identifier * ParseClassExtension(int * cur_token_index);
+
+        bool MatchClassBody(int cur_token_index);
+        void ParseClassBody(int * cur_token_index, DeclClass * decl_class);
+
+        bool MatchDeclFieldSet(int cur_token_index);
+        void ParseDeclFieldSet(int * cur_token_index, DeclClass * decl_class);
+
+        bool MatchVisibility(int cur_token_index);
+        Visibility ParseVisibility(int * cur_token_index);
+
+        bool MatchListDeclField(int cur_token_index);
+        vector<DeclField *> * ParseListDeclField(int * cur_token_index);
+
+        bool MatchDeclField(int cur_token_index);
+        DeclField * ParseDeclField(int * cur_token_index);
+
+        bool MatchDeclMethod(int cur_token_index);
+        DeclMethod * ParseDeclMethod(int * cur_token_index);
 };
 
 #endif

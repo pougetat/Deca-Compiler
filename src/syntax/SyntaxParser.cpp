@@ -162,15 +162,15 @@ vector<DeclVar *> * SyntaxParser::ParseDeclVarSet(int * cur_token_index)
     return list_decl_var;
 }
 
-bool SyntaxParser::MatchListDeclVar(int cur_token_index)
-{
-    return MatchDeclVar(cur_token_index);
-}
-
 /*
     list_decl_var ->
         decl_var (',' decl_var)*
 */
+
+bool SyntaxParser::MatchListDeclVar(int cur_token_index)
+{
+    return MatchDeclVar(cur_token_index);
+}
 
 vector<DeclVar *> * SyntaxParser::ParseListDeclVar(int * cur_token_index)
 {
@@ -1016,6 +1016,8 @@ bool SyntaxParser::MatchClassDecl(int cur_token_index)
 DeclClass * SyntaxParser::ParseClassDecl(int * cur_token_index)
 {
     DeclClass * decl_class = new DeclClass();
+    decl_class->m_class_fields = new vector<DeclField *>();
+    decl_class->m_class_methods = new vector<DeclMethod *>();
 
     ConsumeToken(cur_token_index);
 
@@ -1031,6 +1033,12 @@ DeclClass * SyntaxParser::ParseClassDecl(int * cur_token_index)
     }
 
     ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
+
+    if (MatchClassBody(*cur_token_index))
+    {
+        ParseClassBody(cur_token_index, decl_class);
+    }
+
     ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
 
     return decl_class;
@@ -1051,6 +1059,164 @@ Identifier * SyntaxParser::ParseClassExtension(int * cur_token_index)
 {
     ConsumeToken(cur_token_index);
     return ParseIdentifier(cur_token_index);
+}
+
+/*
+    class_body ->
+        (decl_method
+        | decl_field_set)*
+*/
+
+bool SyntaxParser::MatchClassBody(int cur_token_index)
+{
+    return (
+        MatchDeclMethod(cur_token_index) 
+        || MatchDeclFieldSet(cur_token_index)
+    );
+}
+
+void SyntaxParser::ParseClassBody(int * cur_token_index, DeclClass * decl_class)
+{
+    while (MatchDeclMethod(*cur_token_index) || 
+        MatchDeclFieldSet(*cur_token_index))
+    {
+        if (MatchDeclMethod(*cur_token_index))
+        {
+            decl_class->m_class_methods->push_back(
+                ParseDeclMethod(cur_token_index)
+            );
+        }
+        if (MatchDeclFieldSet(*cur_token_index))
+        {
+            ParseDeclFieldSet(cur_token_index, decl_class);
+        }
+    }
+}
+
+/*
+    decl_field_set ->
+        visibility type list_decl_field ';'
+*/
+
+bool SyntaxParser::MatchDeclFieldSet(int cur_token_index)
+{
+    return (
+        MatchVisibility(cur_token_index)
+        || MatchType(cur_token_index)
+    );
+}
+
+void SyntaxParser::ParseDeclFieldSet(int * cur_token_index, DeclClass * decl_class)
+{
+    Visibility field_visibility = VISIBILITY_PRIVATE;
+    Identifier * field_type;
+
+    if (MatchVisibility(*cur_token_index))
+    {
+        field_visibility = ParseVisibility(cur_token_index);
+    }
+
+    field_type = ParseType(cur_token_index);
+
+    vector<DeclField *> * list_decl_field = ParseListDeclField(cur_token_index);
+    for (DeclField * field : *list_decl_field)
+    {
+        field->m_field_visibility = field_visibility;
+        field->m_field_type = field_type;
+        decl_class->m_class_fields->push_back(field);
+    }
+
+    ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
+}
+
+/*
+    visibility ->
+        | E
+        | 'protected'
+*/
+
+bool SyntaxParser::MatchVisibility(int cur_token_index)
+{
+    return MatchToken(TOKEN_PROTECTED, cur_token_index);
+}
+
+Visibility SyntaxParser::ParseVisibility(int * cur_token_index)
+{
+    ConsumeToken(cur_token_index);
+    return VISIBILITY_PROTECTED;
+}
+
+/*
+    list_decl_field ->
+        decl_field
+        ( ',' decl_field )*
+*/
+
+bool SyntaxParser::MatchListDeclField(int cur_token_index)
+{
+    return MatchDeclField(cur_token_index);
+}
+
+vector<DeclField *> * SyntaxParser::ParseListDeclField(int * cur_token_index)
+{
+    vector<DeclField *> * list_decl_field = new vector<DeclField *>();
+    DeclField * decl_field = ParseDeclField(cur_token_index);
+    list_decl_field->push_back(decl_field);
+
+    while (MatchToken(TOKEN_COMMA, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        list_decl_field->push_back(ParseDeclField(cur_token_index));
+    }
+
+    return list_decl_field;
+}
+
+/*
+    decl_field ->
+        ident ('=' expr)?
+*/
+
+bool SyntaxParser::MatchDeclField(int cur_token_index)
+{
+    return MatchIdentifier(cur_token_index);
+}
+
+DeclField * SyntaxParser::ParseDeclField(int * cur_token_index)
+{
+    DeclField * decl_field = new DeclField();
+    decl_field->m_field_name = ParseIdentifier(cur_token_index);
+
+    AbstractExpr * assign_expr;
+    if (MatchToken(TOKEN_OP_ASSIGN, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        decl_field->m_init = new Initialization(
+            ParseExpr(cur_token_index)
+        );
+    }
+    else
+    {
+        decl_field->m_init = new NoInitialization();
+    }
+
+    return decl_field;
+}
+
+/*
+    decl_method ->
+        type ident '(' list_params ')'
+        ( block | 'asm' '(' multi_line_string ')' ';' )
+*/
+
+bool SyntaxParser::MatchDeclMethod(int cur_token_index)
+{
+    return MatchType(cur_token_index);
+}
+
+DeclMethod * SyntaxParser::ParseDeclMethod(int * cur_token_index)
+{
+
 }
 
 // Utility methods
