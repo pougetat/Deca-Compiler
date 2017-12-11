@@ -159,6 +159,9 @@ class SyntaxParser {
 
         bool MatchClassDecl(int cur_token_index);
         DeclClass * ParseClassDecl(int * cur_token_index);
+
+        bool MatchClassExtension(int cur_token_index);
+        Identifier * ParseClassExtension(int * cur_token_index);
 };
 
 #endif

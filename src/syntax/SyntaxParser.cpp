@@ -1020,12 +1020,37 @@ DeclClass * SyntaxParser::ParseClassDecl(int * cur_token_index)
     ConsumeToken(cur_token_index);
 
     decl_class->m_class_name = ParseIdentifier(cur_token_index);
+    
+    if (MatchClassExtension(*cur_token_index))
+    {
+        decl_class->m_parent_class_name = ParseClassExtension(cur_token_index);
+    }
+    else
+    {
+        decl_class->m_parent_class_name = NULL;
+    }
 
     ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
     ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
 
     return decl_class;
 
+}
+
+/*
+    class_extension ->
+        'extends' ident
+*/
+
+bool SyntaxParser::MatchClassExtension(int cur_token_index)
+{
+    return MatchToken(TOKEN_EXTENDS, cur_token_index);
+}
+
+Identifier * SyntaxParser::ParseClassExtension(int * cur_token_index)
+{
+    ConsumeToken(cur_token_index);
+    return ParseIdentifier(cur_token_index);
 }
 
 // Utility methods
