@@ -12,10 +12,12 @@ class Program
 {
     public:
 
-        vector<DeclClass> m_list_decl_class;
+        vector<DeclClass *> * m_list_decl_class;
+
         AbstractMain * m_main;
 
         void Display(string tab);
+        
         void VerifyProgramPass3(EnvironmentType * env_type);
 };
 

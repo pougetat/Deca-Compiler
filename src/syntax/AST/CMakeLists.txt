@@ -20,6 +20,8 @@ set(SRCS
     BooleanLiteral.cpp
     Cast.cpp
     DeclClass.cpp
+    DeclField.cpp
+    DeclMethod.cpp
     DeclVar.cpp
     Divide.cpp
     EmptyMain.cpp
@@ -78,6 +80,8 @@ set(HEADERS
     BooleanLiteral.h
     Cast.h
     DeclClass.h
+    DeclField.h
+    DeclMethod.h
     DeclVar.h
     Divide.h
 	EmptyMain.h

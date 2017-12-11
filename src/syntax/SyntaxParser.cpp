@@ -3,13 +3,36 @@
 SyntaxParser::SyntaxParser(vector<Token> tokens)
 {
     m_tokens = tokens;
-    m_program = new Program();
 }
 
 void SyntaxParser::CreateAST()
 {
     int cur_token_index = 0;
-    m_program->m_main = ParseMain(&cur_token_index);
+    m_program = ParseProgram(&cur_token_index);
+}
+
+void SyntaxParser::DisplayAST()
+{
+    m_program->Display("");
+}
+
+/*
+    prog ->
+        list_classes main EOF
+*/
+
+Program * SyntaxParser::ParseProgram(int * cur_token_index)
+{
+    Program * prog = new Program();
+
+    if (MatchListClasses(*cur_token_index))
+    {
+        prog->m_list_decl_class = ParseListClasses(cur_token_index);
+    }
+
+    prog->m_main = ParseMain(cur_token_index);
+
+    return prog;
 }
 
 /*
@@ -959,7 +982,51 @@ Identifier * SyntaxParser::ParseIdentifier(int * cur_token_index)
 
 // CLASS RELATED RULES
 
+/*
+    list_classes -> 
+        (class_decl)*
+*/
 
+bool SyntaxParser::MatchListClasses(int cur_token_index)
+{
+    return MatchClassDecl(cur_token_index);
+}
+
+vector<DeclClass *> * SyntaxParser::ParseListClasses(int * cur_token_index)
+{
+    vector<DeclClass *> * list_classes = new vector<DeclClass *>();
+
+    while (MatchClassDecl(*cur_token_index))
+    {
+        list_classes->push_back(ParseClassDecl(cur_token_index));
+    }
+    return list_classes;
+}
+
+/*
+    class_decl ->
+        'class' ident class_extension '{' class_body '}'
+*/
+
+bool SyntaxParser::MatchClassDecl(int cur_token_index)
+{
+    return MatchToken(TOKEN_CLASS, cur_token_index);
+}
+
+DeclClass * SyntaxParser::ParseClassDecl(int * cur_token_index)
+{
+    DeclClass * decl_class = new DeclClass();
+
+    ConsumeToken(cur_token_index);
+
+    decl_class->m_class_name = ParseIdentifier(cur_token_index);
+
+    ShouldMatchToken(TOKEN_OBRACE, cur_token_index);
+    ShouldMatchToken(TOKEN_CBRACE, cur_token_index);
+
+    return decl_class;
+
+}
 
 // Utility methods
 
@@ -980,9 +1047,4 @@ void SyntaxParser::ShouldMatchToken(TokenType token_type, int * cur_token_index)
 void SyntaxParser::ConsumeToken(int * cur_token_index)
 {
     (*cur_token_index)++;
-}
-
-void SyntaxParser::DisplayAST()
-{
-    m_program->Display("-");
 }

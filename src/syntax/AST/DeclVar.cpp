@@ -40,5 +40,4 @@ void DeclVar::VerifyDeclVar(
             variable_type
         )
     );
-
 }

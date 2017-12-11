@@ -74,7 +74,9 @@ class SyntaxParser {
         void ShouldMatchToken(TokenType token_type, int * cur_token_index);
         void ConsumeToken(int * cur_token_index);
 
-        // GRAMMAR RULES
+        // GRAMMAR RULES => MAIN RULES
+
+        Program * ParseProgram(int * cur_token_index);
 
         AbstractMain * ParseMain(int * cur_token_index);
 
@@ -148,7 +150,15 @@ class SyntaxParser {
         AbstractExpr * ParseLiteral(int * cur_token_index);
 
         bool MatchIdentifier(int cur_token_index);
-        Identifier * ParseIdentifier(int * cur_token_index);    
+        Identifier * ParseIdentifier(int * cur_token_index); 
+
+        // GRAMMAR => CLASS RELATED RULES
+
+        bool MatchListClasses(int cur_token_index);
+        vector<DeclClass *> * ParseListClasses(int * cur_token_index);
+
+        bool MatchClassDecl(int cur_token_index);
+        DeclClass * ParseClassDecl(int * cur_token_index);
 };
 
 #endif
