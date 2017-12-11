@@ -1086,7 +1086,8 @@ void SyntaxParser::ParseClassBody(int * cur_token_index, DeclClass * decl_class)
                 ParseDeclMethod(cur_token_index)
             );
         }
-        if (MatchDeclFieldSet(*cur_token_index))
+        if (!MatchDeclMethod(*cur_token_index) 
+            && MatchDeclFieldSet(*cur_token_index))
         {
             ParseDeclFieldSet(cur_token_index, decl_class);
         }
@@ -1211,12 +1212,103 @@ DeclField * SyntaxParser::ParseDeclField(int * cur_token_index)
 
 bool SyntaxParser::MatchDeclMethod(int cur_token_index)
 {
-    return MatchType(cur_token_index);
+    return 
+        MatchType(cur_token_index) 
+        && MatchIdentifier(cur_token_index+1)
+        && MatchToken(TOKEN_OPARENT, cur_token_index+2);
 }
 
 DeclMethod * SyntaxParser::ParseDeclMethod(int * cur_token_index)
 {
+    DeclMethod * decl_method = new DeclMethod();
 
+    decl_method->m_method_return_type = ParseType(cur_token_index);
+    
+    decl_method->m_method_name = ParseIdentifier(cur_token_index);
+    
+    ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+    decl_method->m_list_param = new vector<DeclParam *>();
+    if (MatchListParams(*cur_token_index))
+    {
+        decl_method->m_list_param = ParseListParams(cur_token_index);
+    }
+    ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+
+    if (MatchToken(TOKEN_ASM, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
+        // do stuff
+        ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
+        ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
+    }
+    else
+    {
+        Main * method_block = ParseBlock(cur_token_index);
+        decl_method->m_method_body = new MethodBody(
+            method_block->m_list_decl_var,
+            method_block->m_list_inst
+        );
+    }
+
+    return decl_method;
+}
+
+/*
+    list_params ->
+        (param
+            (',' param)* )?
+*/
+
+bool SyntaxParser::MatchListParams(int cur_token_index)
+{
+    return MatchParam(cur_token_index);
+}
+
+vector<DeclParam *> * SyntaxParser::ParseListParams(int * cur_token_index)
+{
+    vector<DeclParam *> * list_params = new vector<DeclParam *>();
+
+    list_params->push_back(ParseParam(cur_token_index));
+    
+    while(MatchToken(TOKEN_COMMA, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        list_params->push_back(ParseParam(cur_token_index));
+    }
+
+    return list_params;
+
+}
+
+/*
+    multi_line_string ->
+        | STRING
+        | MULTI_LINE_STRING
+*/
+
+bool SyntaxParser::MatchMultiLineString(int cur_token_index)
+{
+
+}
+
+/*
+    param ->
+        type ident
+*/
+
+bool SyntaxParser::MatchParam(int cur_token_index)
+{
+    return MatchType(cur_token_index);
+}
+
+DeclParam * SyntaxParser::ParseParam(int * cur_token_index)
+{
+    DeclParam * decl_param = new DeclParam();
+    decl_param->m_param_type = ParseType(cur_token_index);
+    decl_param->m_param_name = ParseIdentifier(cur_token_index);
+
+    return decl_param;
 }
 
 // Utility methods

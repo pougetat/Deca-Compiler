@@ -8,6 +8,7 @@ set(SRCS
     AbstractLiteral.cpp
     AbstractLValue.cpp
 	AbstractMain.cpp
+    AbstractMethodBody.cpp
     AbstractOpArith.cpp
     AbstractOpBool.cpp
     AbstractOpCmp.cpp
@@ -22,6 +23,7 @@ set(SRCS
     DeclClass.cpp
     DeclField.cpp
     DeclMethod.cpp
+    DeclParam.cpp
     DeclVar.cpp
     Divide.cpp
     EmptyMain.cpp
@@ -36,6 +38,8 @@ set(SRCS
     Lower.cpp
     LowerOrEqual.cpp
     Main.cpp
+    MethodAsmBody.cpp
+    MethodBody.cpp
     MethodCall.cpp
     Minus.cpp
     Modulo.cpp
@@ -68,6 +72,7 @@ set(HEADERS
     AbstractLiteral.h
     AbstractLValue.h
 	AbstractMain.h
+    AbstractMethodBody.h
     AbstractOpArith.h
     AbstractOpBool.h
     AbstractOpCmp.h
@@ -82,6 +87,7 @@ set(HEADERS
     DeclClass.h
     DeclField.h
     DeclMethod.h
+    DeclParam.h
     DeclVar.h
     Divide.h
 	EmptyMain.h
@@ -96,6 +102,8 @@ set(HEADERS
     Lower.h
     LowerOrEqual.h
     Main.h
+    MethodAsmBody.h
+    MethodBody.h
     MethodCall.h
     Minus.h
     Modulo.h

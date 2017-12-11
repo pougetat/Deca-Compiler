@@ -1,9 +1,6 @@
 #ifndef DECL_FIELD_H
 #define DECL_FIELD_H
 
-#include <string>
-#include <iostream>
-
 #include "Identifier.h"
 #include "AbstractInitialization.h"
 
@@ -26,7 +23,6 @@ class DeclField {
         AbstractInitialization * m_init;
 
         void Display(string tab);
-
 };
 
 #endif

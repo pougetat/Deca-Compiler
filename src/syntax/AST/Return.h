@@ -4,8 +4,6 @@
 #include "AbstractInst.h"
 #include "AbstractExpr.h"
 
-using namespace std;
-
 class Return : public AbstractInst
 {
     public:

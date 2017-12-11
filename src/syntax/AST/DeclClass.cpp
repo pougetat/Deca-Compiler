@@ -18,6 +18,7 @@ void DeclClass::Display(string tab)
 
     for (DeclMethod * decl_method : *m_class_methods)
     {
+        decl_method->Display(tab + "--");
     }
 
 }

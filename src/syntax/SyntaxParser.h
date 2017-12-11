@@ -180,6 +180,15 @@ class SyntaxParser {
 
         bool MatchDeclMethod(int cur_token_index);
         DeclMethod * ParseDeclMethod(int * cur_token_index);
+
+        bool MatchListParams(int cur_token_index);
+        vector<DeclParam *> * ParseListParams(int * cur_toke_index);
+
+        bool MatchMultiLineString(int cur_token_index);
+        string * ParseMultiLineString(int * cur_token_index);
+
+        bool MatchParam(int cur_token_index);
+        DeclParam * ParseParam(int * cur_token_index);
 };
 
 #endif
