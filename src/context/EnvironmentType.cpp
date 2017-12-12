@@ -40,6 +40,15 @@ EnvironmentType::EnvironmentType()
             )
         )
     );
+    m_env_types->insert(
+        pair<string, TypeDefinition *>(
+            "Object",
+            new TypeDefinition(
+                new ClassTypeNature(""),
+                new ClassType("Object")
+            )
+        )
+    );
 }
 
 bool EnvironmentType::TypeExists(string type_symbol)
@@ -50,4 +59,14 @@ bool EnvironmentType::TypeExists(string type_symbol)
 AbstractType * EnvironmentType::GetType(string type_symbol)
 {
     return m_env_types->find(type_symbol)->second->GetType();
+}
+
+void EnvironmentType::InsertType(string type_symbol, TypeDefinition * type_def)
+{
+    m_env_types->insert(
+        pair<string, TypeDefinition *>(
+            type_symbol,
+            type_def
+        )
+    );
 }

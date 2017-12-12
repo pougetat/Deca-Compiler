@@ -5,6 +5,9 @@
 #include "DeclField.h"
 #include "DeclMethod.h"
 
+#include "../../context/ClassTypeNature.h"
+#include "../../context/ClassType.h"
+
 #include <vector>
 
 class DeclClass {
@@ -18,6 +21,8 @@ class DeclClass {
         vector<DeclField *> * m_class_fields;
         
         vector<DeclMethod *> * m_class_methods;
+
+        void VerifyClassHierarchy(EnvironmentType * env_types_predef);
 
         void Display(string tab);
 
