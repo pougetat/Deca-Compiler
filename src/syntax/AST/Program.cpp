@@ -12,11 +12,19 @@ void Program::Display(string tab)
     m_main->Display(tab + "----");
 }
 
-void Program::VerifyClassHierarchy(EnvironmentType * env_types_predef)
+void Program::VerifyClassNames(EnvironmentType * env_types)
 {
     for (DeclClass * decl_class : *m_list_decl_class)
     {
-        decl_class->VerifyClassHierarchy(env_types_predef);
+        decl_class->VerifyClassName(env_types);
+    }
+}
+
+void Program::VerifyClassHierarchy(EnvironmentType * env_types)
+{
+    for (DeclClass * decl_class : *m_list_decl_class)
+    {
+        decl_class->VerifyClassHierarchy(env_types);
     }
 }
 

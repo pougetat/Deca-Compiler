@@ -22,7 +22,9 @@ class DeclClass {
         
         vector<DeclMethod *> * m_class_methods;
 
-        void VerifyClassHierarchy(EnvironmentType * env_types_predef);
+        void VerifyClassName(EnvironmentType * env_types);
+
+        void VerifyClassHierarchy(EnvironmentType * env_types);
 
         void Display(string tab);
 

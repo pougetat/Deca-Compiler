@@ -33,6 +33,8 @@ class EnvironmentType
         AbstractType * GetType(string type_symbol);
 
         void InsertType(string symbol, TypeDefinition * type_def);
+
+        void SetParentClass(string child_class, string parent_class);
 };
 
 #endif

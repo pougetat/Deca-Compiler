@@ -70,3 +70,10 @@ void EnvironmentType::InsertType(string type_symbol, TypeDefinition * type_def)
         )
     );
 }
+
+void EnvironmentType::SetParentClass(string child_class, string parent_class)
+{
+    ClassTypeNature * class_type_nature = (ClassTypeNature *) 
+        m_env_types->find(child_class)->second->m_type_nature;
+    class_type_nature->m_super_class_name = parent_class;
+}

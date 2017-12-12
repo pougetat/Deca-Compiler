@@ -18,9 +18,11 @@ class Program
 
         void Display(string tab);
         
-        void VerifyClassHierarchy(EnvironmentType * env_types_predef);
+        void VerifyClassNames(EnvironmentType * env_types);
 
-        void VerifyProgramPass3(EnvironmentType * env_type);
+        void VerifyClassHierarchy(EnvironmentType * env_types);
+
+        void VerifyProgramPass3(EnvironmentType * env_types);
 };
 
 #endif

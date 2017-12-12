@@ -11,6 +11,7 @@ class BooleanType : public AbstractType
         bool IsIntType();
         bool IsStringType();
         bool IsVoidType();
+        bool IsClassType();
         bool IsSameType(AbstractType * other_type);
 };
 

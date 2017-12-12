@@ -25,6 +25,11 @@ bool BooleanType::IsVoidType()
     return false;
 }
 
+bool BooleanType::IsClassType()
+{
+    return false;
+}
+
 bool BooleanType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsBooleanType();
