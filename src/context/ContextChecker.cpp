@@ -7,6 +7,5 @@ void ContextChecker::CheckContext(Program * program)
     program->VerifyClassHierarchy(env_types_predef);
 
     // PASS 3
-    EnvironmentType * env_types = new EnvironmentType();
-    program->VerifyProgramPass3(env_types);
+    program->VerifyProgramPass3(env_types_predef);
 }
