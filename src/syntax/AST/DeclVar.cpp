@@ -33,7 +33,7 @@ void DeclVar::VerifyDeclVar(
         variable_type
     );
 
-    env_exp->AddSymbol(
+    env_exp->InsertExp(
         m_symbol->m_symbol,
         new ExpDefinition(
             new VarExpNature(),

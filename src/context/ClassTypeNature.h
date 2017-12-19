@@ -17,6 +17,8 @@ class ClassTypeNature : public AbstractTypeNature
         EnvironmentExp * m_class_env_exp;
 
         ClassTypeNature(string m_super_class_name);
+
+        EnvironmentExp * GetEnvExp();
 };
 
 #endif

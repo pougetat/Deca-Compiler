@@ -22,6 +22,10 @@ class Program
 
         void VerifyClassHierarchy(EnvironmentType * env_types);
 
+        void VerifyClassMF(EnvironmentType * env_types);
+
+        void VerifyClassMFHierarchy(EnvironmentType * env_types);
+
         void VerifyProgramPass3(EnvironmentType * env_types);
 };
 

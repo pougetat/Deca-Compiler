@@ -18,6 +18,8 @@ class TypeDefinition : public AbstractDefinition
         
         AbstractType * GetType();
 
+        AbstractTypeNature * GetTypeNature();
+
 
 };
 

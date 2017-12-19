@@ -56,6 +56,11 @@ bool EnvironmentType::TypeExists(string type_symbol)
     return m_env_types->find(type_symbol) != m_env_types->end();
 }
 
+TypeDefinition * EnvironmentType::GetTypeDefinition(string type_def_symbol)
+{
+    return m_env_types->find(type_def_symbol)->second;
+}
+
 AbstractType * EnvironmentType::GetType(string type_symbol)
 {
     return m_env_types->find(type_symbol)->second->GetType();
@@ -69,6 +74,21 @@ void EnvironmentType::InsertType(string type_symbol, TypeDefinition * type_def)
             type_def
         )
     );
+}
+
+void EnvironmentType::InsertExp(
+    string class_symbol,
+    string exp_name,
+    ExpDefinition * exp_def)
+{
+    TypeDefinition * class_def = GetTypeDefinition(class_symbol);
+    
+    ClassTypeNature * class_type_nat =
+        (ClassTypeNature *) class_def->GetTypeNature();
+
+    EnvironmentExp * class_env_exp = class_type_nat->GetEnvExp();
+
+    class_env_exp->InsertExp(exp_name, exp_def);
 }
 
 void EnvironmentType::SetParentClass(string child_class, string parent_class)

@@ -5,6 +5,7 @@
 #include "DeclField.h"
 #include "DeclMethod.h"
 
+#include "../../context/EnvironmentExp.h"
 #include "../../context/ClassTypeNature.h"
 #include "../../context/ClassType.h"
 
@@ -25,6 +26,12 @@ class DeclClass {
         void VerifyClassName(EnvironmentType * env_types);
 
         void VerifyClassHierarchy(EnvironmentType * env_types);
+
+        void VerifyClassMF(EnvironmentType * env_types);
+
+        void VerifyClassFields(EnvironmentType * env_types);
+
+        void VerifyClassMethodSignatures(EnvironmentType * env_types);
 
         void Display(string tab);
 

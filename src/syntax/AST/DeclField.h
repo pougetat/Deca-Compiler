@@ -4,6 +4,9 @@
 #include "Identifier.h"
 #include "AbstractInitialization.h"
 
+#include "../../context/EnvironmentType.h"
+#include "../../context/FieldExpNature.h"
+
 enum Visibility 
 {
     VISIBILITY_PROTECTED,
@@ -21,6 +24,11 @@ class DeclField {
         Identifier * m_field_name;
 
         AbstractInitialization * m_init;
+
+        void VerifyFieldNoInit(
+            EnvironmentType * env_types, 
+            Identifier * class_name
+        );
 
         void Display(string tab);
 };

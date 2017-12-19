@@ -30,9 +30,17 @@ class EnvironmentType
         
         bool TypeExists(string type_symbol);
         
+        TypeDefinition * GetTypeDefinition(string type_def_symbol);
+
         AbstractType * GetType(string type_symbol);
 
         void InsertType(string symbol, TypeDefinition * type_def);
+
+        void InsertExp(
+            string class_name,
+            string expr_name,
+            ExpDefinition * exp_def
+        );
 
         void SetParentClass(string child_class, string parent_class);
 };

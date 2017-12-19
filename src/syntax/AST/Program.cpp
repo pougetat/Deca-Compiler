@@ -28,6 +28,19 @@ void Program::VerifyClassHierarchy(EnvironmentType * env_types)
     }
 }
 
+void Program::VerifyClassMF(EnvironmentType * env_types)
+{
+    for (DeclClass * decl_class : *m_list_decl_class)
+    {
+        decl_class->VerifyClassMF(env_types);
+    }
+}
+
+void Program::VerifyClassMFHierarchy(EnvironmentType * env_types)
+{
+    
+}
+
 void Program::VerifyProgramPass3(EnvironmentType * env_types)
 {
     m_main->VerifyMain(env_types);

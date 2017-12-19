@@ -39,6 +39,25 @@ void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
     }
 }
 
+void DeclClass::VerifyClassMF(EnvironmentType* env_types)
+{
+    VerifyClassFields(env_types);
+    VerifyClassMethodSignatures(env_types);
+}
+
+void DeclClass::VerifyClassFields(EnvironmentType * env_types)
+{
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        decl_field->VerifyFieldNoInit(env_types, m_class_name);
+    }
+}
+
+void DeclClass::VerifyClassMethodSignatures(EnvironmentType * env_types)
+{
+
+}
+
 void DeclClass::Display(string tab)
 {
     cout << tab << ">" << "[DECL CLASS]" << endl;

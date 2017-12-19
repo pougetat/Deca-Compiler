@@ -3,10 +3,9 @@
 EnvironmentExp::EnvironmentExp()
 {
     m_env_exp = new map<string, ExpDefinition *>();
-    m_env_exp_sup = new map<string, ExpDefinition *>();
 }
 
-void EnvironmentExp::AddSymbol(string exp_symbol, ExpDefinition * exp_def)
+void EnvironmentExp::InsertExp(string exp_symbol, ExpDefinition * exp_def)
 {
     if (m_env_exp->find(exp_symbol) != m_env_exp->end())
     {

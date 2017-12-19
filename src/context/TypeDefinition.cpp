@@ -12,3 +12,8 @@ AbstractType * TypeDefinition::GetType()
 {
     return m_type;
 }
+
+AbstractTypeNature * TypeDefinition::GetTypeNature()
+{
+    return m_type_nature;
+}

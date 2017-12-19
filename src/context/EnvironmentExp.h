@@ -15,11 +15,11 @@ class EnvironmentExp
         
         map<string, ExpDefinition *> * m_env_exp;
 
-        map<string, ExpDefinition *> * m_env_exp_sup;
+        EnvironmentExp * m_env_exp_sup;
 
         EnvironmentExp();
 
-        void AddSymbol(string symbol, ExpDefinition * exp_def);
+        void InsertExp(string symbol, ExpDefinition * exp_def);
 
         ExpDefinition * GetDefinition(string symbol);
 };
