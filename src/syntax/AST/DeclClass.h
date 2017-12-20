@@ -29,11 +29,28 @@ class DeclClass {
 
         void VerifyClassMF(EnvironmentType * env_types);
 
+        void VerifyClassMFHierarchy(EnvironmentType * env_types);
+
         void VerifyClassFields(EnvironmentType * env_types);
 
         void VerifyClassMethodSignatures(EnvironmentType * env_types);
 
+        void VerifyClassFieldsHierarchy(EnvironmentType * env_types);
+
         void Display(string tab);
+
+    private:
+
+        void AddClassToEnvTypes(
+            EnvironmentType * env_types,
+            string parent_class_symbol
+        );
+
+        void SetParentClass(
+            EnvironmentType * env_types,
+            Identifier * class_name,
+            Identifier * parent_class_name
+        ); 
 
 };
 

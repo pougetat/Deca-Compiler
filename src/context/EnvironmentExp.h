@@ -19,9 +19,15 @@ class EnvironmentExp
 
         EnvironmentExp();
 
-        void InsertExp(string symbol, ExpDefinition * exp_def);
+        void InsertExpDefinition(string symbol, ExpDefinition * exp_def);
 
-        ExpDefinition * GetDefinition(string symbol);
+        bool ContainsSymbol(string symbol);
+
+        bool SupContainsSymbol(string symbol);
+
+        ExpDefinition * GetExpDefinition(string symbol);
+
+        ExpDefinition * GetSupExpDefinition(string symbol);
 };
 
 #endif

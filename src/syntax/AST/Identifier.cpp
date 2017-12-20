@@ -20,5 +20,5 @@ AbstractType * Identifier::VerifyLValue(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    return env_exp->GetDefinition(m_symbol)->GetType();
+    return env_exp->GetExpDefinition(m_symbol)->GetType();
 }

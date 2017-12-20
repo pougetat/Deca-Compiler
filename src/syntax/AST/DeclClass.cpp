@@ -9,15 +9,31 @@ void DeclClass::VerifyClassName(EnvironmentType * env_types)
         );
     }
 
-    env_types->InsertType(
-        m_class_name->m_symbol,
-        new TypeDefinition(
-            new ClassTypeNature(
-                "Object"
-            ),
-            new ClassType(m_class_name->m_symbol)
-        )
-    );
+    if (m_parent_class_name != NULL)
+    {
+        AddClassToEnvTypes(env_types, "Object");
+    }
+    else
+    {
+        AddClassToEnvTypes(env_types, m_class_name->m_symbol);
+    }
+
+    if (m_parent_class_name != NULL)
+    {
+
+    }
+    else
+    {
+        env_types->InsertType(
+            m_class_name->m_symbol,
+            new TypeDefinition(
+                new ClassTypeNature(
+                    "Object"
+                ),
+                new ClassType(m_class_name->m_symbol)
+            )
+        );
+    }
 }
 
 void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
@@ -32,10 +48,7 @@ void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
             );
         }
 
-        env_types->SetParentClass(
-            m_class_name->m_symbol,
-            m_parent_class_name->m_symbol
-        );
+        SetParentClass(env_types, m_class_name, m_parent_class_name);
     }
 }
 
@@ -43,6 +56,11 @@ void DeclClass::VerifyClassMF(EnvironmentType* env_types)
 {
     VerifyClassFields(env_types);
     VerifyClassMethodSignatures(env_types);
+}
+
+void DeclClass::VerifyClassMFHierarchy(EnvironmentType * env_types)
+{
+    VerifyClassFieldsHierarchy(env_types);
 }
 
 void DeclClass::VerifyClassFields(EnvironmentType * env_types)
@@ -58,6 +76,14 @@ void DeclClass::VerifyClassMethodSignatures(EnvironmentType * env_types)
     for (DeclMethod * decl_method: *m_class_methods)
     {
         decl_method->VerifyMethodSignature(env_types, m_class_name);
+    }
+}
+
+void DeclClass::VerifyClassFieldsHierarchy(EnvironmentType * env_types)
+{
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        decl_field->VerifyFieldHierarchy(env_types, m_class_name);
     }
 }
 
@@ -82,4 +108,35 @@ void DeclClass::Display(string tab)
         decl_method->Display(tab + "--");
     }
 
+}
+
+///////////// PRIVATE METHODS /////////////
+
+void DeclClass::AddClassToEnvTypes(
+    EnvironmentType * env_types,
+    string parent_class_symbol)
+{
+    env_types->InsertType(
+        m_class_name->m_symbol,
+        new TypeDefinition(
+            new ClassTypeNature(
+                parent_class_symbol
+            ),
+            new ClassType(m_class_name->m_symbol)
+        )
+    );
+}
+
+void DeclClass::SetParentClass(
+    EnvironmentType * env_types,
+    Identifier * class_name,
+    Identifier * parent_class_name)
+{
+    TypeDefinition * class_type_def = 
+        env_types->GetTypeDefinition(class_name->m_symbol);
+
+    ClassTypeNature * class_type_nature = (ClassTypeNature *)
+        class_type_def->GetTypeNature();
+
+    class_type_nature->SetParentClass(parent_class_name->m_symbol);
 }

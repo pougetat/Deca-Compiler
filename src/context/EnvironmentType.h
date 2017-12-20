@@ -39,11 +39,7 @@ class EnvironmentType
 
         void InsertType(string symbol, TypeDefinition * type_def);
 
-        void InsertExp(
-            string class_name,
-            string expr_name,
-            ExpDefinition * exp_def
-        );
+        EnvironmentExp * GetClassEnvExp(string class_name);
 
         void AddTypeToSignature(
             string class_name,

@@ -12,13 +12,15 @@ class ClassTypeNature : public AbstractTypeNature
 {
     public:
         
-        string m_super_class_name;
+        string m_parent_class_name;
 
         EnvironmentExp * m_class_env_exp;
 
         ClassTypeNature(string m_super_class_name);
 
         EnvironmentExp * GetEnvExp();
+
+        void SetParentClass(string parent_class_name);
 };
 
 #endif

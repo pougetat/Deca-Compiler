@@ -27,13 +27,13 @@ void ContextChecker::CheckContext(Program * program)
 
     /*
         PASS 2.2 :
-            - check that all fields which have been declared in a child class
-            do not appear in a parent class
             - check that all methods appearing in a child class and which also
             appear in a parent class have the same signatures
-            - check initialization of fields
+            - check that if a field appears in a class and the identifier for the
+            field appears in a parent class, then that identifier also refers to a
+            field and not to a method
     */
-    //program->VerifyClassMFHierarchy(env_types_predef);
+    program->VerifyClassMFHierarchy(env_types_predef);
 
     // PASS 3
     program->VerifyProgramPass3(env_types_predef);

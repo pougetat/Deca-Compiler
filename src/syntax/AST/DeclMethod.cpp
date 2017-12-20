@@ -11,17 +11,9 @@ void DeclMethod::VerifyMethodSignature(
         );
     }
 
-    env_types->InsertExp(
-        class_name->m_symbol,
-        m_name->m_symbol,
-        new ExpDefinition(
-            new MethodExpNature(),
-            env_types->GetType(m_return_type->m_symbol)
-        )
-    );
+    InsertMethodExpDefinition(env_types, class_name);
 
     VerifyParamTypes(env_types, class_name);
-    
 }
 
 void DeclMethod::Display(string tab)
@@ -40,6 +32,8 @@ void DeclMethod::Display(string tab)
     m_body->Display(tab + "--");
 }
 
+///////////// PRIVATE METHODS /////////////
+
 void DeclMethod::VerifyParamTypes(
     EnvironmentType * env_types,
     Identifier * class_name)
@@ -48,4 +42,20 @@ void DeclMethod::VerifyParamTypes(
     {
         param->VerifyDeclParam(env_types, class_name, m_name);
     }
+}
+
+void DeclMethod::InsertMethodExpDefinition(
+    EnvironmentType * env_types,
+    Identifier * class_name)
+{
+    EnvironmentExp * class_env_exp = 
+    env_types->GetClassEnvExp(class_name->m_symbol);
+
+    class_env_exp->InsertExpDefinition(
+        m_name->m_symbol,
+        new ExpDefinition(
+            new MethodExpNature(),
+            env_types->GetType(m_return_type->m_symbol)
+        )
+    );
 }

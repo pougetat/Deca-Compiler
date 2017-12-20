@@ -30,7 +30,19 @@ class DeclField {
             Identifier * class_name
         );
 
+        void VerifyFieldHierarchy(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
+
         void Display(string tab);
+
+    private:
+
+        void InsertFieldExpDefinition(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
 };
 
 #endif

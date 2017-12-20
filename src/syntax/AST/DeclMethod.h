@@ -39,6 +39,11 @@ class DeclMethod {
             EnvironmentType * env_types,
             Identifier * class_name
         );
+
+        void InsertMethodExpDefinition(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
 };
 
 #endif
