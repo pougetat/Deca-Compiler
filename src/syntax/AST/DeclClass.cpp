@@ -55,7 +55,10 @@ void DeclClass::VerifyClassFields(EnvironmentType * env_types)
 
 void DeclClass::VerifyClassMethodSignatures(EnvironmentType * env_types)
 {
-
+    for (DeclMethod * decl_method: *m_class_methods)
+    {
+        decl_method->VerifyMethodSignature(env_types, m_class_name);
+    }
 }
 
 void DeclClass::Display(string tab)

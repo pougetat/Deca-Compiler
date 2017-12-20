@@ -11,6 +11,12 @@ class DeclParam
 
         Identifier * m_param_name;
 
+        void VerifyDeclParam(
+            EnvironmentType * env_types,
+            Identifier * class_name,
+            Identifier * method_name
+        );
+
         void Display(string tab);
 };
 

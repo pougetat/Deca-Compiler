@@ -6,9 +6,12 @@
 #include <iostream>
 
 #include "TypeDefinition.h"
+#include "ExpDefinition.h"
 
 #include "TypeTypeNature.h"
 #include "ClassTypeNature.h"
+
+#include "MethodExpNature.h"
 
 #include "AbstractType.h"
 #include "IntType.h"
@@ -40,6 +43,12 @@ class EnvironmentType
             string class_name,
             string expr_name,
             ExpDefinition * exp_def
+        );
+
+        void AddTypeToSignature(
+            string class_name,
+            string method_name,
+            AbstractType * type
         );
 
         void SetParentClass(string child_class, string parent_class);

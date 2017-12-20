@@ -31,7 +31,7 @@ void ContextChecker::CheckContext(Program * program)
             do not appear in a parent class
             - check that all methods appearing in a child class and which also
             appear in a parent class have the same signatures
-            - check initalization of fields
+            - check initialization of fields
     */
     //program->VerifyClassMFHierarchy(env_types_predef);
 

@@ -10,14 +10,12 @@ void DeclField::VerifyFieldNoInit(
             "[DECL FIELD : UNKNOWN TYPE '" + m_field_type->m_symbol + "']"
         );
     }
-
-    FieldExpNature * field_exp = new FieldExpNature();
     
     env_types->InsertExp(
         class_name->m_symbol,
         m_field_name->m_symbol,
         new ExpDefinition(
-            field_exp,
+            new FieldExpNature(),
             env_types->GetType(m_field_type->m_symbol)
         )
     );

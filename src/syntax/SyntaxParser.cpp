@@ -1222,15 +1222,15 @@ DeclMethod * SyntaxParser::ParseDeclMethod(int * cur_token_index)
 {
     DeclMethod * decl_method = new DeclMethod();
 
-    decl_method->m_method_return_type = ParseType(cur_token_index);
+    decl_method->m_return_type = ParseType(cur_token_index);
     
-    decl_method->m_method_name = ParseIdentifier(cur_token_index);
+    decl_method->m_name = ParseIdentifier(cur_token_index);
     
     ShouldMatchToken(TOKEN_OPARENT, cur_token_index);
-    decl_method->m_list_param = new vector<DeclParam *>();
+    decl_method->m_params = new vector<DeclParam *>();
     if (MatchListParams(*cur_token_index))
     {
-        decl_method->m_list_param = ParseListParams(cur_token_index);
+        decl_method->m_params = ParseListParams(cur_token_index);
     }
     ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
 
@@ -1245,7 +1245,7 @@ DeclMethod * SyntaxParser::ParseDeclMethod(int * cur_token_index)
     else
     {
         Main * method_block = ParseBlock(cur_token_index);
-        decl_method->m_method_body = new MethodBody(
+        decl_method->m_body = new MethodBody(
             method_block->m_list_decl_var,
             method_block->m_list_inst
         );

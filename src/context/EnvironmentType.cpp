@@ -77,11 +77,11 @@ void EnvironmentType::InsertType(string type_symbol, TypeDefinition * type_def)
 }
 
 void EnvironmentType::InsertExp(
-    string class_symbol,
+    string class_name,
     string exp_name,
     ExpDefinition * exp_def)
 {
-    TypeDefinition * class_def = GetTypeDefinition(class_symbol);
+    TypeDefinition * class_def = GetTypeDefinition(class_name);
     
     ClassTypeNature * class_type_nat =
         (ClassTypeNature *) class_def->GetTypeNature();
@@ -90,6 +90,28 @@ void EnvironmentType::InsertExp(
 
     class_env_exp->InsertExp(exp_name, exp_def);
 }
+
+
+void EnvironmentType::AddTypeToSignature(
+    string class_name,
+    string method_name,
+    AbstractType * param_type)
+{
+    TypeDefinition * class_def = GetTypeDefinition(class_name);
+
+    ClassTypeNature * class_type_nat = 
+        (ClassTypeNature *) class_def->GetTypeNature();
+
+    EnvironmentExp * class_env_exp = class_type_nat->GetEnvExp();
+
+    ExpDefinition * method_def = class_env_exp->GetDefinition(method_name);
+
+    MethodExpNature * method_exp_nature = 
+        (MethodExpNature *) method_def->GetTypeNature();
+
+    method_exp_nature->InsertSignatureType(param_type);
+}
+
 
 void EnvironmentType::SetParentClass(string child_class, string parent_class)
 {

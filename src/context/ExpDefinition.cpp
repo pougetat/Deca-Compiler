@@ -12,3 +12,7 @@ AbstractType * ExpDefinition::GetType()
 {
     return m_type;
 }
+AbstractExpNature * ExpDefinition::GetTypeNature()
+{
+    return m_exp_nature;
+}

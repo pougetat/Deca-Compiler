@@ -9,21 +9,36 @@
 #include "DeclParam.h"
 #include "MethodBody.h"
 
+#include "../../context/EnvironmentType.h"
+#include "../../context/MethodExpNature.h"
+
 using namespace std;
 
 class DeclMethod {
 
     public:
 
-        Identifier * m_method_return_type;
+        Identifier * m_return_type;
         
-        Identifier * m_method_name;
+        Identifier * m_name;
 
-        vector<DeclParam *> * m_list_param;
+        vector<DeclParam *> * m_params;
 
-        MethodBody * m_method_body;
+        MethodBody * m_body;
+
+        void VerifyMethodSignature(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
 
         void Display(string tab);
+
+    private:
+
+        void VerifyParamTypes(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
 };
 
 #endif

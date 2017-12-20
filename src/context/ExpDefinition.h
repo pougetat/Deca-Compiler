@@ -18,6 +18,8 @@ class ExpDefinition : public AbstractDefinition
         
         AbstractType * GetType();
 
+        AbstractExpNature * GetTypeNature();
+
 
 };
 
