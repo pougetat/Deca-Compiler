@@ -10,6 +10,12 @@ void DeclField::VerifyFieldNoInit(
             "[DECL FIELD : UNKNOWN TYPE '" + m_field_type->m_symbol + "']"
         );
     }
+    if (env_types->GetType(m_field_type->m_symbol)->IsVoidType())
+    {
+        throw runtime_error(
+            "[DECL FIELD : VOID IS INVALID TYPE]"
+        );
+    }
     
     env_types->InsertExp(
         class_name->m_symbol,

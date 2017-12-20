@@ -11,6 +11,12 @@ void DeclParam::VerifyDeclParam(
             "[PARAM TYPE : UNKNOWN TYPE '" + m_param_type->m_symbol + "']"
         );
     }
+    if (env_types->GetType(m_param_type->m_symbol)->IsVoidType())
+    {
+        throw runtime_error(
+            "[DECL PARAM : VOID IS INVALID TYPE]"
+        );
+    }
 
     env_types->AddTypeToSignature(
         class_name->m_symbol,

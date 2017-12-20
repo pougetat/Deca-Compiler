@@ -63,7 +63,7 @@ TypeDefinition * EnvironmentType::GetTypeDefinition(string type_def_symbol)
 
 AbstractType * EnvironmentType::GetType(string type_symbol)
 {
-    return m_env_types->find(type_symbol)->second->GetType();
+    return GetTypeDefinition(type_symbol)->GetType();
 }
 
 void EnvironmentType::InsertType(string type_symbol, TypeDefinition * type_def)
