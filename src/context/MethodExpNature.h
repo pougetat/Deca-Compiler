@@ -19,6 +19,10 @@ class MethodExpNature : public AbstractExpNature
 
         void InsertSignatureType(AbstractType * type);
 
+        virtual bool IsParamExpNature();
+        virtual bool IsVarExpNature();
+        virtual bool IsMethodExpNature();
+        virtual bool IsFieldExpNature();
 };
 
 #endif

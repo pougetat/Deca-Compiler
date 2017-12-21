@@ -5,7 +5,11 @@
 
 class FieldExpNature : public AbstractExpNature
 {
-
+    public:
+        virtual bool IsParamExpNature();
+        virtual bool IsVarExpNature();
+        virtual bool IsMethodExpNature();
+        virtual bool IsFieldExpNature();
 };
 
 #endif

@@ -20,7 +20,10 @@ class ClassTypeNature : public AbstractTypeNature
 
         EnvironmentExp * GetEnvExp();
 
-        void SetParentClass(string parent_class_name);
+        void SetParentClass(
+            string parent_class_symbol,
+            EnvironmentExp * parent_class_env_exp
+        );
 };
 
 #endif

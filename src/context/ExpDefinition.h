@@ -7,7 +7,6 @@
 
 class ExpDefinition : public AbstractDefinition
 {
-
     public:
         
         AbstractExpNature * m_exp_nature;
@@ -19,8 +18,6 @@ class ExpDefinition : public AbstractDefinition
         AbstractType * GetType();
 
         AbstractExpNature * GetTypeNature();
-
-
 };
 
 #endif

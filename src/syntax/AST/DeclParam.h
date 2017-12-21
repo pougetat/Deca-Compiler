@@ -18,6 +18,14 @@ class DeclParam
         );
 
         void Display(string tab);
+
+    private:
+
+        void AddTypeToSignature(
+            EnvironmentType * env_types,
+            Identifier * class_name,
+            Identifier * method_name
+        );
 };
 
 #endif

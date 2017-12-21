@@ -2,6 +2,9 @@
 #define CLASS_TYPE_H
 
 #include "AbstractType.h"
+#include <string>
+
+using namespace std;
 
 class ClassType : public AbstractType
 {

@@ -47,7 +47,6 @@ void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
                 + "' DOES NOT EXIST]"
             );
         }
-
         SetParentClass(env_types, m_class_name, m_parent_class_name);
     }
 }
@@ -132,11 +131,29 @@ void DeclClass::SetParentClass(
     Identifier * class_name,
     Identifier * parent_class_name)
 {
+    // Getting the parent class EnvironmentExp
+    
+    TypeDefinition * parent_class_type_def =
+        env_types->GetTypeDefinition(parent_class_name->m_symbol);
+
+    ClassTypeNature * parent_class_type_nature = (ClassTypeNature *)
+        parent_class_type_def->GetTypeNature();
+
+    EnvironmentExp * parent_class_env_exp =
+        parent_class_type_nature->GetEnvExp();
+
+    // Getting the current class EnvironmentExp
+
     TypeDefinition * class_type_def = 
         env_types->GetTypeDefinition(class_name->m_symbol);
 
     ClassTypeNature * class_type_nature = (ClassTypeNature *)
         class_type_def->GetTypeNature();
 
-    class_type_nature->SetParentClass(parent_class_name->m_symbol);
+    // Setting the parent of the current class to the parent_class
+
+    class_type_nature->SetParentClass(
+        parent_class_name->m_symbol,
+        parent_class_env_exp
+    );
 }

@@ -40,14 +40,6 @@ class EnvironmentType
         void InsertType(string symbol, TypeDefinition * type_def);
 
         EnvironmentExp * GetClassEnvExp(string class_name);
-
-        void AddTypeToSignature(
-            string class_name,
-            string method_name,
-            AbstractType * type
-        );
-
-        void SetParentClass(string child_class, string parent_class);
 };
 
 #endif

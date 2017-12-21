@@ -8,7 +8,7 @@ void DeclParam::VerifyDeclParam(
     if (!env_types->TypeExists(m_param_type->m_symbol))
     {
         throw runtime_error(
-            "[PARAM TYPE : UNKNOWN TYPE '" + m_param_type->m_symbol + "']"
+            "[DECL PARAM : UNKNOWN TYPE '" + m_param_type->m_symbol + "']"
         );
     }
     if (env_types->GetType(m_param_type->m_symbol)->IsVoidType())
@@ -18,11 +18,7 @@ void DeclParam::VerifyDeclParam(
         );
     }
 
-    env_types->AddTypeToSignature(
-        class_name->m_symbol,
-        method_name->m_symbol,
-        env_types->GetType(m_param_type->m_symbol)
-    );
+    AddTypeToSignature(env_types, class_name, method_name);
 }
 
 void DeclParam::Display(string tab)
@@ -30,4 +26,30 @@ void DeclParam::Display(string tab)
     cout << tab << ">" << "[DECL PARAM]" << endl;
     m_param_type->Display(tab + "--");
     m_param_name->Display(tab + "--");
+}
+
+///////////// PRIVATE METHODS /////////////
+
+void DeclParam::AddTypeToSignature(
+    EnvironmentType * env_types,
+    Identifier * class_name,
+    Identifier * method_name)
+{
+    TypeDefinition * class_def =
+        env_types->GetTypeDefinition(class_name->m_symbol);
+
+    ClassTypeNature * class_type_nat =
+        (ClassTypeNature *) class_def->GetTypeNature();
+
+    EnvironmentExp * class_env_exp = class_type_nat->GetEnvExp();
+
+    ExpDefinition * method_def = 
+        class_env_exp->GetExpDefinition(method_name->m_symbol);
+
+    MethodExpNature * method_exp_nature = 
+        (MethodExpNature *) method_def->GetTypeNature();
+
+    method_exp_nature->InsertSignatureType(
+        env_types->GetType(m_param_type->m_symbol)
+    );
 }

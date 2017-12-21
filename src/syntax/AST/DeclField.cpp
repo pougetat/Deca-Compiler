@@ -29,8 +29,15 @@ void DeclField::VerifyFieldHierarchy(
 
     if (class_env_exp->SupContainsSymbol(m_field_name->m_symbol))
     {
-        //AbstractExpNature * parent_exp_nature = 
-        //    class_env_exp->GetParentExp(m_field_name->m_symbol);
+        ExpDefinition * sup_exp = 
+            class_env_exp->GetSupExpDefinition(m_field_name->m_symbol);
+
+        if (!sup_exp->GetTypeNature()->IsFieldExpNature())
+        {
+            throw runtime_error(
+                "[DECL FIELD : PARENT IDENTIFIER SHOULD BE OF SAME TYPE]"
+            );
+        }
     }
 }
 
