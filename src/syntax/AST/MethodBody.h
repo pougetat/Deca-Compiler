@@ -25,7 +25,8 @@ class MethodBody
             EnvironmentType * env_types, 
             EnvironmentExp * env_exp_sup,
             EnvironmentExp * env_exp,
-            string * class_name
+            string * class_name,
+            AbstractType * return_type
         );
 
         void Display(string tab);

@@ -66,7 +66,8 @@ void DeclMethod::VerifyMethodBody(
         env_types,
         env_types->GetClassEnvExp(class_name->m_symbol),
         method_exp_nature->GetMethodEnv(),
-        &(class_name->m_symbol)
+        &(class_name->m_symbol),
+        env_types->GetType(m_return_type->m_symbol)
     );
 }
 

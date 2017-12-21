@@ -12,15 +12,16 @@ void MethodBody::VerifyMethodBody(
     EnvironmentType * env_types, 
     EnvironmentExp * env_exp_sup,
     EnvironmentExp * env_exp,
-    string * class_name)
+    string * class_name,
+    AbstractType * return_type)
 {
     for (DeclVar * declvar : *m_list_decl_var)
     {
-        declvar->VerifyDeclVar(env_types, env_exp_sup, env_exp, class_name);
+        declvar->VerifyDeclVar(env_types, env_exp, class_name);
     }
     for (AbstractInst * inst: *m_list_inst)
     {
-        inst->VerifyInst(env_types, env_exp_sup, new string(""), new VoidType());
+        inst->VerifyInst(env_types, env_exp, class_name, return_type);
     }
 }
 

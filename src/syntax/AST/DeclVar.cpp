@@ -2,7 +2,6 @@
 
 void DeclVar::VerifyDeclVar(
     EnvironmentType * env_types, 
-    EnvironmentExp * env_exp_sup,
     EnvironmentExp * env_exp,
     string * class_name)
 {

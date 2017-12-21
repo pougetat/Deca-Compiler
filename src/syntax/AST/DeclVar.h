@@ -21,8 +21,7 @@ class DeclVar {
         void Display(string tab);
         
         void VerifyDeclVar(
-            EnvironmentType * env_types, 
-            EnvironmentExp * env_exp_sup,
+            EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name
         );

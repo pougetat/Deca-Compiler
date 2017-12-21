@@ -21,7 +21,7 @@ void Main::VerifyMain(EnvironmentType * env_types)
 
     for (DeclVar * declvar : *m_list_decl_var)
     {
-        declvar->VerifyDeclVar(env_types, NULL, m_env_main_exp, NULL);
+        declvar->VerifyDeclVar(env_types, m_env_main_exp, NULL);
     }
     for (AbstractInst * inst: *m_list_inst)
     {
