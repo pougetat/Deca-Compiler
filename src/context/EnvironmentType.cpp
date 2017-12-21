@@ -82,3 +82,8 @@ EnvironmentExp * EnvironmentType::GetClassEnvExp(string class_name)
         m_env_types->find(class_name)->second->GetTypeNature();
     return class_type_nature->GetEnvExp();
 }
+
+bool EnvironmentType::IsSubType(string type1_symbol, AbstractType * type2)
+{
+    return true;
+}

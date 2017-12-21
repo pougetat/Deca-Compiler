@@ -35,6 +35,11 @@ class DeclField {
             Identifier * class_name
         );
 
+        void VerifyFieldInit(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
+
         void Display(string tab);
 
     private:

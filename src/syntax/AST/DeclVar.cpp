@@ -1,13 +1,5 @@
 #include "DeclVar.h"
 
-void DeclVar::Display(string tab)
-{
-    cout << tab << ">" << "[DECL VAR]" << endl;
-    m_type->Display(tab + "--");
-    m_symbol->Display(tab + "--");
-    m_init->Display(tab + "--");
-}
-
 void DeclVar::VerifyDeclVar(
     EnvironmentType * env_types, 
     EnvironmentExp * env_exp_sup,
@@ -40,4 +32,12 @@ void DeclVar::VerifyDeclVar(
             variable_type
         )
     );
+}
+
+void DeclVar::Display(string tab)
+{
+    cout << tab << ">" << "[DECL VAR]" << endl;
+    m_type->Display(tab + "--");
+    m_symbol->Display(tab + "--");
+    m_init->Display(tab + "--");
 }

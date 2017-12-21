@@ -11,6 +11,11 @@ void EnvironmentExp::SetParentEnvExp(EnvironmentExp * parent_env_exp)
     m_env_exp_sup = parent_env_exp; 
 }
 
+EnvironmentExp * EnvironmentExp::GetParentEnv()
+{
+    return m_env_exp_sup;
+}
+
 void EnvironmentExp::InsertExpDefinition(
     string exp_symbol,
     ExpDefinition * exp_def)
@@ -55,7 +60,7 @@ ExpDefinition * EnvironmentExp::GetExpDefinition(string exp_symbol)
 
 ExpDefinition * EnvironmentExp::GetSupExpDefinition(string exp_symbol)
 {
-    if (SupContainsSymbol(exp_symbol))
+    if (m_env_exp_sup->ContainsSymbol(exp_symbol))
     {
         return m_env_exp_sup->m_env_exp->find(exp_symbol)->second;
     }

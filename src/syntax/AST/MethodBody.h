@@ -21,6 +21,13 @@ class MethodBody
             vector<AbstractInst *> * list_inst
         );
 
+        void VerifyMethodBody(
+            EnvironmentType * env_types, 
+            EnvironmentExp * env_exp_sup,
+            EnvironmentExp * env_exp,
+            string * class_name
+        );
+
         void Display(string tab);
 };
 

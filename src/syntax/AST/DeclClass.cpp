@@ -17,23 +17,6 @@ void DeclClass::VerifyClassName(EnvironmentType * env_types)
     {
         AddClassToEnvTypes(env_types, m_class_name->m_symbol);
     }
-
-    if (m_parent_class_name != NULL)
-    {
-
-    }
-    else
-    {
-        env_types->InsertType(
-            m_class_name->m_symbol,
-            new TypeDefinition(
-                new ClassTypeNature(
-                    "Object"
-                ),
-                new ClassType(m_class_name->m_symbol)
-            )
-        );
-    }
 }
 
 void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
@@ -53,36 +36,38 @@ void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
 
 void DeclClass::VerifyClassMF(EnvironmentType* env_types)
 {
-    VerifyClassFields(env_types);
-    VerifyClassMethodSignatures(env_types);
-}
-
-void DeclClass::VerifyClassMFHierarchy(EnvironmentType * env_types)
-{
-    VerifyClassFieldsHierarchy(env_types);
-}
-
-void DeclClass::VerifyClassFields(EnvironmentType * env_types)
-{
     for (DeclField * decl_field : *m_class_fields)
     {
         decl_field->VerifyFieldNoInit(env_types, m_class_name);
     }
-}
 
-void DeclClass::VerifyClassMethodSignatures(EnvironmentType * env_types)
-{
     for (DeclMethod * decl_method: *m_class_methods)
     {
         decl_method->VerifyMethodSignature(env_types, m_class_name);
     }
 }
 
-void DeclClass::VerifyClassFieldsHierarchy(EnvironmentType * env_types)
+void DeclClass::VerifyClassMFHierarchy(EnvironmentType * env_types)
 {
     for (DeclField * decl_field : *m_class_fields)
     {
         decl_field->VerifyFieldHierarchy(env_types, m_class_name);
+    }
+    for (DeclMethod * decl_method : *m_class_methods)
+    {
+        decl_method->VerifyMethodHierarchy(env_types, m_class_name);
+    }
+}
+
+void DeclClass::VerifyClassBody(EnvironmentType * env_types)
+{
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        decl_field->VerifyFieldInit(env_types, m_class_name);
+    }
+    for (DeclMethod * decl_method : *m_class_methods)
+    {
+        decl_method->VerifyMethodBody(env_types, m_class_name);
     }
 }
 

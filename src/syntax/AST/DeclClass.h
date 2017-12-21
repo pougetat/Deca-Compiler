@@ -31,11 +31,7 @@ class DeclClass {
 
         void VerifyClassMFHierarchy(EnvironmentType * env_types);
 
-        void VerifyClassFields(EnvironmentType * env_types);
-
-        void VerifyClassMethodSignatures(EnvironmentType * env_types);
-
-        void VerifyClassFieldsHierarchy(EnvironmentType * env_types);
+        void VerifyClassBody(EnvironmentType * env_types);
 
         void Display(string tab);
 

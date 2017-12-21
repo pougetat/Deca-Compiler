@@ -41,6 +41,18 @@ void DeclField::VerifyFieldHierarchy(
     }
 }
 
+void DeclField::VerifyFieldInit(
+    EnvironmentType * env_types,
+    Identifier * class_name)
+{
+    m_init->VerifyInitialization(
+        env_types,
+        env_types->GetClassEnvExp(class_name->m_symbol),
+        &(class_name->m_symbol),
+        env_types->GetType(m_field_type->m_symbol)
+    );
+}
+
 void DeclField::Display(string tab)
 {
     cout << tab << ">" << "[DECL FIELD]" << endl;

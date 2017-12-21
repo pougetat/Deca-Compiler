@@ -40,6 +40,8 @@ class EnvironmentType
         void InsertType(string symbol, TypeDefinition * type_def);
 
         EnvironmentExp * GetClassEnvExp(string class_name);
+
+        bool IsSubType(string type1_symbol, AbstractType * type2);
 };
 
 #endif

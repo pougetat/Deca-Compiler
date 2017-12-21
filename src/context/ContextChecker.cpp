@@ -35,6 +35,12 @@ void ContextChecker::CheckContext(Program * program)
     */
     program->VerifyClassMFHierarchy(env_types_predef);
 
-    // PASS 3
+    /*
+        PASS 3 :
+            - check the blocks
+            - check the instructions
+            - check the expressions
+            - check the initializations
+    */
     program->VerifyProgramPass3(env_types_predef);
 }

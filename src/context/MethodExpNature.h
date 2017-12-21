@@ -11,13 +11,19 @@ class MethodExpNature : public AbstractExpNature
 
     public:
 
-        EnvironmentExp * m_env_exp;
+        EnvironmentExp * m_method_env;
 
         vector<AbstractType *> * m_signature;
 
         MethodExpNature();
 
+        EnvironmentExp * GetMethodEnv();
+
+        vector<AbstractType *> * GetMethodSignature();
+
         void InsertSignatureType(AbstractType * type);
+
+        bool HasSameSignature(MethodExpNature * other_method_exp_nature);
 
         virtual bool IsParamExpNature();
         virtual bool IsVarExpNature();

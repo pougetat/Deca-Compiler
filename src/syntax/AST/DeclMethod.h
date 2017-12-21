@@ -11,6 +11,7 @@
 
 #include "../../context/EnvironmentType.h"
 #include "../../context/MethodExpNature.h"
+#include "../../context/ParamExpNature.h"
 
 using namespace std;
 
@@ -31,6 +32,16 @@ class DeclMethod {
             Identifier * class_name
         );
 
+        void VerifyMethodHierarchy(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
+
+        void VerifyMethodBody(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
+
         void Display(string tab);
 
     private:
@@ -41,6 +52,11 @@ class DeclMethod {
         );
 
         void InsertMethodExpDefinition(
+            EnvironmentType * env_types,
+            Identifier * class_name
+        );
+
+        MethodExpNature * InitMethodEnv(
             EnvironmentType * env_types,
             Identifier * class_name
         );

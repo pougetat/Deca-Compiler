@@ -20,5 +20,14 @@ AbstractType * Identifier::VerifyLValue(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    return env_exp->GetExpDefinition(m_symbol)->GetType();
+    if (env_exp->ContainsSymbol(m_symbol))
+    {
+        return env_exp->GetExpDefinition(m_symbol)->GetType();
+    }
+    if (env_exp->SupContainsSymbol(m_symbol))
+    {
+        return env_exp->GetSupExpDefinition(m_symbol)->GetType();
+    }
+
+    throw runtime_error("[IDENTIFIER : '" + m_symbol + "' IS UNDEFINED]");
 }

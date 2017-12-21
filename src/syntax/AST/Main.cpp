@@ -27,5 +27,4 @@ void Main::VerifyMain(EnvironmentType * env_types)
     {
         inst->VerifyInst(env_types, m_env_main_exp, new string(""), new VoidType());
     }
-
 }
