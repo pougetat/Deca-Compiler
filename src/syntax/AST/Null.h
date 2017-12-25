@@ -1,9 +1,10 @@
 #ifndef NULL_H
 #define NULL_H
 
-#include "AbstractExpr.h"
+#include "AbstractLiteral.h"
+#include "../../context/NullType.h"
 
-class Null : public AbstractExpr
+class Null : public AbstractLiteral
 {
     public:
 
