@@ -20,6 +20,7 @@ void Print::VerifyInst(
     string * class_name,
     AbstractType * return_type)
 {
+    cout << "verifying inst" << endl;
     for (AbstractExpr * expr : *m_list_args)
     {
         AbstractType * expr_type =
