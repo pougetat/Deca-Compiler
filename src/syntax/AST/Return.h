@@ -11,7 +11,9 @@ class Return : public AbstractInst
         AbstractExpr * m_return_expr;
 
         Return(AbstractExpr * return_expr);
+
         void Display(string tab);
+        
         void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,

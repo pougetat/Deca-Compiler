@@ -1,6 +1,10 @@
 #ifndef ABSTRACT_TYPE_H
 #define ABSTRACT_TYPE_H
 
+#include <string>
+
+using namespace std;
+
 class AbstractType
 {
     public:
@@ -11,6 +15,8 @@ class AbstractType
         virtual bool IsVoidType() = 0;
         virtual bool IsClassType() = 0;
         virtual bool IsSameType(AbstractType * other_type) = 0;
+        
+        virtual string Symbol() = 0;
 };
 
 #endif

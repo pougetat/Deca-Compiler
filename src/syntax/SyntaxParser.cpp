@@ -341,6 +341,7 @@ AbstractInst * SyntaxParser::ParseInst(int * cur_token_index)
         {
             return_expr = ParseExpr(cur_token_index);
         }
+        
         ShouldMatchToken(TOKEN_SEMICOLON, cur_token_index);
 
         return new Return(return_expr);

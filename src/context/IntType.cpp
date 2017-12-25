@@ -34,3 +34,8 @@ bool IntType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsIntType();
 }
+
+string IntType::Symbol()
+{
+    return string("int");
+}

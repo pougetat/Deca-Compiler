@@ -34,3 +34,8 @@ bool FloatType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsFloatType();
 }
+
+string FloatType::Symbol()
+{
+    return string("float");
+}

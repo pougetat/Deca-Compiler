@@ -34,3 +34,8 @@ bool BooleanType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsBooleanType();
 }
+
+string BooleanType::Symbol()
+{
+    return string("boolean");
+}

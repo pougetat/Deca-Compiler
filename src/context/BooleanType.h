@@ -13,6 +13,8 @@ class BooleanType : public AbstractType
         bool IsVoidType();
         bool IsClassType();
         bool IsSameType(AbstractType * other_type);
+
+        string Symbol();
 };
 
 #endif

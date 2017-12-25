@@ -34,3 +34,8 @@ bool VoidType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsVoidType();
 }
+
+string VoidType::Symbol()
+{
+    return string("void");
+}

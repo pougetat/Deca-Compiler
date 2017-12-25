@@ -40,3 +40,8 @@ bool ClassType::IsSameType(AbstractType * other_type)
     return other_type->IsClassType() 
         && ((ClassType *) other_type)->m_class_name == m_class_name;
 }
+
+string ClassType::Symbol()
+{
+    return string("class");
+}

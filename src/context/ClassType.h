@@ -2,9 +2,6 @@
 #define CLASS_TYPE_H
 
 #include "AbstractType.h"
-#include <string>
-
-using namespace std;
 
 class ClassType : public AbstractType
 {
@@ -21,6 +18,8 @@ class ClassType : public AbstractType
         bool IsVoidType();
         bool IsClassType();
         bool IsSameType(AbstractType * other_type);
+
+        string Symbol();
 };
 
 #endif

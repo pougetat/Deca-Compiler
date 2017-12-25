@@ -34,3 +34,8 @@ bool StringType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsStringType();
 }
+
+string StringType::Symbol()
+{
+    return string("string");
+}
