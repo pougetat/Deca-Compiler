@@ -27,20 +27,10 @@ AbstractType * AbstractOpArith::VerifyExpr(
 
     if (type_left_operand->IsFloatType())
     {
-        if (type_right_operand->IsFloatType() || type_right_operand->IsIntType())
-        {
-            return new FloatType();
-        }
+        return new FloatType();
     }
     if (type_left_operand->IsIntType())
     {
-        if (type_right_operand->IsFloatType())
-        {
-            return new FloatType();
-        }
-        if (type_right_operand->IsIntType())
-        {
-            return new IntType();
-        }
+        return type_right_operand;
     }
 }

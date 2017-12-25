@@ -24,6 +24,14 @@ AbstractType * New::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+    if (!env_types->TypeExists(m_class_name->m_symbol))
+    {
+        throw runtime_error(
+            "[DECL VAR : UNKNOWN TYPE '" + m_class_name->m_symbol + "']"
+        );
+    }
+
+    AbstractType * variable_type = env_types->GetType(m_class_name->m_symbol);
+
+    return variable_type;
 }
