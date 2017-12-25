@@ -30,5 +30,24 @@ void While::VerifyInst(
     string * class_name,
     AbstractType * return_type)
 {
-    
+    AbstractType * condition_type = m_condition->VerifyExpr(
+        env_types,
+        env_exp,
+        class_name
+    );
+
+    if (!condition_type->IsBooleanType())
+    {
+        throw runtime_error("[WHILE : BOOLEAN CONDITION EXPECTED]");
+    }
+
+    for (AbstractInst * inst : *m_insts)
+    {
+        inst->VerifyInst(
+            env_types,
+            env_exp,
+            class_name,
+            return_type
+        );
+    }
 }
