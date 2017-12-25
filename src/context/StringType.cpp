@@ -7,7 +7,7 @@ bool StringType::IsBooleanType()
 
 bool StringType::IsFloatType()
 {
-    return true;
+    return false;
 }
 
 bool StringType::IsIntType()

@@ -16,13 +16,21 @@ AbstractType * AbstractOpArith::VerifyExpr(
         class_name
     );
 
+    if (!type_left_operand->IsIntType() && !type_left_operand->IsFloatType())
+    {
+        throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
+    }
+    if (!type_right_operand->IsIntType() && !type_right_operand->IsFloatType())
+    {
+        throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
+    }
+
     if (type_left_operand->IsFloatType())
     {
         if (type_right_operand->IsFloatType() || type_right_operand->IsIntType())
         {
             return new FloatType();
         }
-        throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
     }
     if (type_left_operand->IsIntType())
     {
@@ -34,8 +42,5 @@ AbstractType * AbstractOpArith::VerifyExpr(
         {
             return new IntType();
         }
-        throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
     }
-
-    throw runtime_error("[ARITH OPERATION : INT OR FLOAT OPERAND EXPECTED]");
 }

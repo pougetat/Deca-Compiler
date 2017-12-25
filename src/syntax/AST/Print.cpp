@@ -20,11 +20,11 @@ void Print::VerifyInst(
     string * class_name,
     AbstractType * return_type)
 {
-    cout << "verifying inst" << endl;
     for (AbstractExpr * expr : *m_list_args)
     {
         AbstractType * expr_type =
             expr->VerifyExpr(env_types, env_exp, class_name);
+
         if (!expr_type->IsFloatType() && !expr_type->IsIntType() 
             && !expr_type->IsStringType())
         {
