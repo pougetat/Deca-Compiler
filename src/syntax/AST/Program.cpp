@@ -52,3 +52,8 @@ void Program::VerifyProgramPass3(EnvironmentType * env_types)
     }
     m_main->VerifyMain(env_types);
 }
+
+void Program::GenCode(EnvironmentType * env_types)
+{
+    
+}

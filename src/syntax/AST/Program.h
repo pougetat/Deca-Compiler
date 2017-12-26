@@ -4,14 +4,15 @@
 #include "DeclClass.h"
 #include "AbstractMain.h"
 #include "../../context/EnvironmentType.h"
+
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
 class Program
 {
     public:
-
         vector<DeclClass *> * m_list_decl_class;
 
         AbstractMain * m_main;
@@ -27,6 +28,8 @@ class Program
         void VerifyClassMFHierarchy(EnvironmentType * env_types);
 
         void VerifyProgramPass3(EnvironmentType * env_types);
+
+        void GenCode(EnvironmentType * env_types);
 };
 
 #endif
