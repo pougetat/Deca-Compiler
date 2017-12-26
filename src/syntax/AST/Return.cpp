@@ -39,3 +39,8 @@ void Return::VerifyInst(
         );
     }
 }
+
+void Return::CodeGenInst(ofstream * output_file)
+{
+    
+}

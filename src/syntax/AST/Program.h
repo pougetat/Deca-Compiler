@@ -29,7 +29,7 @@ class Program
 
         void VerifyProgramPass3(EnvironmentType * env_types);
 
-        void GenCode(EnvironmentType * env_types);
+        void GenCode();
 };
 
 #endif

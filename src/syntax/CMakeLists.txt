@@ -12,4 +12,4 @@ set(HEADERS
 	SyntaxParser.h
 	)
 
-add_library(parser ${SRCS} ${HEADERS})
+add_library(syntax ${SRCS} ${HEADERS})

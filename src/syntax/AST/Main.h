@@ -4,7 +4,9 @@
 #include "AbstractMain.h"
 #include "AbstractInst.h"
 #include "DeclVar.h"
+
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -21,6 +23,8 @@ class Main : public AbstractMain
         void VerifyMain(EnvironmentType * env_types);
 
         void Display(string tab);
+
+        void CodeGenMain(ofstream * output_file);
 };
 
 #endif

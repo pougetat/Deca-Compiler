@@ -16,7 +16,6 @@ AbstractType * AbstractExpr::VerifyExpr(
 )
 {
     throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
 }
 
 void AbstractExpr::VerifyRValue(
@@ -42,4 +41,9 @@ AbstractType * AbstractExpr::VerifyLValue(
     string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
+}
+
+void AbstractExpr::CodeGenInst(ofstream * output_file)
+{
+    throw runtime_error("NOT YET IMPLEMENTED");
 }

@@ -9,3 +9,7 @@ void EmptyMain::VerifyMain(EnvironmentType * env_types)
 {
     
 }
+
+void EmptyMain::CodeGenMain(ofstream * output_file)
+{
+}

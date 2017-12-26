@@ -20,6 +20,8 @@ class Return : public AbstractInst
             string * class_name,
             AbstractType * return_type
         );
+
+        void CodeGenInst(ofstream * output_file);
 };
 
 #endif

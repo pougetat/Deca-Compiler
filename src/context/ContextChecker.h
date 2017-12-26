@@ -6,9 +6,7 @@
 
 class ContextChecker
 {
-
     public:
-        
         void CheckContext(Program * program);
 };
 

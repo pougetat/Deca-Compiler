@@ -13,3 +13,8 @@ void NoOperation::VerifyInst(
 {
 
 }
+
+void NoOperation::CodeGenInst(ofstream * output_file)
+{
+    
+}

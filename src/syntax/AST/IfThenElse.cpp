@@ -66,3 +66,8 @@ void IfThenElse::VerifyInst(
         );
     }
 }
+
+void IfThenElse::CodeGenInst(ofstream * output_file)
+{
+    
+}

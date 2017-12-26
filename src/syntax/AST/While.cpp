@@ -51,3 +51,8 @@ void While::VerifyInst(
         );
     }
 }
+
+void While::CodeGenInst(ofstream * output_file)
+{
+    
+}

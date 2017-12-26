@@ -34,3 +34,22 @@ void Print::VerifyInst(
         }
     }
 }
+
+void Print::CodeGenInst(ofstream * output_file)
+{
+    *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
+    *output_file << "    getstatic java/lang/System/out Ljava/io/PrintStream;" << endl;
+
+    if (m_list_args->size() == 0)
+    {
+        *output_file << "    ldc \" \"" << endl;
+    }
+    for (AbstractExpr * print_arg : *m_list_args)
+    {
+        cout << "hello";
+    }
+
+    *output_file << "    ; invoke println" << endl;
+    *output_file << "    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"
+        << endl;
+}

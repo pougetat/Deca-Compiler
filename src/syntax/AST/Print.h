@@ -13,6 +13,7 @@ class Print : public AbstractInst {
     public:
 
         vector<AbstractExpr *> * m_list_args;
+        
         TokenType m_token_type;
 
         Print(TokenType token_type);
@@ -25,6 +26,8 @@ class Print : public AbstractInst {
             string * class_name,
             AbstractType * return_type
         );
+
+        void CodeGenInst(ofstream * output_file);
 };
 
 #endif

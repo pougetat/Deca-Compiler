@@ -15,6 +15,8 @@ class AbstractBinaryExpr : public AbstractExpr
             EnvironmentExp * env_exp,
             string * class_name
         );
+
+        virtual void CodeGenInst(ofstream output_file);
 };
 
 #endif

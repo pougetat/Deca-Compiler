@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+
 #include "../../context/EnvironmentType.h"
 #include "../../context/EnvironmentExp.h"
 #include "../../context/AbstractType.h"
@@ -21,6 +23,8 @@ class AbstractInst
             string * class_name,
             AbstractType * return_type
         ) = 0;
+
+        virtual void CodeGenInst(ofstream * output_file) = 0;
 };
 
 #endif
