@@ -9,27 +9,29 @@ class Cast : public AbstractExpr
     public:
  
         Identifier * m_cast_type;
+        
         AbstractExpr * m_expr;
 
-        // GRAMMAR PARSING RELATED METHODS
-
         Cast(Identifier * cast_type, AbstractExpr * expr);
+        
         AbstractExpr * Clone();
+        
         void Display(string tab);
+        
         void VerifyInst(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name,
-            AbstractType return_type
+            AbstractType * return_type
         );
 
-        // CONTEXT CHECKING RELATED METHODS
-
-        virtual AbstractType * VerifyExpr(
+        AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name
         );
+
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif

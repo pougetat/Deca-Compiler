@@ -46,10 +46,12 @@ void Print::CodeGenInst(ofstream * output_file)
     }
     for (AbstractExpr * print_arg : *m_list_args)
     {
-        cout << "hello";
+        print_arg->CodeGenExpr(output_file);
     }
 
     *output_file << "    ; invoke println" << endl;
-    *output_file << "    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"
+    *output_file << "    invokevirtual java/io/PrintStream/println(I)V"
         << endl;
 }
+
+//  "    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"

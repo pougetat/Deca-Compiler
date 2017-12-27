@@ -20,28 +20,3 @@ void Minus::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
-
-bool Minus::IsPlus()
-{
-    return false;
-}
-
-bool Minus::IsMinus()
-{
-    return true;
-}
-
-bool Minus::IsMultiply()
-{
-    return false;
-}
-
-bool Minus::IsDivide()
-{
-    return false;
-}
-
-bool Minus::IsModulo()
-{
-    return false;
-}

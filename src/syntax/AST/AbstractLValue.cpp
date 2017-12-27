@@ -18,5 +18,9 @@ AbstractType * AbstractLValue::VerifyLValue(
     string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+}
+
+void AbstractLValue::CodeGenExpr(ofstream * output_file)
+{
+    throw runtime_error("NOT IMPLEMENTED YET");
 }

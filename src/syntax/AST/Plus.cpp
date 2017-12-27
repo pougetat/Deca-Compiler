@@ -21,27 +21,11 @@ void Plus::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
-bool Plus::IsPlus()
+void Plus::CodeGenExpr(ofstream * output_file)
 {
-    return true;
-}
-
-bool Plus::IsMinus()
-{
-    return false;
-}
-
-bool Plus::IsMultiply()
-{
-    return false;
-}
-
-bool Plus::IsDivide()
-{
-    return false;
-}
-
-bool Plus::IsModulo()
-{
-    return false;
+    m_left_operand->CodeGenExpr(output_file);
+    m_right_operand->CodeGenExpr(output_file);
+    
+    *output_file << "    ; adding two stack elements" << endl;
+    *output_file << "    iadd " << endl;
 }

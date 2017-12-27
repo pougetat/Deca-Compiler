@@ -20,28 +20,3 @@ void Multiply::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
-
-bool Multiply::IsPlus()
-{
-    return false;
-}
-
-bool Multiply::IsMinus()
-{
-    return false;
-}
-
-bool Multiply::IsMultiply()
-{
-    return true;
-}
-
-bool Multiply::IsDivide()
-{
-    return false;
-}
-
-bool Multiply::IsModulo()
-{
-    return false;
-}

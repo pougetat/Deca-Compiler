@@ -29,6 +29,10 @@ Program * SyntaxParser::ParseProgram(int * cur_token_index)
     {
         prog->m_list_decl_class = ParseListClasses(cur_token_index);
     }
+    else
+    {
+        prog->m_list_decl_class = new vector<DeclClass *>();
+    }
 
     prog->m_main = ParseMain(cur_token_index);
 

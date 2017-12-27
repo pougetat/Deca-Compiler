@@ -9,7 +9,9 @@ using namespace std;
 class ReadInt : public AbstractReadExpr
 {
     public:
+        
         AbstractExpr * Clone();
+        
         void Display(string tab);
 };
 

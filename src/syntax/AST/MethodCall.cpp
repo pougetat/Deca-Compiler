@@ -64,3 +64,8 @@ AbstractType * MethodCall::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
     return NULL;
 }
+
+void MethodCall::CodeGenExpr(ofstream * output_file)
+{
+
+}

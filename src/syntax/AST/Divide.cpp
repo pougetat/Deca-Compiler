@@ -29,28 +29,3 @@ void Divide::VerifyInst(
 {
     
 }
-
-bool Divide::IsPlus()
-{
-    return false;
-}
-
-bool Divide::IsMinus()
-{
-    return false;
-}
-
-bool Divide::IsMultiply()
-{
-    return false;
-}
-
-bool Divide::IsDivide()
-{
-    return true;
-}
-
-bool Divide::IsModulo()
-{
-    return false;
-}

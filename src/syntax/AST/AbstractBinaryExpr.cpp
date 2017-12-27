@@ -8,7 +8,12 @@ AbstractType * AbstractBinaryExpr::VerifyExpr(
     throw runtime_error("NOT YET IMPLEMENTED");
 }
 
-void AbstractBinaryExpr::CodeGenInst(ofstream output_file)
+void AbstractBinaryExpr::CodeGenInst(ofstream * output_file)
+{
+    throw runtime_error("NOT YET IMPLEMENTED");
+}
+
+void AbstractBinaryExpr::CodeGenExpr(ofstream * output_file)
 {
     throw runtime_error("NOT YET IMPLEMENTED");
 }

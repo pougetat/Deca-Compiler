@@ -14,6 +14,8 @@ class AbstractUnaryExpr : public AbstractExpr
             EnvironmentExp * env_exp,
             string * class_name
         ) = 0;
+
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif

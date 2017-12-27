@@ -44,28 +44,3 @@ AbstractType * Modulo::VerifyExpr(
 
     return new IntType();
 }
-
-bool Modulo::IsPlus()
-{
-    return false;
-}
-
-bool Modulo::IsMinus()
-{
-    return false;
-}
-
-bool Modulo::IsMultiply()
-{
-    return false;
-}
-
-bool Modulo::IsDivide()
-{
-    return false;
-}
-
-bool Modulo::IsModulo()
-{
-    return true;
-}

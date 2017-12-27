@@ -22,3 +22,9 @@ AbstractType * IntLiteral::VerifyExpr(
 {
     return new IntType();
 }
+
+void IntLiteral::CodeGenExpr(ofstream * output_file)
+{
+    *output_file << "    ; pushing literal on the stack" << endl;
+    *output_file << "    bipush " << m_value << endl;
+}

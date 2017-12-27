@@ -19,12 +19,6 @@ class Divide : public AbstractOpArith
             string class_name,
             AbstractType return_type
         );
-
-        bool IsPlus();
-        bool IsMinus();
-        bool IsMultiply();
-        bool IsDivide();
-        bool IsModulo();
 };
 
 #endif

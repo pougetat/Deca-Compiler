@@ -6,5 +6,9 @@ AbstractType * AbstractReadExpr::VerifyExpr(
     string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+}
+
+void AbstractReadExpr::CodeGenExpr(ofstream * output_file)
+{
+
 }

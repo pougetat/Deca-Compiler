@@ -38,6 +38,8 @@ class AbstractExpr : public AbstractInst
         );
 
         virtual void CodeGenInst(ofstream * output_file);
+
+        virtual void CodeGenExpr(ofstream * output_file) = 0;
 };
 
 #endif

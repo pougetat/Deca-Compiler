@@ -8,6 +8,7 @@ class AbstractBinaryExpr : public AbstractExpr
     public:
 
         AbstractExpr * m_left_operand;
+        
         AbstractExpr * m_right_operand;
 
         virtual AbstractType * VerifyExpr(
@@ -16,7 +17,9 @@ class AbstractBinaryExpr : public AbstractExpr
             string * class_name
         );
 
-        virtual void CodeGenInst(ofstream output_file);
+        virtual void CodeGenInst(ofstream * output_file);
+
+        virtual void CodeGenExpr(ofstream * output_file);
 };
 
 #endif

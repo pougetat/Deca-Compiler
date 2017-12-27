@@ -1,7 +1,5 @@
 #include "InstanceOf.h"
 
-// GRAMMAR PARSING RELATED METHODS
-
 InstanceOf::InstanceOf(
     AbstractExpr * expr, 
     Identifier * instanceof_type
@@ -26,13 +24,15 @@ void InstanceOf::Display(string tab)
     m_instanceof_type->Display(tab + "--");
 }
 
-// CONTEXT CHECKING RELATED METHODS
-
 AbstractType * InstanceOf::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+}
+
+void InstanceOf::CodeGenExpr(ofstream * output_file)
+{
+    
 }

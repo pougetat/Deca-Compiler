@@ -18,12 +18,6 @@ class Modulo : public AbstractOpArith
             EnvironmentExp * env_exp,
             string * class_name
         );
-
-        bool IsPlus();
-        bool IsMinus();
-        bool IsMultiply();
-        bool IsDivide();
-        bool IsModulo();
 };
 
 #endif

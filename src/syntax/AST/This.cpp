@@ -21,5 +21,9 @@ AbstractType * This::VerifyExpr(
     string * class_name)
 {
     throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+}
+
+void This::CodeGenExpr(ofstream * output_file)
+{
+    
 }

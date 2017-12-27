@@ -35,3 +35,8 @@ AbstractType * New::VerifyExpr(
 
     return variable_type;
 }
+
+void New::CodeGenExpr(ofstream * output_file)
+{
+
+}

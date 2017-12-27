@@ -13,11 +13,7 @@ class Plus : public AbstractOpArith
         
         void Display(string tab);
 
-        bool IsPlus();
-        bool IsMinus();
-        bool IsMultiply();
-        bool IsDivide();
-        bool IsModulo();
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif
