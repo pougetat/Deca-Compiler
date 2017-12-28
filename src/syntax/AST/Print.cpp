@@ -37,21 +37,46 @@ void Print::VerifyInst(
 
 void Print::CodeGenInst(ofstream * output_file)
 {
-    *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
-    *output_file << "    getstatic java/lang/System/out Ljava/io/PrintStream;" << endl;
-
     if (m_list_args->size() == 0)
     {
+        *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
+        *output_file 
+            << "    getstatic "
+            << "java/lang/System/out Ljava/io/PrintStream;"
+            << endl;
         *output_file << "    ldc \" \"" << endl;
+        *output_file 
+            << "    invokevirtual "
+            << "java/io/PrintStream/println(Ljava/lang/String;)V"
+            << endl;
     }
-    for (AbstractExpr * print_arg : *m_list_args)
+    else
     {
-        print_arg->CodeGenExpr(output_file);
+        for (AbstractExpr * print_arg : *m_list_args)
+        {
+            *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
+            *output_file 
+                << "    getstatic "
+                << "java/lang/System/out Ljava/io/PrintStream;"
+                << endl;
+
+            print_arg->CodeGenExpr(output_file);
+
+            *output_file << "    ; invoke println" << endl;
+            if (print_arg->m_expr_type->IsIntType())
+            {
+                *output_file
+                    << "    invokevirtual "
+                    << "java/io/PrintStream/println(I)V"
+                    << endl;
+            }
+            if (print_arg->m_expr_type->IsStringType())
+            {
+                *output_file
+                << "    invokevirtual "
+                << "java/io/PrintStream/println(Ljava/lang/String;)V" 
+                << endl;  
+            }
+        }
     }
-
-    *output_file << "    ; invoke println" << endl;
-    *output_file << "    invokevirtual java/io/PrintStream/println(I)V"
-        << endl;
 }
-
-//  "    invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"

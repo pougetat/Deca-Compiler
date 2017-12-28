@@ -20,6 +20,7 @@ AbstractType * IntLiteral::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
+    m_expr_type = new IntType();
     return new IntType();
 }
 

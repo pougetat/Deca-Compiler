@@ -20,5 +20,12 @@ AbstractType * StringLiteral::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
+    m_expr_type = new StringType();
     return new StringType();
+}
+
+void StringLiteral::CodeGenExpr(ofstream * output_file)
+{
+    *output_file << "    ; pushing string literal on the stack" << endl;
+    *output_file << "    ldc \"" << m_value << "\"" << endl;
 }

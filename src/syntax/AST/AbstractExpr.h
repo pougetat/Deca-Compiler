@@ -7,6 +7,8 @@ class AbstractExpr : public AbstractInst
 {
     public:
         
+        AbstractType * m_expr_type;
+
         virtual AbstractExpr * Clone() = 0;
         
         virtual void Display(string tab) = 0;
