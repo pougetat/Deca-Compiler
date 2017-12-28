@@ -18,6 +18,7 @@ AbstractType * AbstractOpBool::VerifyExpr(
 
     if (type_left_operand->IsBooleanType() && type_right_operand->IsBooleanType())
     {
+        m_expr_type = new BooleanType();
         return new BooleanType();
     }
 

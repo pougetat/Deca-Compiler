@@ -29,7 +29,7 @@ void Print::VerifyInst(
             && !expr_type->IsStringType() && !expr_type->IsBooleanType())
         {
             throw runtime_error(
-                "[PRINT : FLOAT, INT, STRING OPERAND EXPECTED]"
+                "[PRINT : FLOAT, INT, STRING, BOOL OPERAND EXPECTED]"
             );
         }
     }
@@ -39,7 +39,9 @@ void Print::CodeGenInst(ofstream * output_file)
 {
     if (m_list_args->size() == 0)
     {
-        *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
+        *output_file
+            << "    ; push java.lang.System.out (type PrintStream)"
+            << endl;
         *output_file 
             << "    getstatic "
             << "java/lang/System/out Ljava/io/PrintStream;"
@@ -54,7 +56,9 @@ void Print::CodeGenInst(ofstream * output_file)
     {
         for (AbstractExpr * print_arg : *m_list_args)
         {
-            *output_file << "    ; push java.lang.System.out (type PrintStream)" << endl;
+            *output_file
+                << "    ; push java.lang.System.out (type PrintStream)"
+                << endl;
             *output_file 
                 << "    getstatic "
                 << "java/lang/System/out Ljava/io/PrintStream;"

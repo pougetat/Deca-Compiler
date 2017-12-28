@@ -12,6 +12,8 @@ class Or : public AbstractOpBool
         AbstractExpr * Clone();
         
         void Display(string tab);
+
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif

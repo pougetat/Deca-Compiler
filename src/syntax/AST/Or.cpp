@@ -20,3 +20,12 @@ void Or::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
+
+void Or::CodeGenExpr(ofstream * output_file)
+{
+    m_left_operand->CodeGenExpr(output_file);
+    m_right_operand->CodeGenExpr(output_file);
+
+    *output_file << "    ; or of two stack elements" << endl;
+    *output_file << "    ior" << endl;
+}
