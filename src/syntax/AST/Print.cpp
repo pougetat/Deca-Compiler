@@ -26,7 +26,7 @@ void Print::VerifyInst(
             expr->VerifyExpr(env_types, env_exp, class_name);
 
         if (!expr_type->IsFloatType() && !expr_type->IsIntType() 
-            && !expr_type->IsStringType())
+            && !expr_type->IsStringType() && !expr_type->IsBooleanType())
         {
             throw runtime_error(
                 "[PRINT : FLOAT, INT, STRING OPERAND EXPECTED]"
@@ -73,9 +73,16 @@ void Print::CodeGenInst(ofstream * output_file)
             if (print_arg->m_expr_type->IsStringType())
             {
                 *output_file
-                << "    invokevirtual "
-                << "java/io/PrintStream/println(Ljava/lang/String;)V" 
-                << endl;  
+                    << "    invokevirtual "
+                    << "java/io/PrintStream/println(Ljava/lang/String;)V" 
+                    << endl;  
+            }
+            if (print_arg->m_expr_type->IsBooleanType())
+            {
+                *output_file
+                    << "    invokevirtual "
+                    << "java/io/PrintStream/println(Z)V" 
+                    << endl;  
             }
         }
     }
