@@ -12,6 +12,8 @@ class Minus : public AbstractOpArith
         AbstractExpr * Clone();
         
         void Display(string tab);
+
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif

@@ -20,3 +20,12 @@ void Minus::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
+
+void Minus::CodeGenExpr(ofstream * output_file)
+{
+    m_left_operand->CodeGenExpr(output_file);
+    m_right_operand->CodeGenExpr(output_file);
+    
+    *output_file << "    ; subtracting two stack elements" << endl;
+    *output_file << "    isub" << endl;
+}

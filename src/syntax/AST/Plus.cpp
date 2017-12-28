@@ -25,7 +25,7 @@ void Plus::CodeGenExpr(ofstream * output_file)
 {
     m_left_operand->CodeGenExpr(output_file);
     m_right_operand->CodeGenExpr(output_file);
-    
+
     *output_file << "    ; adding two stack elements" << endl;
-    *output_file << "    iadd " << endl;
+    *output_file << "    iadd" << endl;
 }

@@ -21,11 +21,11 @@ void Divide::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
-void Divide::VerifyInst(
-    EnvironmentType * env_types,
-    EnvironmentExp * env_exp,
-    string class_name,
-    AbstractType return_type)
+void Divide::CodeGenExpr(ofstream * output_file)
 {
+    m_left_operand->CodeGenExpr(output_file);
+    m_right_operand->CodeGenExpr(output_file);
     
+    *output_file << "    ; dividing two stack elements" << endl;
+    *output_file << "    idiv" << endl;
 }

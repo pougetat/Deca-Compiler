@@ -20,3 +20,12 @@ void Multiply::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
+
+void Multiply::CodeGenExpr(ofstream * output_file)
+{
+    m_left_operand->CodeGenExpr(output_file);
+    m_right_operand->CodeGenExpr(output_file);
+    
+    *output_file << "    ; multiplying two stack elements" << endl;
+    *output_file << "    imul" << endl;
+}

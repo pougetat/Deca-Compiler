@@ -13,12 +13,7 @@ class Divide : public AbstractOpArith
         
         void Display(string tab);
         
-        void VerifyInst(
-            EnvironmentType * env_types,
-            EnvironmentExp * env_exp,
-            string class_name,
-            AbstractType return_type
-        );
+        void CodeGenExpr(ofstream * output_file);
 };
 
 #endif
