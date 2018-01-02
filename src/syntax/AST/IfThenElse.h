@@ -20,7 +20,8 @@ class IfThenElse : public AbstractInst
         IfThenElse(
             AbstractExpr * condition, 
             vector<AbstractInst *> * m_insts,
-            vector<AbstractInst *> * m_else_insts);
+            vector<AbstractInst *> * m_else_insts
+        );
         
         void Display(string tab);
         
@@ -31,7 +32,10 @@ class IfThenElse : public AbstractInst
             AbstractType * return_type
         );
 
-        void CodeGenInst(ofstream * output_file);
+        void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

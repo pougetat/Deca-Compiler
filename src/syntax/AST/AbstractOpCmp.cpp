@@ -24,5 +24,6 @@ AbstractType * AbstractOpCmp::VerifyExpr(
         );
     }
 
-    return new BooleanType();
+    m_expr_type = new BooleanType();
+    return m_expr_type;
 }

@@ -39,9 +39,15 @@ class AbstractExpr : public AbstractInst
             string * class_name
         );
 
-        virtual void CodeGenInst(ofstream * output_file);
+        virtual void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 
-        virtual void CodeGenExpr(ofstream * output_file) = 0;
+        virtual void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        ) = 0;
 };
 
 #endif

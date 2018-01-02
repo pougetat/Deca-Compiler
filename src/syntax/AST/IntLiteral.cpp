@@ -24,8 +24,10 @@ AbstractType * IntLiteral::VerifyExpr(
     return new IntType();
 }
 
-void IntLiteral::CodeGenExpr(ofstream * output_file)
+void IntLiteral::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    *output_file << "    ; pushing literal on the stack" << endl;
-    *output_file << "    bipush " << m_value << endl;
+    gen_env->output_file << "    ; pushing literal on the stack" << endl;
+    gen_env->output_file << "    bipush " << m_value << endl;
 }

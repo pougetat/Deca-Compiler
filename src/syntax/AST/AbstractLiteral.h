@@ -13,7 +13,10 @@ class AbstractLiteral : public AbstractExpr
             string * class_name
         );
 
-        virtual void CodeGenExpr(ofstream * output_file);        
+        virtual void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );      
 };
 
 #endif

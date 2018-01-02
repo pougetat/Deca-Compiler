@@ -21,11 +21,13 @@ void Or::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
-void Or::CodeGenExpr(ofstream * output_file)
+void Or::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    m_left_operand->CodeGenExpr(output_file);
-    m_right_operand->CodeGenExpr(output_file);
+    m_left_operand->CodeGenExpr(env_types, gen_env);
+    m_right_operand->CodeGenExpr(env_types, gen_env);
 
-    *output_file << "    ; or of two stack elements" << endl;
-    *output_file << "    ior" << endl;
+    gen_env->output_file << "    ; or of two stack elements" << endl;
+    gen_env->output_file << "    ior" << endl;
 }

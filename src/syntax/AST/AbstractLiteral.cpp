@@ -8,7 +8,9 @@ AbstractType * AbstractLiteral::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void AbstractLiteral::CodeGenExpr(ofstream * output_file)
+void AbstractLiteral::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
     throw runtime_error("NOT YET IMPLEMENTED");
 }

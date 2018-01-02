@@ -43,7 +43,9 @@ AbstractType * AbstractExpr::VerifyLValue(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void AbstractExpr::CodeGenInst(ofstream * output_file)
+void AbstractExpr::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
     throw runtime_error("NOT YET IMPLEMENTED");
 }

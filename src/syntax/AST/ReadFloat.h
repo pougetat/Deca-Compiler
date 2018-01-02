@@ -10,7 +10,6 @@ class ReadFloat : public AbstractReadExpr
         AbstractExpr * Clone();
         
         void Display(string tab);
-
 };
 
 #endif

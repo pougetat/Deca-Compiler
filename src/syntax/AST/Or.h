@@ -13,7 +13,10 @@ class Or : public AbstractOpBool
         
         void Display(string tab);
 
-        void CodeGenExpr(ofstream * output_file);
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

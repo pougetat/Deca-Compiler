@@ -2,10 +2,10 @@
 #define ABSTRACT_MAIN_H
 
 #include <iostream>
-#include <fstream>
 #include "../../context/EnvironmentType.h"
 #include "../../context/EnvironmentExp.h"
 #include "../../context/VoidType.h"
+#include "../../generator/GeneratorEnvironment.h"
 
 using namespace std;
 
@@ -17,7 +17,10 @@ class AbstractMain
         
         virtual void VerifyMain(EnvironmentType * env_types) = 0;
         
-        virtual void CodeGenMain(ofstream * output_file) = 0;
+        virtual void CodeGenMain(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        ) = 0;
 };
 
 #endif

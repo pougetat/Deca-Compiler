@@ -6,7 +6,6 @@
 #include "DeclVar.h"
 
 #include <vector>
-#include <fstream>
 
 using namespace std;
 
@@ -24,7 +23,10 @@ class Main : public AbstractMain
 
         void Display(string tab);
 
-        void CodeGenMain(ofstream * output_file);
+        void CodeGenMain(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

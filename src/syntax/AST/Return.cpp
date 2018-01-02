@@ -40,7 +40,7 @@ void Return::VerifyInst(
     }
 }
 
-void Return::CodeGenInst(ofstream * output_file)
-{
-    
-}
+void Return::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

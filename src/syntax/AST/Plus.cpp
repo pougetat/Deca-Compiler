@@ -21,11 +21,13 @@ void Plus::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
-void Plus::CodeGenExpr(ofstream * output_file)
+void Plus::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    m_left_operand->CodeGenExpr(output_file);
-    m_right_operand->CodeGenExpr(output_file);
+    m_left_operand->CodeGenExpr(env_types, gen_env);
+    m_right_operand->CodeGenExpr(env_types, gen_env);
 
-    *output_file << "    ; adding two stack elements" << endl;
-    *output_file << "    iadd" << endl;
+    gen_env->output_file << "    ; adding two stack elements" << endl;
+    gen_env->output_file << "    iadd" << endl;
 }

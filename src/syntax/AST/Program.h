@@ -4,6 +4,7 @@
 #include "DeclClass.h"
 #include "AbstractMain.h"
 #include "../../context/EnvironmentType.h"
+#include "../../generator/GeneratorEnvironment.h"
 
 #include <vector>
 #include <fstream>
@@ -29,7 +30,7 @@ class Program
 
         void VerifyProgramPass3(EnvironmentType * env_types);
 
-        void GenCode();
+        void GenCode(EnvironmentType * env_types, GeneratorEnvironment * gen_env);
 };
 
 #endif

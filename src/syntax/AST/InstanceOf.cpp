@@ -32,7 +32,7 @@ AbstractType * InstanceOf::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void InstanceOf::CodeGenExpr(ofstream * output_file)
-{
-    
-}
+void InstanceOf::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

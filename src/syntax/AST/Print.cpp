@@ -35,19 +35,21 @@ void Print::VerifyInst(
     }
 }
 
-void Print::CodeGenInst(ofstream * output_file)
+void Print::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
     if (m_list_args->size() == 0)
     {
-        *output_file
+        gen_env->output_file
             << "    ; push java.lang.System.out (type PrintStream)"
             << endl;
-        *output_file 
+        gen_env->output_file 
             << "    getstatic "
             << "java/lang/System/out Ljava/io/PrintStream;"
             << endl;
-        *output_file << "    ldc \" \"" << endl;
-        *output_file 
+        gen_env->output_file << "    ldc \" \"" << endl;
+        gen_env->output_file 
             << "    invokevirtual "
             << "java/io/PrintStream/println(Ljava/lang/String;)V"
             << endl;
@@ -56,34 +58,34 @@ void Print::CodeGenInst(ofstream * output_file)
     {
         for (AbstractExpr * print_arg : *m_list_args)
         {
-            *output_file
+            gen_env->output_file
                 << "    ; push java.lang.System.out (type PrintStream)"
                 << endl;
-            *output_file 
+            gen_env->output_file 
                 << "    getstatic "
                 << "java/lang/System/out Ljava/io/PrintStream;"
                 << endl;
 
-            print_arg->CodeGenExpr(output_file);
+            print_arg->CodeGenExpr(env_types, gen_env);
 
-            *output_file << "    ; invoke println" << endl;
+            gen_env->output_file << "    ; invoke println" << endl;
             if (print_arg->m_expr_type->IsIntType())
             {
-                *output_file
+                gen_env->output_file
                     << "    invokevirtual "
                     << "java/io/PrintStream/println(I)V"
                     << endl;
             }
             if (print_arg->m_expr_type->IsStringType())
             {
-                *output_file
+                gen_env->output_file
                     << "    invokevirtual "
                     << "java/io/PrintStream/println(Ljava/lang/String;)V" 
                     << endl;  
             }
             if (print_arg->m_expr_type->IsBooleanType())
             {
-                *output_file
+                gen_env->output_file
                     << "    invokevirtual "
                     << "java/io/PrintStream/println(Z)V" 
                     << endl;  

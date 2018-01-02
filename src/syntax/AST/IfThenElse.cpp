@@ -67,7 +67,7 @@ void IfThenElse::VerifyInst(
     }
 }
 
-void IfThenElse::CodeGenInst(ofstream * output_file)
-{
-    
-}
+void IfThenElse::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

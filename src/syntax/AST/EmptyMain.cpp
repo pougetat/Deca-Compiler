@@ -10,6 +10,7 @@ void EmptyMain::VerifyMain(EnvironmentType * env_types)
     
 }
 
-void EmptyMain::CodeGenMain(ofstream * output_file)
-{
-}
+void EmptyMain::CodeGenMain(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

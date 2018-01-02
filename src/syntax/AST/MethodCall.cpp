@@ -65,7 +65,7 @@ AbstractType * MethodCall::VerifyExpr(
     return NULL;
 }
 
-void MethodCall::CodeGenExpr(ofstream * output_file)
-{
-
-}
+void MethodCall::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

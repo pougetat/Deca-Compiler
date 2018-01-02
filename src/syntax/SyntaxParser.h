@@ -70,7 +70,12 @@ class SyntaxParser {
 
         vector<Token> m_tokens;
 
-        int MatchTokenAhead(
+        int MatchFarthestToken(
+            TokenType token_type,
+            int cur_token_index,
+            int index_limit
+        );
+        int MatchClosestToken(
             TokenType token_type,
             int cur_token_index,
             int index_limit
@@ -134,7 +139,7 @@ class SyntaxParser {
         AbstractExpr * ParseInequalityExpr(int * cur_token_expr);
 
         bool MatchSumExpr(int cur_token_expr);
-        AbstractExpr * ParseSumExpr(int * cur_token_expr);
+        AbstractExpr * ParseSumExpr(int * cur_token_expr, int token_limit_index);
 
         bool MatchMultExpr(int cur_token_index);
         AbstractExpr * ParseMultExpr(int * cur_token_expr, int token_limit_index);

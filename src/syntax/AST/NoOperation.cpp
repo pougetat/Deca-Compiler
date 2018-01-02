@@ -10,11 +10,9 @@ void NoOperation::VerifyInst(
     EnvironmentExp * env_exp,
     string * class_name,
     AbstractType * return_type)
-{
+{}
 
-}
-
-void NoOperation::CodeGenInst(ofstream * output_file)
-{
-    
-}
+void NoOperation::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

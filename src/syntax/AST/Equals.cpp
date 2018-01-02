@@ -20,3 +20,14 @@ void Equals::Display(string tab)
     m_left_operand->Display(tab + "--");
     m_right_operand->Display(tab + "--");
 }
+
+void Equals::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    m_left_operand->CodeGenExpr(env_types, gen_env);
+    m_right_operand->CodeGenExpr(env_types, gen_env);
+
+    gen_env->output_file << "    ; comp of two stack elements" << endl;
+    gen_env->output_file << "    lcmp" << endl;
+}

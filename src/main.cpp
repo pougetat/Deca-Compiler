@@ -49,7 +49,11 @@ int main(int argc, char * argv[])
 
     // stage 4 : code generating : walking AST
     Generator generator;
-    generator.GenCode(syntax_parser.m_program);
+    generator.GenCode(
+        syntax_parser.m_program,
+        context_checker.m_env_types_predef,
+        new GeneratorEnvironment()
+    );
 
     return 0;
 }

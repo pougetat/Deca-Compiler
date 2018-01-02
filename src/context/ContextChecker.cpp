@@ -2,13 +2,13 @@
 
 void ContextChecker::CheckContext(Program * program)
 {
-    EnvironmentType * env_types_predef = new EnvironmentType();
+    m_env_types_predef = new EnvironmentType();
     /*
         PASS 1.1 :
             - add new type definitions to env_types_predef for each class
             without checking against existence of potential parent classes
     */
-    program->VerifyClassNames(env_types_predef);
+    program->VerifyClassNames(m_env_types_predef);
 
     /*
         PASS 1.2 :
@@ -16,14 +16,14 @@ void ContextChecker::CheckContext(Program * program)
             and change the parent classes of child classes to those parents
             instead of "Object"
     */
-    program->VerifyClassHierarchy(env_types_predef);
+    program->VerifyClassHierarchy(m_env_types_predef);
 
     /*
         PASS 2.1 :
             - create the env exp of each class without checking against conflicts
             with a potential parent class
     */
-    program->VerifyClassMF(env_types_predef);
+    program->VerifyClassMF(m_env_types_predef);
 
     /*
         PASS 2.2 :
@@ -33,7 +33,7 @@ void ContextChecker::CheckContext(Program * program)
             field appears in a parent class, then that identifier also refers to a
             field and not to a method
     */
-    program->VerifyClassMFHierarchy(env_types_predef);
+    program->VerifyClassMFHierarchy(m_env_types_predef);
 
     /*
         PASS 3 :
@@ -42,5 +42,5 @@ void ContextChecker::CheckContext(Program * program)
             - check the expressions
             - check the initializations
     */
-    program->VerifyProgramPass3(env_types_predef);
+    program->VerifyProgramPass3(m_env_types_predef);
 }

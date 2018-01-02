@@ -52,7 +52,7 @@ void While::VerifyInst(
     }
 }
 
-void While::CodeGenInst(ofstream * output_file)
-{
-    
-}
+void While::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

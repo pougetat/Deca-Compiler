@@ -53,9 +53,7 @@ void Program::VerifyProgramPass3(EnvironmentType * env_types)
     m_main->VerifyMain(env_types);
 }
 
-void Program::GenCode()
+void Program::GenCode(EnvironmentType * env_types, GeneratorEnvironment * gen_env)
 {
-    ofstream output_file = ofstream("results.j");
-
-    m_main->CodeGenMain(&output_file);
+    m_main->CodeGenMain(env_types, gen_env);
 }

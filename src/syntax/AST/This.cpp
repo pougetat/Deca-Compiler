@@ -23,7 +23,7 @@ AbstractType * This::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void This::CodeGenExpr(ofstream * output_file)
-{
-    
-}
+void This::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

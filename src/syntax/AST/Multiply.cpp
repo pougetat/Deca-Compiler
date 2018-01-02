@@ -21,11 +21,13 @@ void Multiply::Display(string tab)
     m_right_operand->Display(tab + "--");
 }
 
-void Multiply::CodeGenExpr(ofstream * output_file)
+void Multiply::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    m_left_operand->CodeGenExpr(output_file);
-    m_right_operand->CodeGenExpr(output_file);
+    m_left_operand->CodeGenExpr(env_types, gen_env);
+    m_right_operand->CodeGenExpr(env_types, gen_env);
     
-    *output_file << "    ; multiplying two stack elements" << endl;
-    *output_file << "    imul" << endl;
+    gen_env->output_file << "    ; multiplying two stack elements" << endl;
+    gen_env->output_file << "    imul" << endl;
 }

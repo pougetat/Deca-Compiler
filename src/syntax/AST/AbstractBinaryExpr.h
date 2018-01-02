@@ -17,9 +17,15 @@ class AbstractBinaryExpr : public AbstractExpr
             string * class_name
         );
 
-        virtual void CodeGenInst(ofstream * output_file);
+        virtual void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 
-        virtual void CodeGenExpr(ofstream * output_file);
+        virtual void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

@@ -24,7 +24,10 @@ class IntLiteral : public AbstractLiteral
             string * class_name
         );
 
-        void CodeGenExpr(ofstream * output_file);
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

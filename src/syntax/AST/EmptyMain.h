@@ -14,7 +14,10 @@ class EmptyMain : public AbstractMain
 
         void VerifyMain(EnvironmentType * env_types);
 
-        void CodeGenMain(ofstream * output_file);
+        void CodeGenMain(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

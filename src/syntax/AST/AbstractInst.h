@@ -8,6 +8,7 @@
 #include "../../context/EnvironmentType.h"
 #include "../../context/EnvironmentExp.h"
 #include "../../context/AbstractType.h"
+#include "../../generator/GeneratorEnvironment.h"
 
 using namespace std;
 
@@ -24,7 +25,10 @@ class AbstractInst
             AbstractType * return_type
         ) = 0;
 
-        virtual void CodeGenInst(ofstream * output_file) = 0;
+        virtual void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        ) = 0;
 };
 
 #endif

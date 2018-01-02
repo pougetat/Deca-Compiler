@@ -19,7 +19,7 @@ AbstractType * AbstractOpBool::VerifyExpr(
     if (type_left_operand->IsBooleanType() && type_right_operand->IsBooleanType())
     {
         m_expr_type = new BooleanType();
-        return new BooleanType();
+        return m_expr_type;
     }
 
     throw runtime_error("[BOOL OPERATION : BOOLEAN OPERAND EXPECTED]");

@@ -27,7 +27,10 @@ class Print : public AbstractInst {
             AbstractType * return_type
         );
 
-        void CodeGenInst(ofstream * output_file);
+        void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

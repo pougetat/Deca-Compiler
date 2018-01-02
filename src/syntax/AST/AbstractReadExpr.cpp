@@ -8,7 +8,7 @@ AbstractType * AbstractReadExpr::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void AbstractReadExpr::CodeGenExpr(ofstream * output_file)
-{
-
-}
+void AbstractReadExpr::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

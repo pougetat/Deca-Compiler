@@ -37,7 +37,7 @@ AbstractType * Cast::VerifyExpr(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
-void Cast::CodeGenExpr(ofstream * output_file)
-{
-    
-}
+void Cast::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{}

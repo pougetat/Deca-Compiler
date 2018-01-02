@@ -29,27 +29,29 @@ void Main::VerifyMain(EnvironmentType * env_types)
     }
 }
 
-void Main::CodeGenMain(ofstream * output_file)
+void Main::CodeGenMain(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    *output_file << ".class public Main" << endl;
-    *output_file << ".super java/lang/Object" << endl;
-    *output_file << "; default constructor" << endl;
-    *output_file << ".method public <init>()V" << endl;
-    *output_file << "    aload_0 ; push this" << endl;
-    *output_file << "    invokespecial java/lang/Object/<init>()V ; call super"
+    gen_env->output_file << ".class public Main" << endl;
+    gen_env->output_file << ".super java/lang/Object" << endl;
+    gen_env->output_file << "; default constructor" << endl;
+    gen_env->output_file << ".method public <init>()V" << endl;
+    gen_env->output_file << "    aload_0 ; push this" << endl;
+    gen_env->output_file << "    invokespecial java/lang/Object/<init>()V ; call super"
         << endl;
-    *output_file << "    return" << endl;
-    *output_file << ".end method" << endl;
-    *output_file << ".method public static main([Ljava/lang/String;)V" << endl;
-    *output_file << "    ; allocate stack size" << endl;
-    *output_file << "    .limit stack 10" << endl;
+    gen_env->output_file << "    return" << endl;
+    gen_env->output_file << ".end method" << endl;
+    gen_env->output_file << ".method public static main([Ljava/lang/String;)V" << endl;
+    gen_env->output_file << "    ; allocate stack size" << endl;
+    gen_env->output_file << "    .limit stack 10" << endl;
 
     for (AbstractInst * inst : *m_list_inst)
     {
-        inst->CodeGenInst(output_file);
+        inst->CodeGenInst(env_types, gen_env);
     }
 
-    *output_file << "    ; return main" << endl;
-    *output_file << "    return" << endl;
-    *output_file << ".end method" << endl;
+    gen_env->output_file << "    ; return main" << endl;
+    gen_env->output_file << "    return" << endl;
+    gen_env->output_file << ".end method" << endl;
 }

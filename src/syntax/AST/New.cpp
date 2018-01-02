@@ -36,7 +36,9 @@ AbstractType * New::VerifyExpr(
     return variable_type;
 }
 
-void New::CodeGenExpr(ofstream * output_file)
+void New::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
 
 }

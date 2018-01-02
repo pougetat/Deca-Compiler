@@ -8,12 +8,16 @@ AbstractType * AbstractBinaryExpr::VerifyExpr(
     throw runtime_error("NOT YET IMPLEMENTED");
 }
 
-void AbstractBinaryExpr::CodeGenInst(ofstream * output_file)
+void AbstractBinaryExpr::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
     throw runtime_error("NOT YET IMPLEMENTED");
 }
 
-void AbstractBinaryExpr::CodeGenExpr(ofstream * output_file)
+void AbstractBinaryExpr::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
     throw runtime_error("NOT YET IMPLEMENTED");
 }
