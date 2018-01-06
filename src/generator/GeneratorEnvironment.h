@@ -23,6 +23,8 @@ class GeneratorEnvironment
         void SetMemoryLocation(string var_symbol);
 
         int GetMemoryLocation(string var_symbol);
+
+        int GetNewLabel();
 };
 
 #endif

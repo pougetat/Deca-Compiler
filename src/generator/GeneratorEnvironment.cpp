@@ -22,3 +22,9 @@ int GeneratorEnvironment::GetMemoryLocation(string var_symbol)
     return 
         m_env_exp->GetExpDefinition(var_symbol)->GetMemoryLocation();
 }
+
+int GeneratorEnvironment::GetNewLabel()
+{
+    m_num_labels++;
+    return m_num_labels;
+}
