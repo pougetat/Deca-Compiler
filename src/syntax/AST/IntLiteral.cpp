@@ -21,7 +21,7 @@ AbstractType * IntLiteral::VerifyExpr(
     string * class_name)
 {
     m_expr_type = new IntType();
-    return new IntType();
+    return m_expr_type;
 }
 
 void IntLiteral::CodeGenExpr(

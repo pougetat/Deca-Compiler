@@ -2,6 +2,7 @@
 #define ASSIGN_H
 
 #include "AbstractBinaryExpr.h"
+#include "Identifier.h"
 
 class Assign : public AbstractBinaryExpr
 {
@@ -17,6 +18,11 @@ class Assign : public AbstractBinaryExpr
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name
+        );
+
+        void CodeGenInst(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
         );
 };
 

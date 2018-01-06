@@ -39,3 +39,17 @@ AbstractType * Assign::VerifyExpr(
         lvalue_type
     );
 }
+
+void Assign::CodeGenInst(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    m_right_operand->CodeGenExpr(env_types, gen_env);
+    gen_env->output_file << "    ; storing value in variable" << endl;
+    gen_env->output_file 
+        << "    istore " 
+        << gen_env->GetMemoryLocation(
+                ((Identifier *) m_left_operand)->m_symbol
+            )
+        << endl;
+}
