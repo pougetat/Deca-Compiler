@@ -55,4 +55,21 @@ void While::VerifyInst(
 void While::CodeGenInst(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
-{}
+{
+    gen_env->output_file << "    ; while" << endl;
+    int label_num = gen_env->GetNewLabel();
+    gen_env->output_file << "    label" << label_num << ".while:" << endl;
+
+    m_condition->CodeGenExpr(env_types, gen_env);
+
+    gen_env->output_file << "    ifeq label" << label_num << ".endwhile" << endl;
+
+    for (AbstractInst * inst : *m_insts)
+    {
+        inst->CodeGenInst(env_types, gen_env);
+    }
+
+    gen_env->output_file << "    goto label" << label_num << ".while" << endl;
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    label" << label_num << ".endwhile:" << endl;
+}
