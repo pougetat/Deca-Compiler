@@ -8,6 +8,8 @@ class Initialization : public AbstractInitialization {
     public:
         
         AbstractExpr * m_expr;
+
+        string var_symbol;
         
         Initialization(AbstractExpr * expr);
         
@@ -20,6 +22,10 @@ class Initialization : public AbstractInitialization {
             AbstractType * type
         );
 
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

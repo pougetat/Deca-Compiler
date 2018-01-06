@@ -44,13 +44,13 @@ void Program::VerifyClassMFHierarchy(EnvironmentType * env_types)
     }
 }
 
-void Program::VerifyProgramPass3(EnvironmentType * env_types)
+EnvironmentExp * Program::VerifyProgramPass3(EnvironmentType * env_types)
 {
     for (DeclClass * decl_class : *m_list_decl_class)
     {
         decl_class->VerifyClassBody(env_types);
     }
-    m_main->VerifyMain(env_types);
+    return m_main->VerifyMain(env_types);
 }
 
 void Program::GenCode(EnvironmentType * env_types, GeneratorEnvironment * gen_env)

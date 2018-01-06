@@ -18,6 +18,11 @@ class NoInitialization : public AbstractInitialization
             string * class_name,
             AbstractType * type
         );
+
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

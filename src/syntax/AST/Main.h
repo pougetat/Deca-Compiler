@@ -19,7 +19,7 @@ class Main : public AbstractMain
 
         EnvironmentExp * m_env_main_exp;
 
-        void VerifyMain(EnvironmentType * env_types);
+        EnvironmentExp * VerifyMain(EnvironmentType * env_types);
 
         void Display(string tab);
 

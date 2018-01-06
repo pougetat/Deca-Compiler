@@ -15,7 +15,7 @@ void Main::Display(string tab)
     }
 }
 
-void Main::VerifyMain(EnvironmentType * env_types)
+EnvironmentExp * Main::VerifyMain(EnvironmentType * env_types)
 {
     m_env_main_exp = new EnvironmentExp();
 
@@ -27,6 +27,8 @@ void Main::VerifyMain(EnvironmentType * env_types)
     {
         inst->VerifyInst(env_types, m_env_main_exp, new string(""), new VoidType());
     }
+
+    return m_env_main_exp;
 }
 
 void Main::CodeGenMain(
@@ -45,7 +47,12 @@ void Main::CodeGenMain(
     gen_env->output_file << ".method public static main([Ljava/lang/String;)V" << endl;
     gen_env->output_file << "    ; allocate stack size" << endl;
     gen_env->output_file << "    .limit stack 10" << endl;
+    gen_env->output_file << "    .limit locals 10" << endl;
 
+    for (DeclVar * decl_var : *m_list_decl_var)
+    {
+        decl_var->CodeGenExpr(env_types, gen_env);
+    }
     for (AbstractInst * inst : *m_list_inst)
     {
         inst->CodeGenInst(env_types, gen_env);

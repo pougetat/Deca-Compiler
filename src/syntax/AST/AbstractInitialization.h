@@ -18,6 +18,11 @@ class AbstractInitialization
             string * class_name,
             AbstractType * type
         ) = 0;
+
+        virtual void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        ) = 0;
 };
 
 #endif

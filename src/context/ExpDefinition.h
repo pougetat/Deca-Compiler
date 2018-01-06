@@ -12,12 +12,18 @@ class ExpDefinition : public AbstractDefinition
         AbstractExpNature * m_exp_nature;
         
         AbstractType * m_type;
+
+        int m_memory_location;
         
         ExpDefinition(AbstractExpNature * exp_nature, AbstractType * type);
         
+        void SetMemoryLocation(int memory_location);
+
         AbstractType * GetType();
 
         AbstractExpNature * GetTypeNature();
+
+        int GetMemoryLocation();
 };
 
 #endif

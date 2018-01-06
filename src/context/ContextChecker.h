@@ -10,7 +10,7 @@ class ContextChecker
 
         EnvironmentType * m_env_types_predef;
 
-        void CheckContext(Program * program);
+        EnvironmentExp * CheckContext(Program * program);
 };
 
 #endif

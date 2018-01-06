@@ -28,7 +28,7 @@ class Program
 
         void VerifyClassMFHierarchy(EnvironmentType * env_types);
 
-        void VerifyProgramPass3(EnvironmentType * env_types);
+        EnvironmentExp * VerifyProgramPass3(EnvironmentType * env_types);
 
         void GenCode(EnvironmentType * env_types, GeneratorEnvironment * gen_env);
 };

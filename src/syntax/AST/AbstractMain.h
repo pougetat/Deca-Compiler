@@ -15,7 +15,7 @@ class AbstractMain
         
         virtual void Display(string tab) = 0;
         
-        virtual void VerifyMain(EnvironmentType * env_types) = 0;
+        virtual EnvironmentExp * VerifyMain(EnvironmentType * env_types) = 0;
         
         virtual void CodeGenMain(
             EnvironmentType * env_types,

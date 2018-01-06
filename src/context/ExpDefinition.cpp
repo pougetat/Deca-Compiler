@@ -8,11 +8,22 @@ ExpDefinition::ExpDefinition(
     m_type = type;
 }
 
+void ExpDefinition::SetMemoryLocation(int memory_location)
+{
+    m_memory_location = memory_location;
+}
+
 AbstractType * ExpDefinition::GetType()
 {
     return m_type;
 }
+
 AbstractExpNature * ExpDefinition::GetTypeNature()
 {
     return m_exp_nature;
+}
+
+int ExpDefinition::GetMemoryLocation()
+{
+    return m_memory_location;
 }

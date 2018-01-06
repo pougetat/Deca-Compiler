@@ -31,3 +31,13 @@ AbstractType * Identifier::VerifyLValue(
 
     throw runtime_error("[IDENTIFIER : '" + m_symbol + "' IS UNDEFINED]");
 }
+
+void Identifier::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->output_file << "    ; loading variable on the stack" << endl;
+    gen_env->output_file 
+        << "    iload " << gen_env->GetMemoryLocation(m_symbol)
+        << endl;
+}

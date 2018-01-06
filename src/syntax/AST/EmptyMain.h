@@ -12,7 +12,7 @@ class EmptyMain : public AbstractMain
 
         void Display(string tab);
 
-        void VerifyMain(EnvironmentType * env_types);
+        EnvironmentExp * VerifyMain(EnvironmentType * env_types);
 
         void CodeGenMain(
             EnvironmentType * env_types,

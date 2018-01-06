@@ -5,11 +5,12 @@ AbstractType * AbstractLValue::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    return VerifyLValue(
+    m_expr_type = VerifyLValue(
         env_types,
         env_exp,
-        class_name
+        class_name        
     );
+    return m_expr_type;
 }
 
 AbstractType * AbstractLValue::VerifyLValue(

@@ -40,3 +40,17 @@ void DeclVar::Display(string tab)
     m_symbol->Display(tab + "--");
     m_init->Display(tab + "--");
 }
+
+void DeclVar::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->IncrNumVars();
+    gen_env->SetMemoryLocation(m_symbol->m_symbol);
+
+    m_init->CodeGenExpr(env_types, gen_env);
+    gen_env->output_file << "    ; storing value in variable" << endl;
+    gen_env->output_file 
+        << "    istore " << gen_env->GetMemoryLocation(m_symbol->m_symbol)
+        << endl;
+}

@@ -45,14 +45,15 @@ int main(int argc, char * argv[])
 
     // stage 3 : context checking : walking AST
     ContextChecker context_checker;
-    context_checker.CheckContext(syntax_parser.m_program);
+    EnvironmentExp * main_env_exp =
+        context_checker.CheckContext(syntax_parser.m_program);
 
     // stage 4 : code generating : walking AST
     Generator generator;
     generator.GenCode(
         syntax_parser.m_program,
         context_checker.m_env_types_predef,
-        new GeneratorEnvironment()
+        new GeneratorEnvironment(main_env_exp)
     );
 
     return 0;

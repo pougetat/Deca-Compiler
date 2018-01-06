@@ -1,6 +1,6 @@
 #include "ContextChecker.h"
 
-void ContextChecker::CheckContext(Program * program)
+EnvironmentExp * ContextChecker::CheckContext(Program * program)
 {
     m_env_types_predef = new EnvironmentType();
     /*
@@ -42,5 +42,5 @@ void ContextChecker::CheckContext(Program * program)
             - check the expressions
             - check the initializations
     */
-    program->VerifyProgramPass3(m_env_types_predef);
+    return program->VerifyProgramPass3(m_env_types_predef);
 }

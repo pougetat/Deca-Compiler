@@ -15,12 +15,19 @@ void Initialization::VerifyInitialization(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string * class_name,
-    AbstractType * type)
+    AbstractType * var_type)
 {
     m_expr->VerifyRValue(
         env_types,
         env_exp,
         class_name,
-        type
+        var_type
     );
+}
+
+void Initialization::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    m_expr->CodeGenExpr(env_types, gen_env);
 }
