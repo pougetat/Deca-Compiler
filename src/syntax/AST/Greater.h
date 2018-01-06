@@ -16,8 +16,7 @@ class Greater : public AbstractOpIneq
         void CodeGenExpr(
             EnvironmentType * env_types,
             GeneratorEnvironment * gen_env
-        );
-        
+        ); 
 };
 
 #endif
