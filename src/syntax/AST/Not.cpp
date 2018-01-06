@@ -31,8 +31,30 @@ AbstractType * Not::VerifyExpr(
 
     if (type_operand->IsBooleanType())
     {
-        return new BooleanType();
+        m_expr_type = new BooleanType();
+        return m_expr_type;
     }
 
     throw runtime_error("[NOT : BOOLEAN OPERAND EXPECTED]");
+}
+
+void Not::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    m_operand->CodeGenExpr(env_types, gen_env);
+
+    gen_env->output_file << "    ; not of stack element" << endl;
+    int label_num = gen_env->GetNewLabel();
+    gen_env->output_file << "    ifeq label" << label_num << ".true" << endl;
+    gen_env->output_file << "    goto label" << label_num << ".false" << endl;
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    label" << label_num << ".true:" << endl;
+    gen_env->output_file << "    bipush 1" << endl;
+    gen_env->output_file << "    goto endlabel" << label_num << endl;
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    label" << label_num << ".false:" << endl;
+    gen_env->output_file << "    bipush 0" << endl;
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    endlabel" << label_num << ":" << endl;
 }
