@@ -12,6 +12,12 @@ class Greater : public AbstractOpIneq
         AbstractExpr * Clone();
         
         void Display(string tab);
+
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
+        
 };
 
 #endif
