@@ -38,6 +38,9 @@ AbstractType * Assign::VerifyExpr(
         class_name,
         lvalue_type
     );
+
+    m_expr_type = lvalue_type;
+    return m_expr_type;
 }
 
 void Assign::CodeGenInst(
@@ -45,11 +48,26 @@ void Assign::CodeGenInst(
     GeneratorEnvironment * gen_env)
 {
     m_right_operand->CodeGenExpr(env_types, gen_env);
+
     gen_env->output_file << "    ; storing value in variable" << endl;
-    gen_env->output_file 
-        << "    istore " 
-        << gen_env->GetMemoryLocation(
-                ((Identifier *) m_left_operand)->m_symbol
-            )
-        << endl;
+    
+    if (m_left_operand->m_expr_type->IsIntType())
+    {
+        gen_env->output_file 
+            << "    istore " 
+            << gen_env->GetMemoryLocation(
+                    ((Identifier *) m_left_operand)->m_symbol
+                )
+            << endl;
+    }
+    if (m_left_operand->m_expr_type->IsFloatType())
+    {
+        gen_env->output_file 
+            << "    fstore " 
+            << gen_env->GetMemoryLocation(
+                    ((Identifier *) m_left_operand)->m_symbol
+                )
+            << endl;
+    }
+
 }

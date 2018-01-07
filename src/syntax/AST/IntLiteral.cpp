@@ -29,5 +29,5 @@ void IntLiteral::CodeGenExpr(
     GeneratorEnvironment * gen_env)
 {
     gen_env->output_file << "    ; pushing literal on the stack" << endl;
-    gen_env->output_file << "    bipush " << m_value << endl;
+    gen_env->output_file << "    ldc " << m_value << endl;
 }

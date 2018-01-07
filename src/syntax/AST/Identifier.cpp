@@ -22,11 +22,13 @@ AbstractType * Identifier::VerifyLValue(
 {
     if (env_exp->ContainsSymbol(m_symbol))
     {
-        return env_exp->GetExpDefinition(m_symbol)->GetType();
+        m_expr_type = env_exp->GetExpDefinition(m_symbol)->GetType();
+        return m_expr_type;
     }
     if (env_exp->SupContainsSymbol(m_symbol))
     {
-        return env_exp->GetSupExpDefinition(m_symbol)->GetType();
+        m_expr_type = env_exp->GetSupExpDefinition(m_symbol)->GetType();
+        return m_expr_type;
     }
 
     throw runtime_error("[IDENTIFIER : '" + m_symbol + "' IS UNDEFINED]");
@@ -37,7 +39,17 @@ void Identifier::CodeGenExpr(
     GeneratorEnvironment * gen_env)
 {
     gen_env->output_file << "    ; loading variable on the stack" << endl;
-    gen_env->output_file 
-        << "    iload " << gen_env->GetMemoryLocation(m_symbol)
-        << endl;
+
+    if (m_expr_type->IsIntType())
+    {
+        gen_env->output_file 
+            << "    iload " << gen_env->GetMemoryLocation(m_symbol)
+            << endl;
+    }
+    if (m_expr_type->IsFloatType())
+    {
+        gen_env->output_file 
+            << "    fload " << gen_env->GetMemoryLocation(m_symbol)
+            << endl;
+    }
 }

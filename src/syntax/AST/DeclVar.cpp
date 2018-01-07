@@ -50,7 +50,17 @@ void DeclVar::CodeGenExpr(
 
     m_init->CodeGenExpr(env_types, gen_env);
     gen_env->output_file << "    ; storing value in variable" << endl;
-    gen_env->output_file 
-        << "    istore " << gen_env->GetMemoryLocation(m_symbol->m_symbol)
-        << endl;
+
+    if (env_types->GetType(m_type->m_symbol)->IsIntType())
+    {
+        gen_env->output_file 
+            << "    istore " << gen_env->GetMemoryLocation(m_symbol->m_symbol)
+            << endl;
+    }
+    if (env_types->GetType(m_type->m_symbol)->IsFloatType())
+    {
+        gen_env->output_file 
+            << "    fstore " << gen_env->GetMemoryLocation(m_symbol->m_symbol)
+            << endl;
+    }
 }

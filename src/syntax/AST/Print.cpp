@@ -76,6 +76,13 @@ void Print::CodeGenInst(
                     << "java/io/PrintStream/println(I)V"
                     << endl;
             }
+            if (print_arg->m_expr_type->IsFloatType())
+            {
+                gen_env->output_file
+                    << "    invokevirtual "
+                    << "java/io/PrintStream/println(F)V"
+                    << endl;
+            }
             if (print_arg->m_expr_type->IsStringType())
             {
                 gen_env->output_file

@@ -17,5 +17,5 @@ void NoInitialization::CodeGenExpr(
     GeneratorEnvironment * gen_env)
 {
     gen_env->output_file << "    ; pushing 0 on the stack" << endl;
-    gen_env->output_file << "    bipush 0" << endl;
+    gen_env->output_file << "    ldc 0" << endl;
 }

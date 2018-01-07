@@ -26,18 +26,63 @@ void Cast::VerifyInst(
     EnvironmentExp * env_exp,
     string * class_name,
     AbstractType * return_type)
-{ 
-}
+{}
 
 AbstractType * Cast::VerifyExpr(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    throw runtime_error("NOT IMPLEMENTED YET");
+    AbstractType * type_operand =
+        m_expr->VerifyExpr(env_types, env_exp, class_name);
+
+    if (!env_types->TypeExists(m_cast_type->m_symbol))
+    {
+        throw runtime_error(
+            "[CAST : UNKNOWN TYPE '" + m_cast_type->m_symbol + "']"
+        );
+    }
+
+    AbstractType * type_cast =
+        env_types->GetType(m_cast_type->m_symbol);
+
+    if (!type_cast->IsIntType() && !type_cast->IsFloatType())
+    {
+        throw runtime_error(
+            "[CAST : CANNOT CAST TO '" + m_cast_type->m_symbol + "']"
+        );
+    }
+    if (!type_operand->IsIntType() && !type_operand->IsFloatType())
+    {
+        throw runtime_error(
+            "[CAST : CANNOT CAST FROM '" + m_cast_type->m_symbol + "']"
+        );
+    }
+
+    m_expr_type = type_cast;
+    return m_expr_type;
 }
 
 void Cast::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
-{}
+{
+    m_expr->CodeGenExpr(env_types, gen_env);
+
+    gen_env->output_file << "    ; casting stack element to other type" << endl;
+    
+    if (m_expr->m_expr_type->IsIntType())
+    {
+        if (m_expr_type->IsFloatType())
+        {
+            gen_env->output_file << "    i2f" << endl;
+        }
+    }
+    if (m_expr->m_expr_type->IsFloatType())
+    {
+        if (m_expr_type->IsIntType())
+        {
+            gen_env->output_file << "    f2i" << endl;
+        }
+    }
+}
