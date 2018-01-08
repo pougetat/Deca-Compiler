@@ -579,14 +579,7 @@ bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
 {
-    AbstractExpr * expr1 = ParseSumExpr(
-        cur_token_index, 
-        MatchClosestToken(
-            TOKEN_SEMICOLON,
-            *cur_token_index,
-            m_tokens.size()
-        )
-    );
+    AbstractExpr * expr1 = ParseSumExpr(cur_token_index);
 
     if (MatchToken(TOKEN_COMP_LESSEQ, *cur_token_index))
     {
@@ -630,6 +623,7 @@ AbstractExpr * SyntaxParser::ParseInequalityExpr(int * cur_token_index)
                 ParseIdentifier(cur_token_index)
             );
             prev_instanceof = cur_instanceof;
+
         }
 
         return prev_instanceof;
@@ -650,56 +644,24 @@ bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
         | sum_expr '-' mult_expr
 */
 
-AbstractExpr * SyntaxParser::ParseSumExpr(
-    int * cur_token_index,
-    int token_limit_index)
+AbstractExpr * SyntaxParser::ParseSumExpr(int * cur_token_index)
 {
-    AbstractExpr * left_expr;
-    AbstractExpr * right_expr;
+    AbstractExpr * expr1 = ParseMultExpr(cur_token_index);
 
-    int token_plus_index = 
-         MatchFarthestToken(TOKEN_OP_PLUS, *cur_token_index, token_limit_index);
-    int token_minus_index =
-        MatchFarthestToken(TOKEN_OP_MINUS, *cur_token_index, token_limit_index);
+    if (MatchToken(TOKEN_OP_PLUS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
+        return new Plus(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
+        return new Minus(expr1, expr2);
+    }
 
-    if (token_plus_index > 0 && token_plus_index > token_minus_index)
-    {
-        left_expr = ParseSumExpr(
-            cur_token_index,
-            token_plus_index
-        );
-        ShouldMatchToken(
-            TOKEN_OP_PLUS,
-            cur_token_index
-        );
-        return new Plus(
-            left_expr,
-            ParseMultExpr(cur_token_index, token_limit_index)
-        );
-    }
-    if (token_minus_index > 0 && token_minus_index > token_plus_index)
-    {
-        left_expr = ParseSumExpr(
-            cur_token_index,
-            token_minus_index
-        );
-        ShouldMatchToken(
-            TOKEN_OP_MINUS,
-            cur_token_index
-        );
-        return new Minus(
-            left_expr,
-            ParseMultExpr(cur_token_index, token_limit_index)
-        );
-    }
-    if (token_plus_index == -1 && token_minus_index == -1)
-    {
-        left_expr = ParseMultExpr(
-            cur_token_index,
-            token_limit_index
-        );
-        return left_expr;
-    }
+    return expr1;
 }
 
 bool SyntaxParser::MatchSumExpr(int cur_token_index)
@@ -715,78 +677,30 @@ bool SyntaxParser::MatchSumExpr(int cur_token_index)
         | mult_expr '%' unary_expr
 */
 
-AbstractExpr * SyntaxParser::ParseMultExpr(
-    int * cur_token_index,
-    int token_limit_index)
+AbstractExpr * SyntaxParser::ParseMultExpr(int * cur_token_index)
 {
-    AbstractExpr * left_expr;
-    AbstractExpr * right_expr;
-
-    int token_mult_index = 
-        MatchFarthestToken(TOKEN_OP_MULT, *cur_token_index, token_limit_index);
-    int token_div_index =
-        MatchFarthestToken(TOKEN_OP_DIV, *cur_token_index, token_limit_index);
-    int token_mod_index =
-        MatchFarthestToken(TOKEN_OP_MOD, *cur_token_index, token_limit_index);
+    AbstractExpr * expr1 = ParseUnaryExpr(cur_token_index);
     
-    if (token_mult_index > 0 
-        && token_mult_index > token_div_index 
-        && token_mult_index > token_mod_index)
+    if (MatchToken(TOKEN_OP_MULT, *cur_token_index))
     {
-        if (MatchFarthestToken(TOKEN_OP_MULT, *cur_token_index, token_mult_index) == -1 
-            && MatchFarthestToken(TOKEN_OP_DIV, *cur_token_index, token_mult_index) == -1
-            && MatchFarthestToken(TOKEN_OP_MOD, *cur_token_index, token_mult_index) == -1)
-        {
-            left_expr = ParseUnaryExpr(cur_token_index);
-        }
-        else
-        {
-            left_expr = ParseMultExpr(cur_token_index, token_mult_index);
-        }
-        ShouldMatchToken(TOKEN_OP_MULT, cur_token_index);
-        right_expr = ParseUnaryExpr(cur_token_index);
-        return new Multiply(left_expr, right_expr);
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Multiply(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_DIV, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Divide(expr1, expr2);
+    }
+    if (MatchToken(TOKEN_OP_MOD, *cur_token_index))
+    {
+        ConsumeToken(cur_token_index);
+        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
+        return new Modulo(expr1, expr2);
     }
 
-    if (token_div_index > 0
-        && token_div_index > token_mult_index
-        && token_div_index > token_mod_index)
-    {
-        if (MatchFarthestToken(TOKEN_OP_MULT, *cur_token_index, token_div_index) == -1 
-            && MatchFarthestToken(TOKEN_OP_DIV, *cur_token_index, token_div_index) == -1
-            && MatchFarthestToken(TOKEN_OP_MOD, *cur_token_index, token_div_index) == -1)
-        {
-            left_expr = ParseUnaryExpr(cur_token_index);
-        }
-        else
-        {
-            left_expr = ParseMultExpr(cur_token_index, token_div_index);
-        }
-        ShouldMatchToken(TOKEN_OP_DIV, cur_token_index);
-        right_expr = ParseUnaryExpr(cur_token_index);
-        return new Divide(left_expr, right_expr);
-    }
-
-    if (token_mod_index > 0
-        && token_mod_index > token_mult_index
-        && token_mod_index > token_div_index)
-    {
-        if (MatchFarthestToken(TOKEN_OP_MULT, *cur_token_index, token_mod_index) == -1 
-            && MatchFarthestToken(TOKEN_OP_DIV, *cur_token_index, token_mod_index) == -1
-            && MatchFarthestToken(TOKEN_OP_MOD, *cur_token_index, token_mod_index) == -1)
-        {
-            left_expr = ParseUnaryExpr(cur_token_index);
-        }
-        else
-        {
-            left_expr = ParseMultExpr(cur_token_index, token_mod_index);
-        }
-        ShouldMatchToken(TOKEN_OP_MOD, cur_token_index);
-        right_expr = ParseUnaryExpr(cur_token_index);
-        return new Modulo(left_expr, right_expr);
-    }
-
-    return ParseUnaryExpr(cur_token_index);
+    return expr1;
 }
 
 bool SyntaxParser::MatchMultExpr(int cur_token_index)
@@ -1403,39 +1317,6 @@ DeclParam * SyntaxParser::ParseParam(int * cur_token_index)
 }
 
 // Utility methods
-
-int SyntaxParser::MatchFarthestToken(
-    TokenType token_type,
-    int cur_token_index,
-    int index_limit)
-{
-    int ahead_token_index = -1;
-    while (cur_token_index < index_limit)
-    {
-        if (MatchToken(token_type, cur_token_index))
-        {
-            ahead_token_index = cur_token_index;
-        }
-        cur_token_index++;
-    }
-    return ahead_token_index;
-}
-
-int SyntaxParser::MatchClosestToken(
-    TokenType token_type,
-    int cur_token_index,
-    int index_limit)
-{
-    while (cur_token_index < index_limit)
-    {
-        if (MatchToken(token_type, cur_token_index))
-        {
-            return cur_token_index;
-        }
-        cur_token_index++;
-    }
-    return -1;
-}
 
 bool SyntaxParser::MatchToken(TokenType token_type, int cur_token_index)
 {

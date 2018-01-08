@@ -70,16 +70,6 @@ class SyntaxParser {
 
         vector<Token> m_tokens;
 
-        int MatchFarthestToken(
-            TokenType token_type,
-            int cur_token_index,
-            int index_limit
-        );
-        int MatchClosestToken(
-            TokenType token_type,
-            int cur_token_index,
-            int index_limit
-        );
         bool MatchToken(TokenType token_type, int cur_token_index);
         void ShouldMatchToken(TokenType token_type, int * cur_token_index);
         void ConsumeToken(int * cur_token_index);
@@ -139,10 +129,10 @@ class SyntaxParser {
         AbstractExpr * ParseInequalityExpr(int * cur_token_expr);
 
         bool MatchSumExpr(int cur_token_expr);
-        AbstractExpr * ParseSumExpr(int * cur_token_expr, int token_limit_index);
+        AbstractExpr * ParseSumExpr(int * cur_token_expr);
 
         bool MatchMultExpr(int cur_token_index);
-        AbstractExpr * ParseMultExpr(int * cur_token_expr, int token_limit_index);
+        AbstractExpr * ParseMultExpr(int * cur_token_expr);
 
         bool MatchUnaryExpr(int cur_token_index);
         AbstractExpr * ParseUnaryExpr(int * cur_token_expr);
