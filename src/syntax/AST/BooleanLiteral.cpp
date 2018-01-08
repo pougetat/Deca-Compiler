@@ -24,22 +24,18 @@ AbstractType * BooleanLiteral::VerifyExpr(
     return new BooleanType();
 }
 
-void BooleanLiteral::CodeGenExpr(ofstream * output_file)
+void BooleanLiteral::CodeGenExpr(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
 {
-    *output_file
-        << "    ; pushing true on the stack"
-        << endl;
+    gen_env->output_file << "    ; pushing true on the stack" << endl;
 
     if (m_value)
     {
-        *output_file
-            << "    iconst_1"
-            << endl;
+        gen_env->output_file << "    iconst_1" << endl;
     }
     else
     {
-        *output_file
-            << "    iconst_0"
-            << endl;
+        gen_env->output_file << "    iconst_0" << endl;
     }
 }

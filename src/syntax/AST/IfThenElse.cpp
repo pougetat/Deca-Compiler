@@ -70,4 +70,26 @@ void IfThenElse::VerifyInst(
 void IfThenElse::CodeGenInst(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
-{}
+{
+    int label_num = gen_env->GetNewLabel();
+
+    gen_env->output_file << "    ; if then else" << endl;
+    m_condition->CodeGenExpr(env_types, gen_env);
+    gen_env->output_file << "    ifeq label" << label_num << ".else" << endl;
+    
+    for (AbstractInst * inst : *m_insts)
+    {
+        inst->CodeGenInst(env_types, gen_env);
+    }
+    gen_env->output_file << "    goto label" << label_num << ".endif" << endl;
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    label" << label_num << ".else:" << endl;
+    
+    for (AbstractInst * inst : *m_else_insts)
+    {
+        inst->CodeGenInst(env_types, gen_env);
+    }
+
+    gen_env->output_file << "" << endl;
+    gen_env->output_file << "    label" << label_num << ".endif:" << endl;
+}
