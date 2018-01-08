@@ -47,5 +47,5 @@ void AbstractExpr::CodeGenInst(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    throw runtime_error("NOT YET IMPLEMENTED");
+    CodeGenExpr(env_types, gen_env);
 }
