@@ -18,6 +18,11 @@ class UnaryMinus : public AbstractUnaryExpr
             EnvironmentExp * env_exp,
             string * class_name
         );
+
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif
