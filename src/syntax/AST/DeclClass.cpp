@@ -175,6 +175,8 @@ void DeclClass::CodeGenClassConstructor(
 {
     gen_env->output_file << "; default constructor" << endl;
     gen_env->output_file << ".method public <init>()V" << endl;
+    gen_env->output_file << "    .limit stack 10" << endl;
+    gen_env->output_file << "    .limit locals 10" << endl;
     gen_env->output_file << "    aload_0 ; push this" << endl;
     gen_env->output_file
         << "    invokespecial java/lang/Object/<init>()V ; call parent constructor"
