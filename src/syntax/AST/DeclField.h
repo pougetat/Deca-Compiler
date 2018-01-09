@@ -49,6 +49,12 @@ class DeclField {
             GeneratorEnvironment * gen_env
         );
 
+        void CodeGenFieldInit(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env,
+            string class_name
+        );
+
     private:
 
         void InsertFieldExpDefinition(

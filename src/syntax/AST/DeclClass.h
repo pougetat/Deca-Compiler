@@ -53,7 +53,17 @@ class DeclClass {
             EnvironmentType * env_types,
             Identifier * class_name,
             Identifier * parent_class_name
-        ); 
+        );
+
+        void CodeGenClassHeader(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
+
+        void CodeGenClassConstructor(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

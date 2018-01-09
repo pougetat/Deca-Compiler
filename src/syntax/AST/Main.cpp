@@ -40,7 +40,8 @@ void Main::CodeGenMain(
     gen_env->output_file << "; default constructor" << endl;
     gen_env->output_file << ".method public <init>()V" << endl;
     gen_env->output_file << "    aload_0 ; push this" << endl;
-    gen_env->output_file << "    invokespecial java/lang/Object/<init>()V ; call super"
+    gen_env->output_file 
+        << "    invokespecial java/lang/Object/<init>()V ; call super"
         << endl;
     gen_env->output_file << "    return" << endl;
     gen_env->output_file << ".end method" << endl;

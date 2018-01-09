@@ -102,6 +102,33 @@ void DeclField::CodeGenDeclField(
     }
 }
 
+void DeclField::CodeGenFieldInit(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env,
+    string class_name)
+{
+    m_init->CodeGenExpr(env_types, gen_env);
+    gen_env->output_file 
+        << "    putfield " 
+        << class_name 
+        << "/" 
+        << m_field_name->m_symbol;
+    
+    if (env_types->GetType(m_field_type->m_symbol)->IsIntType())
+    {
+        gen_env->output_file << " I" << endl;
+    }
+    if (env_types->GetType(m_field_type->m_symbol)->IsFloatType())
+    {
+        gen_env->output_file << " F" << endl;
+    }
+    if (env_types->GetType(m_field_type->m_symbol)->IsBooleanType())
+    {
+        gen_env->output_file << " Z" << endl;
+    }
+
+}
+
 ///////////// PRIVATE METHODS /////////////
 
 void DeclField::InsertFieldExpDefinition(

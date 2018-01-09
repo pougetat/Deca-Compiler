@@ -95,23 +95,8 @@ void DeclClass::CodeGenDeclClass(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << ".class public " << m_class_name->m_symbol << endl;
-
-    if (m_parent_class_name->m_symbol == "Object")
-    {
-        gen_env->output_file << ".super java/lang/Object" << endl;
-    }
-    else
-    {
-        gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
-    }
-
-    gen_env->output_file << "" << endl;
-    for (DeclField * decl_field : *m_class_fields)
-    {
-        decl_field->CodeGenDeclField(env_types, gen_env);
-    }
-
+    CodeGenClassHeader(env_types, gen_env);
+    CodeGenClassConstructor(env_types, gen_env);
 }
 
 ///////////// PRIVATE METHODS /////////////
@@ -161,4 +146,47 @@ void DeclClass::SetParentClass(
         parent_class_name->m_symbol,
         parent_class_env_exp
     );
+}
+
+void DeclClass::CodeGenClassHeader(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->output_file << ".class public " << m_class_name->m_symbol << endl;
+
+    if (m_parent_class_name->m_symbol == "Object")
+    {
+        gen_env->output_file << ".super java/lang/Object" << endl;
+    }
+    else
+    {
+        gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
+    }
+
+    gen_env->output_file << "" << endl;
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        decl_field->CodeGenDeclField(env_types, gen_env);
+    }
+}
+
+void DeclClass::CodeGenClassConstructor(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->output_file << "; default constructor" << endl;
+    gen_env->output_file << ".method public <init>()V" << endl;
+    gen_env->output_file << "    aload_0 ; push this" << endl;
+    gen_env->output_file
+        << "    invokespecial java/lang/Object/<init>()V ; call parent constructor"
+        << endl;
+
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        gen_env->output_file << "    aload_0 ; push this" << endl;
+        decl_field->CodeGenFieldInit(env_types, gen_env, m_class_name->m_symbol);
+    }
+
+    gen_env->output_file << "    return" << endl;
+    gen_env->output_file << ".end method" << endl;
 }
