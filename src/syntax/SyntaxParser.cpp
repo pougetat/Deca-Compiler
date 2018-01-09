@@ -474,7 +474,6 @@ AbstractExpr * SyntaxParser::ParseAssignExpr(int * cur_token_index)
     return expr;
 }
 
-
 /*
     or_expr ->
         | and_expr
@@ -494,22 +493,23 @@ AbstractExpr * SyntaxParser::ParseOrExpr(int * cur_token_index)
     {
         ConsumeToken(cur_token_index);
 
-        Or * prev_or = new Or();
-        prev_or->m_left_operand = ParseAndExpr(cur_token_index);
-        prev_or->m_right_operand = expr;
+        Or * prev_or = new Or(
+            expr,
+            ParseAndExpr(cur_token_index)
+        );
 
         while (MatchToken(TOKEN_OR, *cur_token_index))
         {
             ConsumeToken(cur_token_index);
 
-            Or * cur_or = new Or();
-            cur_or->m_left_operand = ParseAndExpr(cur_token_index);
-            cur_or->m_right_operand = prev_or->Clone();
+            Or * cur_or = new Or(
+                prev_or->Clone(),
+                ParseAndExpr(cur_token_index)
+            );
             prev_or = cur_or;
         }
         return prev_or;
     }
-
     return expr;
 }
 
@@ -532,17 +532,19 @@ AbstractExpr * SyntaxParser::ParseAndExpr(int * cur_token_index)
     {
         ConsumeToken(cur_token_index);
 
-        And * prev_and = new And();
-        prev_and->m_left_operand = ParseEqNeqExpr(cur_token_index);
-        prev_and->m_right_operand = expr;
+        And * prev_and = new And(
+            expr,
+            ParseEqNeqExpr(cur_token_index)
+        );
 
         while (MatchToken(TOKEN_AND, *cur_token_index))
         {
             ConsumeToken(cur_token_index);
 
-            And * cur_and = new And();
-            cur_and->m_left_operand = ParseEqNeqExpr(cur_token_index);
-            cur_and->m_right_operand = prev_and->Clone();
+            And * cur_and = new And(
+                prev_and->Clone(),
+                ParseEqNeqExpr(cur_token_index)
+            );
             prev_and = cur_and;
         }
         return prev_and;
@@ -557,30 +559,66 @@ AbstractExpr * SyntaxParser::ParseAndExpr(int * cur_token_index)
         | eq_neq_expr '!=' inequality_expr
 */
 
-AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
-{
-    AbstractExpr * expr1 = ParseInequalityExpr(cur_token_index);
-
-    if (MatchToken(TOKEN_COMP_EQ, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
-        return new Equals(expr1, expr2);
-    }
-    else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseEqNeqExpr(cur_token_index);
-        return new NotEquals(expr1, expr2);
-    }
-    else {
-        return expr1;
-    }
-}
-
 bool SyntaxParser::MatchEqNeqExpr(int cur_token_index)
 {
     return MatchInequalityExpr(cur_token_index);
+}
+
+AbstractExpr * SyntaxParser::ParseEqNeqExpr(int * cur_token_index)
+{
+    AbstractExpr * expr = ParseInequalityExpr(cur_token_index);
+
+    if (MatchToken(TOKEN_COMP_EQ, *cur_token_index)
+        || MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
+    {
+        AbstractExpr * prev_expr;
+
+        if (MatchToken(TOKEN_COMP_EQ, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Equals(
+                expr,
+                ParseInequalityExpr(cur_token_index)
+            );            
+        }
+        else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new NotEquals(
+                expr,
+                ParseInequalityExpr(cur_token_index)
+            );
+        }
+
+        while (MatchToken(TOKEN_COMP_EQ, *cur_token_index)
+                || MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
+        {
+            if (MatchToken(TOKEN_COMP_EQ, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Equals(
+                    prev_expr->Clone(),
+                    ParseInequalityExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+            else if (MatchToken(TOKEN_COMP_NEQ, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new NotEquals(
+                    prev_expr->Clone(),
+                    ParseInequalityExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+        }
+        return prev_expr;
+    }
+    return expr;
 }
 
 /*
