@@ -707,22 +707,59 @@ bool SyntaxParser::MatchInequalityExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseSumExpr(int * cur_token_index)
 {
-    AbstractExpr * expr1 = ParseMultExpr(cur_token_index);
+    AbstractExpr * expr = ParseMultExpr(cur_token_index);
 
-    if (MatchToken(TOKEN_OP_PLUS, *cur_token_index))
+    if (MatchToken(TOKEN_OP_PLUS, *cur_token_index)
+        || MatchToken(TOKEN_OP_MINUS, *cur_token_index))
     {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
-        return new Plus(expr1, expr2);
-    }
-    if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseSumExpr(cur_token_index);
-        return new Minus(expr1, expr2);
-    }
+        AbstractExpr * prev_expr;
 
-    return expr1;
+        if (MatchToken(TOKEN_OP_PLUS, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Plus(
+                expr,
+                ParseMultExpr(cur_token_index)
+            );            
+        }
+        else if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Minus(
+                expr,
+                ParseMultExpr(cur_token_index)
+            );
+        }
+
+        while (MatchToken(TOKEN_OP_PLUS, *cur_token_index)
+                || MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+        {
+            if (MatchToken(TOKEN_OP_PLUS, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Plus(
+                    prev_expr->Clone(),
+                    ParseMultExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+            else if (MatchToken(TOKEN_OP_MINUS, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Minus(
+                    prev_expr->Clone(),
+                    ParseMultExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+        }
+        return prev_expr;
+    }
+    return expr;
 }
 
 bool SyntaxParser::MatchSumExpr(int cur_token_index)
@@ -740,28 +777,80 @@ bool SyntaxParser::MatchSumExpr(int cur_token_index)
 
 AbstractExpr * SyntaxParser::ParseMultExpr(int * cur_token_index)
 {
-    AbstractExpr * expr1 = ParseUnaryExpr(cur_token_index);
-    
-    if (MatchToken(TOKEN_OP_MULT, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
-        return new Multiply(expr1, expr2);
-    }
-    if (MatchToken(TOKEN_OP_DIV, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
-        return new Divide(expr1, expr2);
-    }
-    if (MatchToken(TOKEN_OP_MOD, *cur_token_index))
-    {
-        ConsumeToken(cur_token_index);
-        AbstractExpr * expr2 = ParseMultExpr(cur_token_index);
-        return new Modulo(expr1, expr2);
-    }
+    AbstractExpr * expr = ParseUnaryExpr(cur_token_index);
 
-    return expr1;
+    if (MatchToken(TOKEN_OP_MULT, *cur_token_index)
+        || MatchToken(TOKEN_OP_DIV, *cur_token_index)
+        || MatchToken(TOKEN_OP_MOD, *cur_token_index))
+    {
+        AbstractExpr * prev_expr;
+
+        if (MatchToken(TOKEN_OP_MULT, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Multiply(
+                expr,
+                ParseUnaryExpr(cur_token_index)
+            );            
+        }
+        else if (MatchToken(TOKEN_OP_DIV, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Divide(
+                expr,
+                ParseUnaryExpr(cur_token_index)
+            );
+        }
+        else if (MatchToken(TOKEN_OP_MOD, *cur_token_index))
+        {
+            ConsumeToken(cur_token_index);
+
+            prev_expr = new Modulo(
+                expr,
+                ParseUnaryExpr(cur_token_index)
+            );
+        }
+
+        while (MatchToken(TOKEN_OP_MULT, *cur_token_index)
+                || MatchToken(TOKEN_OP_DIV, *cur_token_index)
+                || MatchToken(TOKEN_OP_MOD, *cur_token_index))
+        {
+            if (MatchToken(TOKEN_OP_MULT, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Multiply(
+                    prev_expr->Clone(),
+                    ParseUnaryExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+            else if (MatchToken(TOKEN_OP_DIV, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Divide(
+                    prev_expr->Clone(),
+                    ParseUnaryExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+            else if (MatchToken(TOKEN_OP_MOD, *cur_token_index))
+            {
+                ConsumeToken(cur_token_index);
+
+                AbstractExpr * cur_expr = new Modulo(
+                    prev_expr->Clone(),
+                    ParseUnaryExpr(cur_token_index)
+                );
+                prev_expr = cur_expr;
+            }
+        }
+        return prev_expr;
+    }
+    return expr;
 }
 
 bool SyntaxParser::MatchMultExpr(int cur_token_index)
