@@ -12,11 +12,17 @@ class ClassType : public AbstractType
         ClassType(string class_name);
 
         bool IsBooleanType();
+        
         bool IsFloatType();
+        
         bool IsIntType();
+        
         bool IsStringType();
+        
         bool IsVoidType();
+        
         bool IsClassType();
+        
         bool IsSameType(AbstractType * other_type);
 
         string Symbol();

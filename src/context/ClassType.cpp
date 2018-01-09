@@ -1,4 +1,5 @@
 #include "ClassType.h"
+#include <iostream>
 
 ClassType::ClassType(string class_name)
 {

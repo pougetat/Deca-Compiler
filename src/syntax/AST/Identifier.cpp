@@ -52,4 +52,10 @@ void Identifier::CodeGenExpr(
             << "    fload " << gen_env->GetMemoryLocation(m_symbol)
             << endl;
     }
+    if (m_expr_type->IsClassType())
+    {
+        gen_env->output_file
+            << "    aload " << gen_env->GetMemoryLocation(m_symbol)
+            << endl;
+    }
 }
