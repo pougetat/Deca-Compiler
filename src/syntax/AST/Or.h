@@ -8,6 +8,8 @@ class Or : public AbstractOpBool
     public:
 
         Or(AbstractExpr * expr1, AbstractExpr * expr2);
+
+        Or();
         
         AbstractExpr * Clone();
         

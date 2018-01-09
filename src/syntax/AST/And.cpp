@@ -6,6 +6,8 @@ And::And(AbstractExpr * e1, AbstractExpr * e2)
     m_right_operand = e2;
 }
 
+And::And(){}
+
 AbstractExpr * And::Clone()
 {
     return new And(

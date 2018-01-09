@@ -8,6 +8,8 @@ class And : public AbstractOpBool
     public:
 
         And(AbstractExpr * expr1, AbstractExpr * expr2);
+
+        And();
         
         AbstractExpr * Clone();
         

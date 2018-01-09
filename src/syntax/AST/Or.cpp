@@ -6,6 +6,8 @@ Or::Or(AbstractExpr * e1, AbstractExpr * e2)
     m_right_operand = e2;
 }
 
+Or::Or(){}
+
 AbstractExpr * Or::Clone()
 {
     return new Or(
