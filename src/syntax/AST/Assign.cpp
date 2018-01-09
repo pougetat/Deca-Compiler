@@ -50,8 +50,9 @@ void Assign::CodeGenInst(
     m_right_operand->CodeGenExpr(env_types, gen_env);
 
     gen_env->output_file << "    ; storing value in variable" << endl;
-    
-    if (m_left_operand->m_expr_type->IsIntType())
+
+    if (m_left_operand->m_expr_type->IsIntType()
+        || m_left_operand->m_expr_type->IsBooleanType())
     {
         gen_env->output_file 
             << "    istore " 
@@ -68,6 +69,10 @@ void Assign::CodeGenInst(
                     ((Identifier *) m_left_operand)->m_symbol
                 )
             << endl;
+    }
+    if (m_left_operand->m_expr_type->IsBooleanType())
+    {
+
     }
 
 }

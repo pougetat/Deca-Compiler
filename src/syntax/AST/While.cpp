@@ -70,6 +70,5 @@ void While::CodeGenInst(
     }
 
     gen_env->output_file << "    goto label" << label_num << ".while" << endl;
-    gen_env->output_file << "" << endl;
     gen_env->output_file << "    label" << label_num << ".endwhile:" << endl;
 }

@@ -40,7 +40,7 @@ void Identifier::CodeGenExpr(
 {
     gen_env->output_file << "    ; loading variable on the stack" << endl;
 
-    if (m_expr_type->IsIntType())
+    if (m_expr_type->IsIntType() || m_expr_type->IsBooleanType())
     {
         gen_env->output_file 
             << "    iload " << gen_env->GetMemoryLocation(m_symbol)

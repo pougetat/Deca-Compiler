@@ -82,7 +82,6 @@ void IfThenElse::CodeGenInst(
         inst->CodeGenInst(env_types, gen_env);
     }
     gen_env->output_file << "    goto label" << label_num << ".endif" << endl;
-    gen_env->output_file << "" << endl;
     gen_env->output_file << "    label" << label_num << ".else:" << endl;
     
     for (AbstractInst * inst : *m_else_insts)
@@ -90,6 +89,5 @@ void IfThenElse::CodeGenInst(
         inst->CodeGenInst(env_types, gen_env);
     }
 
-    gen_env->output_file << "" << endl;
     gen_env->output_file << "    label" << label_num << ".endif:" << endl;
 }

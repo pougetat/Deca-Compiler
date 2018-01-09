@@ -12,7 +12,7 @@ bool ClassType::IsBooleanType()
 
 bool ClassType::IsFloatType()
 {
-    return true;
+    return false;
 }
 
 bool ClassType::IsIntType()
@@ -22,7 +22,7 @@ bool ClassType::IsIntType()
 
 bool ClassType::IsStringType()
 {
-    return true;
+    return false;
 }
 
 bool ClassType::IsVoidType()
