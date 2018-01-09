@@ -44,13 +44,20 @@ Here is a sample .deca program
 
 ```
 {
-	int a;
-	int b = 34;
-	while (b <= 54)
-	{
-		print(b);
-		b = b+1;
-	}
+    int a = 3;
+    if (a - 1 == 2)
+    {
+        while (a <= 15)
+        {
+            print("this is a", a);
+            a = a + 1;
+        }
+        print("yes");
+    }
+    else {
+        print("no");
+    }
+    print(a);
 }
 ```
 

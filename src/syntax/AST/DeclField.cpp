@@ -71,6 +71,37 @@ void DeclField::Display(string tab)
     m_init->Display(tab + "--");
 }
 
+void DeclField::CodeGenDeclField(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->output_file << ".field ";
+    
+    if (m_field_visibility == VISIBILITY_PRIVATE)
+    {
+        gen_env->output_file << "private ";
+    }
+    if (m_field_visibility == VISIBILITY_PROTECTED)
+    {
+        gen_env->output_file << "protected ";
+    }
+    
+    gen_env->output_file << m_field_name->m_symbol;
+
+    if (env_types->GetType(m_field_type->m_symbol)->IsFloatType())
+    {
+        gen_env->output_file << " F" << endl;
+    }
+    if (env_types->GetType(m_field_type->m_symbol)->IsBooleanType())
+    {
+        gen_env->output_file << " Z" << endl;
+    }
+        if (env_types->GetType(m_field_type->m_symbol)->IsIntType())
+    {
+        gen_env->output_file << " I" << endl;
+    }
+}
+
 ///////////// PRIVATE METHODS /////////////
 
 void DeclField::InsertFieldExpDefinition(

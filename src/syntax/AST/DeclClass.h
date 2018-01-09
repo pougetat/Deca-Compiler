@@ -54,7 +54,6 @@ class DeclClass {
             Identifier * class_name,
             Identifier * parent_class_name
         ); 
-
 };
 
 #endif

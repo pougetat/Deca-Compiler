@@ -14,7 +14,7 @@ void DeclClass::VerifyClassName(EnvironmentType * env_types)
         m_parent_class_name = new Identifier("Object");
     }
 
-    AddClassToEnvTypes(env_types, m_class_name->m_symbol);
+    AddClassToEnvTypes(env_types, m_parent_class_name->m_symbol);
 }
 
 void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
@@ -105,6 +105,13 @@ void DeclClass::CodeGenDeclClass(
     {
         gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
     }
+
+    gen_env->output_file << "" << endl;
+    for (DeclField * decl_field : *m_class_fields)
+    {
+        decl_field->CodeGenDeclField(env_types, gen_env);
+    }
+
 }
 
 ///////////// PRIVATE METHODS /////////////

@@ -7,6 +7,8 @@
 #include "../../context/EnvironmentType.h"
 #include "../../context/FieldExpNature.h"
 
+#include "../../generator/GeneratorEnvironment.h"
+
 enum Visibility 
 {
     VISIBILITY_PROTECTED,
@@ -41,6 +43,11 @@ class DeclField {
         );
 
         void Display(string tab);
+
+        void CodeGenDeclField(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 
     private:
 
