@@ -55,5 +55,15 @@ EnvironmentExp * Program::VerifyProgramPass3(EnvironmentType * env_types)
 
 void Program::GenCode(EnvironmentType * env_types, GeneratorEnvironment * gen_env)
 {
+    for (DeclClass * decl_class : *m_list_decl_class)
+    {
+        decl_class->CodeGenDeclClass(
+            env_types,
+            new GeneratorEnvironment(
+                env_types->GetClassEnvExp(decl_class->m_class_name->m_symbol),
+                new string(decl_class->m_class_name->m_symbol + ".j")
+            )
+        );
+    }
     m_main->CodeGenMain(env_types, gen_env);
 }

@@ -12,11 +12,11 @@ class GeneratorEnvironment
 
         int m_num_labels = 0;
 
-        ofstream output_file = ofstream("results.j");
+        ofstream output_file;
 
         EnvironmentExp * m_env_exp;
 
-        GeneratorEnvironment(EnvironmentExp * env_exp);
+        GeneratorEnvironment(EnvironmentExp * env_exp, string * jasmin_file);
 
         void IncrNumVars();
 

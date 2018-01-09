@@ -9,14 +9,12 @@ void DeclClass::VerifyClassName(EnvironmentType * env_types)
         );
     }
 
-    if (m_parent_class_name != NULL)
+    if (m_parent_class_name == NULL)
     {
-        AddClassToEnvTypes(env_types, "Object");
+        m_parent_class_name = new Identifier("Object");
     }
-    else
-    {
-        AddClassToEnvTypes(env_types, m_class_name->m_symbol);
-    }
+
+    AddClassToEnvTypes(env_types, m_class_name->m_symbol);
 }
 
 void DeclClass::VerifyClassHierarchy(EnvironmentType * env_types)
@@ -91,7 +89,22 @@ void DeclClass::Display(string tab)
     {
         decl_method->Display(tab + "--");
     }
+}
 
+void DeclClass::CodeGenDeclClass(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    gen_env->output_file << ".class public " << m_class_name->m_symbol << endl;
+
+    if (m_parent_class_name->m_symbol == "Object")
+    {
+        gen_env->output_file << ".super java/lang/Object" << endl;
+    }
+    else
+    {
+        gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
+    }
 }
 
 ///////////// PRIVATE METHODS /////////////

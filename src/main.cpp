@@ -53,7 +53,7 @@ int main(int argc, char * argv[])
     generator.GenCode(
         syntax_parser.m_program,
         context_checker.m_env_types_predef,
-        new GeneratorEnvironment(main_env_exp)
+        new GeneratorEnvironment(main_env_exp, new string("main.j"))
     );
 
     return 0;

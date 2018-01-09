@@ -1,8 +1,11 @@
 #include "GeneratorEnvironment.h"
 
-GeneratorEnvironment::GeneratorEnvironment(EnvironmentExp * env_exp)
+GeneratorEnvironment::GeneratorEnvironment(
+    EnvironmentExp * env_exp,
+    string * jasmin_file)
 {
     m_env_exp = env_exp;
+    output_file = ofstream(*jasmin_file);
 }
 
 void GeneratorEnvironment::IncrNumVars()

@@ -9,6 +9,8 @@
 #include "../../context/ClassTypeNature.h"
 #include "../../context/ClassType.h"
 
+#include "../../generator/GeneratorEnvironment.h"
+
 #include <vector>
 
 class DeclClass {
@@ -34,6 +36,11 @@ class DeclClass {
         void VerifyClassBody(EnvironmentType * env_types);
 
         void Display(string tab);
+
+        void CodeGenDeclClass(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 
     private:
 
