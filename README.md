@@ -61,6 +61,28 @@ Here is a sample .deca program
 }
 ```
 
+Here is another sample deca program with classes:
+
+```
+class A {
+    B b = new B();
+}
+
+class B {
+    int b = 13;
+    C c = new C();
+}
+
+class C {
+    int c = 46;
+}
+
+{
+    A a = new A();
+    print(a.b.c.c);
+}
+```
+
 
 ## License
 
