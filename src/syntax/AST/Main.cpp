@@ -17,7 +17,7 @@ void Main::Display(string tab)
 
 EnvironmentExp * Main::VerifyMain(EnvironmentType * env_types)
 {
-    m_env_main_exp = new EnvironmentExp();
+    m_env_main_exp = new EnvironmentExp("");
 
     for (DeclVar * declvar : *m_list_decl_var)
     {

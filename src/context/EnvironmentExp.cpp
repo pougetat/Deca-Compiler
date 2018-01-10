@@ -1,9 +1,10 @@
 #include "EnvironmentExp.h"
 
-EnvironmentExp::EnvironmentExp()
+EnvironmentExp::EnvironmentExp(string class_name)
 {
     m_env_exp = new map<string, ExpDefinition *>();
     m_env_exp_sup = NULL;
+    m_englobing_class = class_name;
 }
 
 void EnvironmentExp::SetParentEnvExp(EnvironmentExp * parent_env_exp)

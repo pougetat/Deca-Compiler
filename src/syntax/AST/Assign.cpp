@@ -47,9 +47,6 @@ void Assign::CodeGenInst(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    m_right_operand->CodeGenExpr(env_types, gen_env);
-    gen_env->GenStoreInMemory(
-        env_types,
-        ((Identifier *) m_left_operand)->m_symbol
-    );
+    ((AbstractLValue *) m_left_operand)
+        ->CodeGenLValue(env_types, gen_env, m_right_operand);
 }

@@ -108,6 +108,7 @@ void DeclField::CodeGenFieldInit(
     string class_name)
 {
     m_init->CodeGenExpr(env_types, gen_env);
+    
     gen_env->output_file 
         << "    putfield " 
         << class_name 

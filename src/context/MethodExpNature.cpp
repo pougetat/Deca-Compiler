@@ -1,8 +1,8 @@
 #include "MethodExpNature.h"
 
-MethodExpNature::MethodExpNature()
+MethodExpNature::MethodExpNature(string englobing_class)
 {
-    m_method_env = new EnvironmentExp();
+    m_method_env = new EnvironmentExp(englobing_class);
     m_signature = new vector<AbstractType *>();
 }
 

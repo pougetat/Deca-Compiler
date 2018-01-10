@@ -109,7 +109,8 @@ void DeclClass::AddClassToEnvTypes(
         m_class_name->m_symbol,
         new TypeDefinition(
             new ClassTypeNature(
-                parent_class_symbol
+                parent_class_symbol,
+                m_class_name->m_symbol
             ),
             new ClassType(m_class_name->m_symbol)
         )

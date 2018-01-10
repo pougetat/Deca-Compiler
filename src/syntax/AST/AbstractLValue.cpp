@@ -21,6 +21,14 @@ AbstractType * AbstractLValue::VerifyLValue(
     throw runtime_error("NOT IMPLEMENTED YET");
 }
 
+void AbstractLValue::CodeGenLValue(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env,
+    AbstractExpr * right_operand)
+{
+    throw runtime_error("CODE_GEN_LVALUE NOT IMPLEMENTED");
+}
+
 void AbstractLValue::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)

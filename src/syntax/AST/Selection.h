@@ -25,6 +25,12 @@ class Selection : public AbstractLValue
             string * class_name
         );
 
+        void CodeGenLValue(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env,
+            AbstractExpr * right_operand
+        );
+
         void CodeGenExpr(
             EnvironmentType * env_types,
             GeneratorEnvironment * gen_env

@@ -19,6 +19,12 @@ class AbstractLValue : public AbstractExpr
             string * class_name            
         );
 
+        virtual void CodeGenLValue(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env,
+            AbstractExpr * right_operand
+        );
+
         virtual void CodeGenExpr(
             EnvironmentType * env_types,
             GeneratorEnvironment * gen_env

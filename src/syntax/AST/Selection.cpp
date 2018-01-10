@@ -53,6 +53,40 @@ AbstractType * Selection::VerifyLValue(
 
 }
 
+void Selection::CodeGenLValue(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env,
+    AbstractExpr * right_operand)
+{
+    // pushing the reference onto the stack
+    m_selection_expr->CodeGenExpr(env_types, gen_env);
+    
+    // pushing the right operand expr onto the stack
+    right_operand->CodeGenExpr(env_types, gen_env);
+    
+    ClassType * select_type = (ClassType *) m_selection_expr->m_expr_type;
+    gen_env->output_file 
+        << "    putfield "
+        << select_type->m_class_name
+        << "/"
+        << m_identifier->m_symbol;
+    
+    if (m_expr_type->IsClassType())
+    {}
+    if (m_expr_type->IsBooleanType())
+    {
+        gen_env->output_file << " Z" << endl;
+    }
+    if (m_expr_type->IsFloatType())
+    {
+        gen_env->output_file << " F" << endl;
+    }
+    if (m_expr_type->IsIntType())
+    {
+        gen_env->output_file << " I" << endl;
+    }
+}
+
 void Selection::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)

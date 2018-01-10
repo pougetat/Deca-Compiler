@@ -86,7 +86,19 @@ void GeneratorEnvironment::GenLoadFieldFromMemory(
     EnvironmentType * env_types,
     string var_symbol)
 {
+    output_file << "    aload_0" << endl;
+    output_file
+        << "    getfield "
+        << m_env_exp->m_englobing_class
+        << "/"
+        << var_symbol;
 
+    AbstractType * var_type = m_env_exp->GetExpDefinition(var_symbol)->GetType();
+
+    if (var_type->IsIntType())
+    {
+        output_file << " I" << endl;
+    }
 }
 
 void GeneratorEnvironment::GenStoreLocalInMemory(

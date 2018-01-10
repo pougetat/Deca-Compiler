@@ -17,7 +17,9 @@ class EnvironmentExp
 
         EnvironmentExp * m_env_exp_sup;
 
-        EnvironmentExp();
+        string m_englobing_class;
+
+        EnvironmentExp(string class_name);
 
         void SetParentEnvExp(EnvironmentExp * parent_env_exp);
 

@@ -34,6 +34,18 @@ AbstractType * Identifier::VerifyLValue(
     throw runtime_error("[IDENTIFIER : '" + m_symbol + "' IS UNDEFINED]");
 }
 
+void Identifier::CodeGenLValue(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env,
+    AbstractExpr * right_operand)
+{
+    right_operand->CodeGenExpr(env_types, gen_env);
+    gen_env->GenStoreInMemory(
+        env_types,
+        m_symbol
+    );
+}
+
 void Identifier::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)

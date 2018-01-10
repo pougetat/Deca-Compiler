@@ -44,7 +44,7 @@ EnvironmentType::EnvironmentType()
         pair<string, TypeDefinition *>(
             "Object",
             new TypeDefinition(
-                new ClassTypeNature(""),
+                new ClassTypeNature("", "Object"),
                 new ClassType("Object")
             )
         )

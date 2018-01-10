@@ -15,7 +15,7 @@ class MethodExpNature : public AbstractExpNature
 
         vector<AbstractType *> * m_signature;
 
-        MethodExpNature();
+        MethodExpNature(string englobing_class);
 
         EnvironmentExp * GetMethodEnv();
 

@@ -12,7 +12,6 @@ void DeclMethod::VerifyMethodSignature(
     }
 
     InsertMethodExpDefinition(env_types, class_name);
-
     VerifyParamTypes(env_types, class_name);
 }
 
@@ -109,7 +108,7 @@ void DeclMethod::InsertMethodExpDefinition(
     class_env_exp->InsertExpDefinition(
         m_name->m_symbol,
         new ExpDefinition(
-            new MethodExpNature(),
+            new MethodExpNature(class_name->m_symbol),
             env_types->GetType(m_return_type->m_symbol)
         )
     );
