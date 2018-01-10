@@ -6,6 +6,7 @@ ExpDefinition::ExpDefinition(
 {
     m_exp_nature = exp_nature;
     m_type = type;
+    m_memory_location = -1;
 }
 
 void ExpDefinition::SetMemoryLocation(int memory_location)

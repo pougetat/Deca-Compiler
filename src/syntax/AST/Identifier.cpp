@@ -38,24 +38,5 @@ void Identifier::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; loading variable on the stack" << endl;
-
-    if (m_expr_type->IsIntType() || m_expr_type->IsBooleanType())
-    {
-        gen_env->output_file 
-            << "    iload " << gen_env->GetMemoryLocation(m_symbol)
-            << endl;
-    }
-    if (m_expr_type->IsFloatType())
-    {
-        gen_env->output_file 
-            << "    fload " << gen_env->GetMemoryLocation(m_symbol)
-            << endl;
-    }
-    if (m_expr_type->IsClassType())
-    {
-        gen_env->output_file
-            << "    aload " << gen_env->GetMemoryLocation(m_symbol)
-            << endl;
-    }
+    gen_env->GenLoadFromMemory(env_types, m_symbol);
 }
