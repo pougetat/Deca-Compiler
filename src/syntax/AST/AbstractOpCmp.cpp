@@ -16,8 +16,15 @@ AbstractType * AbstractOpCmp::VerifyExpr(
         class_name
     );
 
-    if (!(type_left_operand->IsFloatType() || type_left_operand->IsIntType())
-        || !(type_right_operand->IsFloatType() || type_right_operand->IsIntType()))
+    if (!(type_left_operand->IsSameType(type_right_operand)))
+    {
+        throw runtime_error(
+            "[COMP OPERATIN : OPERANDS CANNOT BE OF DIFFERENT TYPES"
+        );
+    }
+    if (!type_left_operand->IsFloatType() 
+        && !type_left_operand->IsIntType()
+        && !type_left_operand->IsClassType())
     {
         throw runtime_error(
             "[COMP OPERATION : INT OR FLOAT OPERAND EXPECTED]"

@@ -27,9 +27,28 @@ void Equals::CodeGenExpr(
 {
     m_left_operand->CodeGenExpr(env_types, gen_env);
     m_right_operand->CodeGenExpr(env_types, gen_env);
+
+    string branch_instruct = "";
     
+    if (m_left_operand->m_expr_type->IsClassType())
+    {
+        branch_instruct = "if_acmpne";
+    }
+    if (m_left_operand->m_expr_type->IsIntType())
+    {
+        branch_instruct = "if_icmpne";
+    }
+    if (m_left_operand->m_expr_type->IsFloatType())
+    {
+        gen_env->output_file << "    fcmpl" << endl;
+        return;
+    }
+
     int label_num = gen_env->GetNewLabel();
-    gen_env->output_file << "    if_icmpne label" << label_num << ".false" << endl;
+
+    gen_env->output_file 
+        << "    " 
+        << branch_instruct << " label" << label_num << ".false" << endl;
     gen_env->output_file << "    goto label" << label_num << ".true" << endl;
     gen_env->output_file << "    label" << label_num << ".true:" << endl;
     gen_env->output_file << "    bipush 1" << endl;
