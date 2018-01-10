@@ -30,6 +30,11 @@ bool FloatType::IsClassType()
     return false;
 }
 
+bool FloatType::IsNullType()
+{
+    return false;
+}
+
 bool FloatType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsFloatType();

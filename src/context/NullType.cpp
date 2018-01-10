@@ -30,6 +30,11 @@ bool NullType::IsClassType()
     return false;
 }
 
+bool NullType::IsNullType()
+{
+    return true;
+}
+
 bool NullType::IsSameType(AbstractType * other_type)
 {
     return false;

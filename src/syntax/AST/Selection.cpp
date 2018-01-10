@@ -64,28 +64,32 @@ void Selection::CodeGenLValue(
     // pushing the right operand expr onto the stack
     right_operand->CodeGenExpr(env_types, gen_env);
     
+    string field_jasmin_type = "";
+    if (m_expr_type->IsIntType())
+    {
+        field_jasmin_type = "I";
+    }
+    if (m_expr_type->IsBooleanType())
+    {
+        field_jasmin_type = "Z";
+    }
+    if (m_expr_type->IsFloatType())
+    {
+        field_jasmin_type = "F";
+    }
+    if (m_expr_type->IsClassType())
+    {
+        field_jasmin_type = "L" + ((ClassType *) m_expr_type)->m_class_name + ";";
+    }
+
     ClassType * select_type = (ClassType *) m_selection_expr->m_expr_type;
     gen_env->output_file 
         << "    putfield "
         << select_type->m_class_name
         << "/"
-        << m_identifier->m_symbol;
-    
-    if (m_expr_type->IsClassType())
-    {
-    }
-    if (m_expr_type->IsBooleanType())
-    {
-        gen_env->output_file << " Z" << endl;
-    }
-    if (m_expr_type->IsFloatType())
-    {
-        gen_env->output_file << " F" << endl;
-    }
-    if (m_expr_type->IsIntType())
-    {
-        gen_env->output_file << " I" << endl;
-    }
+        << m_identifier->m_symbol
+        << " " << field_jasmin_type
+        << endl;
 }
 
 void Selection::CodeGenExpr(

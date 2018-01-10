@@ -12,10 +12,15 @@ class Null : public AbstractLiteral
         
         void Display(string tab);
 
-        virtual AbstractType * VerifyExpr(
+        AbstractType * VerifyExpr(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name
+        );
+
+        void CodeGenExpr(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
         );
 };
 

@@ -22,6 +22,8 @@ class ClassType : public AbstractType
         bool IsVoidType();
         
         bool IsClassType();
+
+        bool IsNullType();
         
         bool IsSameType(AbstractType * other_type);
 

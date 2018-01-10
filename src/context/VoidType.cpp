@@ -30,6 +30,11 @@ bool VoidType::IsClassType()
     return false;
 }
 
+bool VoidType::IsNullType()
+{
+    return false;
+}
+
 bool VoidType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsVoidType();

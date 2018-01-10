@@ -30,6 +30,11 @@ bool IntType::IsClassType()
     return false;
 }
 
+bool IntType::IsNullType()
+{
+    return false;
+}
+
 bool IntType::IsSameType(AbstractType * other_type)
 {
     return other_type->IsIntType();

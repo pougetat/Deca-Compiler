@@ -36,10 +36,17 @@ bool ClassType::IsClassType()
     return true;
 }
 
+bool ClassType::IsNullType()
+{
+    return false;
+}
+
 bool ClassType::IsSameType(AbstractType * other_type)
 {
-    return other_type->IsClassType() 
-        && ((ClassType *) other_type)->m_class_name == m_class_name;
+    return 
+        (other_type->IsClassType() && 
+            ((ClassType *) other_type)->m_class_name == m_class_name)
+        || other_type->IsNullType();
 }
 
 string ClassType::Symbol()
