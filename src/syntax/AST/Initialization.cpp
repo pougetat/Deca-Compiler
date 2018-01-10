@@ -27,7 +27,8 @@ void Initialization::VerifyInitialization(
 
 void Initialization::CodeGenExpr(
     EnvironmentType * env_types,
-    GeneratorEnvironment * gen_env)
+    GeneratorEnvironment * gen_env,
+    AbstractType * var_type)
 {
     m_expr->CodeGenExpr(env_types, gen_env);
 }

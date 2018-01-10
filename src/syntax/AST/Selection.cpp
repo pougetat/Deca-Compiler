@@ -72,7 +72,8 @@ void Selection::CodeGenLValue(
         << m_identifier->m_symbol;
     
     if (m_expr_type->IsClassType())
-    {}
+    {
+    }
     if (m_expr_type->IsBooleanType())
     {
         gen_env->output_file << " Z" << endl;
@@ -101,7 +102,11 @@ void Selection::CodeGenExpr(
         << m_identifier->m_symbol;
     
     if (m_expr_type->IsClassType())
-    {}
+    {
+        gen_env->output_file 
+            << " " << "L" << ((ClassType *) m_expr_type)->m_class_name << ";"
+            << endl;
+    }
     if (m_expr_type->IsBooleanType())
     {
         gen_env->output_file << " Z" << endl;

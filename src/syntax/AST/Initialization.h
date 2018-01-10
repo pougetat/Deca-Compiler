@@ -24,7 +24,8 @@ class Initialization : public AbstractInitialization {
 
         void CodeGenExpr(
             EnvironmentType * env_types,
-            GeneratorEnvironment * gen_env
+            GeneratorEnvironment * gen_env,
+            AbstractType * var_type
         );
 };
 

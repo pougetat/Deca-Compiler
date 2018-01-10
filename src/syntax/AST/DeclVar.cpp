@@ -45,6 +45,10 @@ void DeclVar::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    m_init->CodeGenExpr(env_types, gen_env);
+    m_init->CodeGenExpr(
+        env_types,
+        gen_env,
+        env_types->GetType(m_type->m_symbol)
+    );
     gen_env->GenStoreInMemory(env_types, m_symbol->m_symbol);
 }

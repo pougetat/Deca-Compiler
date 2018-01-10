@@ -86,19 +86,32 @@ void GeneratorEnvironment::GenLoadFieldFromMemory(
     EnvironmentType * env_types,
     string var_symbol)
 {
-    output_file << "    aload_0" << endl;
-    output_file
-        << "    getfield "
-        << m_env_exp->m_englobing_class
-        << "/"
-        << var_symbol;
-
+    string var_jasmin_type = "";
     AbstractType * var_type = m_env_exp->GetExpDefinition(var_symbol)->GetType();
 
     if (var_type->IsIntType())
     {
-        output_file << " I" << endl;
+        var_jasmin_type = "I";
     }
+    if (var_type->IsBooleanType())
+    {
+        var_jasmin_type = "Z";
+    }
+    if (var_type->IsFloatType())
+    {
+        var_jasmin_type = "F";
+    }
+    if (var_type->IsClassType())
+    {
+        var_jasmin_type = "L" + ((ClassType *) var_type)->m_class_name + ";";
+    }
+
+    output_file << "    aload_0" << endl;
+    output_file
+        << "    getfield "
+        << m_env_exp->m_englobing_class << "/" << var_symbol
+        << " " << var_jasmin_type
+        << endl;
 }
 
 void GeneratorEnvironment::GenStoreLocalInMemory(

@@ -88,18 +88,26 @@ void DeclField::CodeGenDeclField(
     
     gen_env->output_file << m_field_name->m_symbol;
 
-    if (env_types->GetType(m_field_type->m_symbol)->IsFloatType())
+    AbstractType * var_type = env_types->GetType(m_field_type->m_symbol);
+    string var_jasmin_type = "";
+
+    if (var_type->IsFloatType())
     {
-        gen_env->output_file << " F" << endl;
+        var_jasmin_type = "F";
     }
-    if (env_types->GetType(m_field_type->m_symbol)->IsBooleanType())
+    if (var_type->IsBooleanType())
     {
-        gen_env->output_file << " Z" << endl;
+        var_jasmin_type = "Z";
     }
-        if (env_types->GetType(m_field_type->m_symbol)->IsIntType())
+    if (var_type->IsIntType())
     {
-        gen_env->output_file << " I" << endl;
+        var_jasmin_type = "I";
     }
+    if (var_type->IsClassType())
+    {
+        var_jasmin_type = "L" + m_field_type->m_symbol + ";";
+    }
+    gen_env->output_file << " " << var_jasmin_type << endl;
 }
 
 void DeclField::CodeGenFieldInit(
@@ -107,27 +115,32 @@ void DeclField::CodeGenFieldInit(
     GeneratorEnvironment * gen_env,
     string class_name)
 {
-    m_init->CodeGenExpr(env_types, gen_env);
+    AbstractType * var_type = env_types->GetType(m_field_type->m_symbol);
+    string var_jasmin_type = "";
     
-    gen_env->output_file 
-        << "    putfield " 
-        << class_name 
-        << "/" 
-        << m_field_name->m_symbol;
-    
-    if (env_types->GetType(m_field_type->m_symbol)->IsIntType())
+    m_init->CodeGenExpr(env_types, gen_env, var_type);
+
+    if (var_type->IsIntType())
     {
-        gen_env->output_file << " I" << endl;
+        var_jasmin_type = "I";
     }
-    if (env_types->GetType(m_field_type->m_symbol)->IsFloatType())
+    if (var_type->IsBooleanType())
     {
-        gen_env->output_file << " F" << endl;
+        var_jasmin_type = "Z";
     }
-    if (env_types->GetType(m_field_type->m_symbol)->IsBooleanType())
+    if (var_type->IsFloatType())
     {
-        gen_env->output_file << " Z" << endl;
+        var_jasmin_type = "F";
+    }
+    if (var_type->IsClassType())
+    {
+        var_jasmin_type = "L" + m_field_type->m_symbol + ";";
     }
 
+    gen_env->output_file 
+        << "    putfield " 
+        << class_name << "/" << m_field_name->m_symbol
+        << " " << var_jasmin_type << endl;
 }
 
 ///////////// PRIVATE METHODS /////////////

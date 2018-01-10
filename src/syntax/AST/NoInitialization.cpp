@@ -14,8 +14,17 @@ void NoInitialization::VerifyInitialization(
 
 void NoInitialization::CodeGenExpr(
     EnvironmentType * env_types,
-    GeneratorEnvironment * gen_env)
+    GeneratorEnvironment * gen_env,
+    AbstractType * var_type)
 {
-    gen_env->output_file << "    ; pushing 0 on the stack" << endl;
-    gen_env->output_file << "    ldc 0" << endl;
+    if (var_type->IsClassType())
+    {
+        gen_env->output_file << "    ; pushing null onto the stack" << endl;
+        gen_env->output_file << "    aconst_null" << endl;
+    }
+    else
+    {
+        gen_env->output_file << "    ; pushing 0 onto the stack" << endl;
+        gen_env->output_file << "    ldc 0" << endl;
+    }
 }
