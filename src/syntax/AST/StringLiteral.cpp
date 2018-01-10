@@ -28,6 +28,5 @@ void StringLiteral::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; pushing string literal on the stack" << endl;
     gen_env->output_file << "    ldc \"" << m_value << "\"" << endl;
 }

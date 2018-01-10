@@ -19,12 +19,10 @@ void NoInitialization::CodeGenExpr(
 {
     if (var_type->IsClassType())
     {
-        gen_env->output_file << "    ; pushing null onto the stack" << endl;
         gen_env->output_file << "    aconst_null" << endl;
     }
     else
     {
-        gen_env->output_file << "    ; pushing 0 onto the stack" << endl;
         gen_env->output_file << "    ldc 0" << endl;
     }
 }

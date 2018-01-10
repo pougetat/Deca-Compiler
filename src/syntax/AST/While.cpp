@@ -56,7 +56,6 @@ void While::CodeGenInst(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; while" << endl;
     int label_num = gen_env->GetNewLabel();
     gen_env->output_file << "    label" << label_num << ".while:" << endl;
 

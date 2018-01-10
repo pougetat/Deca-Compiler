@@ -28,8 +28,6 @@ void BooleanLiteral::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; pushing true on the stack" << endl;
-
     if (m_value)
     {
         gen_env->output_file << "    iconst_1" << endl;

@@ -68,8 +68,6 @@ void Cast::CodeGenExpr(
     GeneratorEnvironment * gen_env)
 {
     m_expr->CodeGenExpr(env_types, gen_env);
-
-    gen_env->output_file << "    ; casting stack element to other type" << endl;
     
     if (m_expr->m_expr_type->IsIntType())
     {

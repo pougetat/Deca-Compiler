@@ -37,16 +37,14 @@ void Main::CodeGenMain(
 {
     gen_env->output_file << ".class public Main" << endl;
     gen_env->output_file << ".super java/lang/Object" << endl;
-    gen_env->output_file << "; default constructor" << endl;
     gen_env->output_file << ".method public <init>()V" << endl;
-    gen_env->output_file << "    aload_0 ; push this" << endl;
+    gen_env->output_file << "    aload_0" << endl;
     gen_env->output_file 
-        << "    invokespecial java/lang/Object/<init>()V ; call super"
+        << "    invokespecial java/lang/Object/<init>()V"
         << endl;
     gen_env->output_file << "    return" << endl;
     gen_env->output_file << ".end method" << endl;
     gen_env->output_file << ".method public static main([Ljava/lang/String;)V" << endl;
-    gen_env->output_file << "    ; allocate stack size" << endl;
     gen_env->output_file << "    .limit stack 10" << endl;
     gen_env->output_file << "    .limit locals 10" << endl;
 
@@ -59,7 +57,6 @@ void Main::CodeGenMain(
         inst->CodeGenInst(env_types, gen_env);
     }
 
-    gen_env->output_file << "    ; return main" << endl;
     gen_env->output_file << "    return" << endl;
     gen_env->output_file << ".end method" << endl;
 }

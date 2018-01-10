@@ -24,7 +24,6 @@ void ReadFloat::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; reading float from the console" << endl;
     gen_env->output_file
         << "invokestatic java/lang/System.console()Ljava/io/Console;"
         << endl;

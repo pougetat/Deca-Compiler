@@ -40,11 +40,8 @@ void New::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; adding new reference to stack" << endl;
     gen_env->output_file << "    new " << m_class_name->m_symbol << endl;
-    gen_env->output_file << "    ; creating dup of ref on stack" << endl;
     gen_env->output_file << "    dup" << endl;
-    gen_env->output_file << "    ; calling constructor" << endl;
     gen_env->output_file 
         << "    invokespecial " 
         << m_class_name->m_symbol

@@ -28,6 +28,5 @@ void Minus::CodeGenExpr(
     m_left_operand->CodeGenExpr(env_types, gen_env);
     m_right_operand->CodeGenExpr(env_types, gen_env);
     
-    gen_env->output_file << "    ; subtracting two stack elements" << endl;
     gen_env->output_file << "    isub" << endl;
 }

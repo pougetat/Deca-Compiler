@@ -41,9 +41,6 @@ void Print::CodeGenInst(
 {
     if (m_list_args->size() == 0)
     {
-        gen_env->output_file
-            << "    ; push java.lang.System.out (type PrintStream)"
-            << endl;
         gen_env->output_file 
             << "    getstatic "
             << "java/lang/System/out Ljava/io/PrintStream;"
@@ -58,9 +55,6 @@ void Print::CodeGenInst(
     {
         for (AbstractExpr * print_arg : *m_list_args)
         {
-            gen_env->output_file
-                << "    ; push java.lang.System.out (type PrintStream)"
-                << endl;
             gen_env->output_file 
                 << "    getstatic "
                 << "java/lang/System/out Ljava/io/PrintStream;"
@@ -68,7 +62,6 @@ void Print::CodeGenInst(
 
             print_arg->CodeGenExpr(env_types, gen_env);
 
-            gen_env->output_file << "    ; invoke println" << endl;
             if (print_arg->m_expr_type->IsIntType())
             {
                 gen_env->output_file

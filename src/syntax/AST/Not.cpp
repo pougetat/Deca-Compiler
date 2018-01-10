@@ -44,7 +44,6 @@ void Not::CodeGenExpr(
 {
     m_operand->CodeGenExpr(env_types, gen_env);
 
-    gen_env->output_file << "    ; not of stack element" << endl;
     int label_num = gen_env->GetNewLabel();
     gen_env->output_file << "    ifeq label" << label_num << ".true" << endl;
     gen_env->output_file << "    goto label" << label_num << ".false" << endl;

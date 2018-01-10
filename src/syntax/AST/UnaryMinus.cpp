@@ -45,7 +45,6 @@ void UnaryMinus::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-    gen_env->output_file << "    ; taking opposite of stack element" << endl;
     gen_env->output_file << "    bipush 0" << endl;
     m_operand->CodeGenExpr(env_types, gen_env);
     gen_env->output_file << "    isub" << endl;

@@ -11,9 +11,7 @@ GeneratorEnvironment::GeneratorEnvironment(
 void GeneratorEnvironment::GenLoadFromMemory(
     EnvironmentType * env_types,
     string var_symbol)
-{
-    output_file << "    ; loading variable on the stack" << endl;
-    
+{    
     if (m_env_exp->ContainsSymbol(var_symbol))
     {
         ExpDefinition * var_def = m_env_exp->GetExpDefinition(var_symbol);

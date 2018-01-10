@@ -30,6 +30,5 @@ void Or::CodeGenExpr(
     m_left_operand->CodeGenExpr(env_types, gen_env);
     m_right_operand->CodeGenExpr(env_types, gen_env);
 
-    gen_env->output_file << "    ; or of two stack elements" << endl;
     gen_env->output_file << "    ior" << endl;
 }

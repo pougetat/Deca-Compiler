@@ -27,8 +27,6 @@ void LowerOrEqual::CodeGenExpr(
 {
     m_left_operand->CodeGenExpr(env_types, gen_env);
     m_right_operand->CodeGenExpr(env_types, gen_env);
-
-    gen_env->output_file << "    ; comp of two stack elements" << endl;
     
     int label_num = gen_env->GetNewLabel();
     gen_env->output_file << "    if_icmple label" << label_num << ".true" << endl;

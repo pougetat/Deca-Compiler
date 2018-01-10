@@ -73,7 +73,6 @@ void IfThenElse::CodeGenInst(
 {
     int label_num = gen_env->GetNewLabel();
 
-    gen_env->output_file << "    ; if then else" << endl;
     m_condition->CodeGenExpr(env_types, gen_env);
     gen_env->output_file << "    ifeq label" << label_num << ".else" << endl;
     
