@@ -46,7 +46,7 @@ class MethodCall : public AbstractExpr
 
     private:
 
-        MethodExpNature * VerifyClassHasMethod(
+        ExpDefinition * VerifyClassHasMethod(
             EnvironmentType * env_types,
             EnvironmentExp * env_exp,
             string * class_name

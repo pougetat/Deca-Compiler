@@ -57,7 +57,7 @@ AbstractType * MethodCall::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    MethodExpNature * method_exp_nature = VerifyClassHasMethod(
+    ExpDefinition * method_exp = VerifyClassHasMethod(
         env_types,
         env_exp,
         class_name
@@ -67,10 +67,10 @@ AbstractType * MethodCall::VerifyExpr(
         env_types,
         env_exp,
         class_name,
-        method_exp_nature->GetMethodSignature()
+        ((MethodExpNature *) method_exp->GetTypeNature())->GetMethodSignature()
     );
 
-    throw runtime_error("NOT IMPLEMENTED : VERIFY Method Call");
+    return method_exp->GetType();
 }
 
 void MethodCall::CodeGenExpr(
@@ -80,7 +80,7 @@ void MethodCall::CodeGenExpr(
 
 // PRIVATE METHODS
 
-MethodExpNature * MethodCall::VerifyClassHasMethod(
+ExpDefinition * MethodCall::VerifyClassHasMethod(
     EnvironmentType * env_types,
     EnvironmentExp * env_exp,
     string * class_name)
@@ -108,9 +108,7 @@ MethodExpNature * MethodCall::VerifyClassHasMethod(
         );
     }
 
-    return (MethodExpNature *) class_env_exp
-        ->GetExpDefinition(m_method_identifier->m_symbol)
-        ->GetTypeNature();
+    return class_env_exp->GetExpDefinition(m_method_identifier->m_symbol);
 }
 
 void MethodCall::VerifyMethodParams(

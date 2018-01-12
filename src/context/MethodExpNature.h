@@ -25,10 +25,13 @@ class MethodExpNature : public AbstractExpNature
 
         bool HasSameSignature(MethodExpNature * other_method_exp_nature);
 
-        virtual bool IsParamExpNature();
-        virtual bool IsVarExpNature();
-        virtual bool IsMethodExpNature();
-        virtual bool IsFieldExpNature();
+        bool IsParamExpNature();
+        
+        bool IsVarExpNature();
+        
+        bool IsMethodExpNature();
+        
+        bool IsFieldExpNature();
 };
 
 #endif
