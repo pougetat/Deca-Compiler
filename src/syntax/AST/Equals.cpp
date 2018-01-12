@@ -47,7 +47,7 @@ void Equals::CodeGenExpr(
     int label_num = gen_env->GetNewLabel();
 
     gen_env->output_file 
-        << "    " 
+        << "    "
         << branch_instruct << " label" << label_num << ".false" << endl;
     gen_env->output_file << "    goto label" << label_num << ".true" << endl;
     gen_env->output_file << "    label" << label_num << ".true:" << endl;

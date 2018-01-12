@@ -20,7 +20,7 @@ AbstractType * This::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    throw runtime_error("NOT IMPLEMENTED YET");
+    throw runtime_error("NOT IMPLEMENTED : VERIFY This");
 }
 
 void This::CodeGenExpr(

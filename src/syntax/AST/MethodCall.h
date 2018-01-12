@@ -3,6 +3,7 @@
 
 #include "AbstractExpr.h"
 #include "Identifier.h"
+#include "This.h"
 #include <vector>
 
 using namespace std;
@@ -41,6 +42,20 @@ class MethodCall : public AbstractExpr
         void CodeGenExpr(
             EnvironmentType * env_types,
             GeneratorEnvironment * gen_env
+        );
+
+    private:
+
+        MethodExpNature * VerifyClassHasMethod(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name
+        );
+        void VerifyMethodParams(
+            EnvironmentType * env_types,
+            EnvironmentExp * env_exp,
+            string * class_name,
+            vector<AbstractType *> * method_exp_nature
         );
 };
 

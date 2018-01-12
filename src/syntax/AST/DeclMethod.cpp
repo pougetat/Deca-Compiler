@@ -86,6 +86,13 @@ void DeclMethod::Display(string tab)
     m_body->Display(tab + "--");
 }
 
+void DeclMethod::CodeGenDeclMethod(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+
+}
+
 ///////////// PRIVATE METHODS /////////////
 
 void DeclMethod::VerifyParamTypes(
@@ -144,6 +151,5 @@ MethodExpNature * DeclMethod::InitMethodEnv(
             )
         );
     }
-
     return method_exp_nature;
 }

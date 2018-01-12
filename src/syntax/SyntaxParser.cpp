@@ -975,7 +975,7 @@ AbstractExpr * SyntaxParser::ParsePrimaryExpr(int * cur_token_index)
                 method_args = ParseListExpr(cur_token_index);
             }
             ShouldMatchToken(TOKEN_CPARENT, cur_token_index);
-            return new MethodCall(ident, method_args);
+            return new MethodCall(NULL, ident, method_args);
         }
         return ident;
     }

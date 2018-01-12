@@ -97,6 +97,11 @@ void DeclClass::CodeGenDeclClass(
 {
     CodeGenClassHeader(env_types, gen_env);
     CodeGenClassConstructor(env_types, gen_env);
+
+    for (DeclMethod * decl_method : *m_class_methods)
+    {
+        decl_method->CodeGenDeclMethod(env_types, gen_env);
+    }
 }
 
 ///////////// PRIVATE METHODS /////////////

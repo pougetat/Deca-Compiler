@@ -1,22 +1,18 @@
 #include "MethodCall.h"
 
 MethodCall::MethodCall(
-    Identifier * method_name, 
-    vector<AbstractExpr *> * method_args
-)
-{
-    m_selection_expr = NULL;
-    m_method_identifier = method_name;
-    m_method_args = method_args;
-}
-
-MethodCall::MethodCall(
     AbstractExpr * selection_expr,
     Identifier * method_name, 
-    vector<AbstractExpr *> * method_args
-)
+    vector<AbstractExpr *> * method_args)
 {
-    m_selection_expr = selection_expr;
+    if (selection_expr == NULL)
+    {
+        m_selection_expr = new This(true);
+    }
+    else
+    {
+        m_selection_expr = selection_expr;
+    }
     m_method_identifier = method_name;
     m_method_args = method_args;
 }
@@ -61,11 +57,92 @@ AbstractType * MethodCall::VerifyExpr(
     EnvironmentExp * env_exp,
     string * class_name)
 {
-    throw runtime_error("NOT IMPLEMENTED YET");
-    return NULL;
+    MethodExpNature * method_exp_nature = VerifyClassHasMethod(
+        env_types,
+        env_exp,
+        class_name
+    );
+
+    VerifyMethodParams(
+        env_types,
+        env_exp,
+        class_name,
+        method_exp_nature->GetMethodSignature()
+    );
+
+    throw runtime_error("NOT IMPLEMENTED : VERIFY Method Call");
 }
 
 void MethodCall::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {}
+
+// PRIVATE METHODS
+
+MethodExpNature * MethodCall::VerifyClassHasMethod(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string * class_name)
+{
+    AbstractType * selection_expr_type = 
+        m_selection_expr->VerifyExpr(
+            env_types,
+            env_exp,
+            class_name
+        );
+
+    string selection_class_name = 
+        ((ClassType *) selection_expr_type)->m_class_name;
+
+    EnvironmentExp * class_env_exp = 
+        env_types->GetClassEnvExp(
+            selection_class_name
+        );
+
+    if (!class_env_exp->ContainsSymbol(m_method_identifier->m_symbol))
+    {
+        throw runtime_error(
+            "[METHOD CALL : '" + m_method_identifier->m_symbol + "' "
+            + "does not belong to class '" +  selection_class_name + "']"
+        );
+    }
+
+    return (MethodExpNature *) class_env_exp
+        ->GetExpDefinition(m_method_identifier->m_symbol)
+        ->GetTypeNature();
+}
+
+void MethodCall::VerifyMethodParams(
+    EnvironmentType * env_types,
+    EnvironmentExp * env_exp,
+    string * class_name,
+    vector<AbstractType *> * method_signature)
+{
+    if (method_signature->size() != m_method_args->size())
+    {
+        throw runtime_error(
+            "[METHOD CALL : '"  + m_method_identifier->m_symbol + "' "
+            + "mismatch between argument length and signature length]"
+        );
+    }
+
+    for (int param_num = 0; param_num < method_signature->size(); param_num++)
+    {
+        AbstractType * arg_type = m_method_args->at(param_num)->VerifyExpr(
+            env_types,
+            env_exp,
+            class_name
+        );
+        AbstractType * expected_type = method_signature->at(param_num);
+
+        if (!arg_type->IsSameType(expected_type))
+        {
+            throw runtime_error(
+                "[METHOD CALL : '" + m_method_identifier->m_symbol + "' : "
+                + "expected param of type '" + expected_type->Symbol()
+                + "' but found type '" + arg_type->Symbol() + "']"
+            );
+        }   
+    }
+}
