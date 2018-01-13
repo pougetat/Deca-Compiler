@@ -29,7 +29,7 @@ void GeneratorEnvironment::GenLoadFromMemory(
     {
         GenLoadFieldFromMemory(env_types, var_symbol, var_exp);
     }
-    if (var_exp_nature->IsVarExpNature())
+    if (var_exp_nature->IsVarExpNature() || var_exp_nature->IsParamExpNature())
     {
         GenLoadLocalFromMemory(env_types, var_symbol, var_exp);
     }
@@ -44,7 +44,7 @@ void GeneratorEnvironment::GenStoreInMemory(
         ExpDefinition * var_def = m_env_exp->GetExpDefinition(var_symbol);
         AbstractExpNature * var_exp_nature = var_def->GetTypeNature();
         
-        if (var_exp_nature->IsVarExpNature())
+        if (var_exp_nature->IsVarExpNature() || var_exp_nature->IsParamExpNature())
         {
             GenStoreLocalInMemory(env_types, var_symbol);
         }
@@ -59,6 +59,14 @@ int GeneratorEnvironment::GetNewLabel()
 {
     m_num_labels++;
     return m_num_labels;
+}
+
+void GeneratorEnvironment::SetLocalMemoryLocation(string var_symbol)
+{
+    m_num_vars++;
+    m_env_exp
+        ->GetExpDefinition(var_symbol)
+        ->SetMemoryLocation(m_num_vars);
 }
 
 ///////////// PRIVATE METHODS /////////////
@@ -141,12 +149,4 @@ int GeneratorEnvironment::GetLocalMemoryLocation(string var_symbol)
 {
     return
         m_env_exp->GetExpDefinition(var_symbol)->GetMemoryLocation();
-}
-
-void GeneratorEnvironment::SetLocalMemoryLocation(string var_symbol)
-{
-    m_num_vars++;
-    m_env_exp
-        ->GetExpDefinition(var_symbol)
-        ->SetMemoryLocation(m_num_vars);
 }

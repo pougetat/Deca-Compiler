@@ -88,17 +88,20 @@ void MethodCall::CodeGenExpr(
 
     m_selection_expr->CodeGenExpr(env_types, gen_env);
 
+    for (AbstractExpr * method_arg : *m_method_args)
+    {
+        method_arg->CodeGenExpr(env_types, gen_env);
+    }
+
     gen_env->output_file
         << "    invokevirtual " << selection_class_name << "/"
         << m_method_identifier->m_symbol;
-
     gen_env->output_file << "(";
     for (AbstractExpr * method_arg : *m_method_args)
     {
         gen_env->output_file << method_arg->m_expr_type->JasminSymbol();
     }
     gen_env->output_file << ")";
-
     gen_env->output_file << return_type->JasminSymbol() << endl;
 }
 

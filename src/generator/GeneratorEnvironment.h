@@ -27,6 +27,8 @@ class GeneratorEnvironment
 
         int GetNewLabel();
 
+        void SetLocalMemoryLocation(string var_symbol);
+
     private:
 
         int m_num_vars = 0;
@@ -54,8 +56,6 @@ class GeneratorEnvironment
             EnvironmentType * env_types,
             string var_symbol
         );
-
-        void SetLocalMemoryLocation(string var_symbol);
 
         int GetLocalMemoryLocation(string var_symbol);
 };
