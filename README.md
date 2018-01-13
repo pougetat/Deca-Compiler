@@ -40,7 +40,7 @@ Compile a deca program (The executable is in build/src/)
 ./main sample.deca
 ```
 
-Here is a sample .deca program
+Sample .deca program :
 
 ```
 {
@@ -61,7 +61,7 @@ Here is a sample .deca program
 }
 ```
 
-Here is another sample deca program with classes:
+Sample deca program with classes :
 
 ```
 class A {
@@ -80,6 +80,30 @@ class C {
 {
     A a = new A();
     print(a.b.c.c);
+}
+```
+
+Sample deca program with classes and methods :
+
+```
+class A {
+
+    B b = new B();
+
+    void hello()
+    {
+        print(b.b);
+        print("hello");
+    }
+}
+
+class B {
+    int b;
+}
+
+{
+    A a = new A();
+    a.hello();
 }
 ```
 
