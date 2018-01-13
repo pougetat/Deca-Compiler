@@ -44,3 +44,8 @@ string FloatType::Symbol()
 {
     return string("float");
 }
+
+string FloatType::JasminSymbol()
+{
+    return string("F");
+}

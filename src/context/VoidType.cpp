@@ -44,3 +44,8 @@ string VoidType::Symbol()
 {
     return string("void");
 }
+
+string VoidType::JasminSymbol()
+{
+    return string("V");
+}

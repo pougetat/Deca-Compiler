@@ -44,3 +44,8 @@ string BooleanType::Symbol()
 {
     return string("boolean");
 }
+
+string BooleanType::JasminSymbol()
+{
+    return string("Z");
+}

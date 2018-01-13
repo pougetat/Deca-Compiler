@@ -39,3 +39,18 @@ void MethodBody::Display(string tab)
         inst->Display(tab + "----");
     }
 }
+
+void MethodBody::CodeGenMethodBody(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    for (DeclVar * decl_var : *m_list_decl_var)
+    {
+        decl_var->CodeGenExpr(env_types, gen_env);
+    }
+    for (AbstractInst * inst : *m_list_inst)
+    {
+        inst->CodeGenInst(env_types, gen_env);
+    }
+    gen_env->output_file << "    return" << endl;
+}

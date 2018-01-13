@@ -53,3 +53,8 @@ string ClassType::Symbol()
 {
     return string("class");
 }
+
+string ClassType::JasminSymbol()
+{
+    return "L" + m_class_name + ";";
+}

@@ -90,7 +90,9 @@ void DeclMethod::CodeGenDeclMethod(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
-
+    CodeGenMethodHeader(env_types, gen_env);
+    m_body->CodeGenMethodBody(env_types, gen_env);
+    gen_env->output_file << ".end method" << endl;
 }
 
 ///////////// PRIVATE METHODS /////////////
@@ -152,4 +154,27 @@ MethodExpNature * DeclMethod::InitMethodEnv(
         );
     }
     return method_exp_nature;
+}
+
+void DeclMethod::CodeGenMethodHeader(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    // method signature in jasmin
+    
+    AbstractType * return_type = env_types->GetType(m_return_type->m_symbol);
+
+    gen_env->output_file 
+        << ".method " 
+        << m_name->m_symbol << "(";
+    for (DeclParam * decl_param : *m_params)
+    {
+        decl_param->CodeGenDeclParam(env_types, gen_env);
+    }
+    gen_env->output_file << ")";
+    gen_env->output_file << return_type->JasminSymbol() << endl;
+
+    // stack limit and locals limit
+    gen_env->output_file << "    .limit stack 10" << endl;
+    gen_env->output_file << "    .limit locals 10" << endl;
 }

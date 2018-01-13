@@ -16,12 +16,12 @@ class ExpDefinition : public AbstractDefinition
         int m_memory_location;
         
         ExpDefinition(AbstractExpNature * exp_nature, AbstractType * type);
-        
-        void SetMemoryLocation(int memory_location);
 
         AbstractType * GetType();
 
         AbstractExpNature * GetTypeNature();
+
+        void SetMemoryLocation(int memory_location);
 
         int GetMemoryLocation();
 };

@@ -5,26 +5,33 @@ GeneratorEnvironment::GeneratorEnvironment(
     string * jasmin_file)
 {
     m_env_exp = env_exp;
-    output_file = ofstream(*jasmin_file);
+    output_file = ofstream(*jasmin_file, ios::out | ios::app);
 }
 
 void GeneratorEnvironment::GenLoadFromMemory(
     EnvironmentType * env_types,
     string var_symbol)
 {    
+    ExpDefinition * var_exp = NULL;
+
     if (m_env_exp->ContainsSymbol(var_symbol))
     {
-        ExpDefinition * var_def = m_env_exp->GetExpDefinition(var_symbol);
-        AbstractExpNature * var_exp_nature = var_def->GetTypeNature();
-        
-        if (var_exp_nature->IsFieldExpNature())
-        {
-            GenLoadFieldFromMemory(env_types, var_symbol);
-        }
-        else
-        {
-            GenLoadLocalFromMemory(env_types, var_symbol);
-        }
+        var_exp = m_env_exp->GetExpDefinition(var_symbol);
+    }
+    else if (m_env_exp->SupContainsSymbol(var_symbol))
+    {
+        var_exp = m_env_exp->GetSupExpDefinition(var_symbol);
+    }
+
+    AbstractExpNature * var_exp_nature = var_exp->GetTypeNature();
+
+    if (var_exp_nature->IsFieldExpNature())
+    {
+        GenLoadFieldFromMemory(env_types, var_symbol, var_exp);
+    }
+    if (var_exp_nature->IsVarExpNature())
+    {
+        GenLoadLocalFromMemory(env_types, var_symbol, var_exp);
     }
 }
 
@@ -54,14 +61,15 @@ int GeneratorEnvironment::GetNewLabel()
     return m_num_labels;
 }
 
-// PRIVATE METHODS
+///////////// PRIVATE METHODS /////////////
 
 void GeneratorEnvironment::GenLoadLocalFromMemory(
     EnvironmentType * env_types,
-    string var_symbol)
+    string var_symbol,
+    ExpDefinition * var_exp)
 {
     string load_instruct = "";
-    AbstractType * var_type = m_env_exp->GetExpDefinition(var_symbol)->GetType();
+    AbstractType * var_type = var_exp->GetType();
     
     if (var_type->IsIntType() || var_type->IsBooleanType())
     {
@@ -82,33 +90,16 @@ void GeneratorEnvironment::GenLoadLocalFromMemory(
 
 void GeneratorEnvironment::GenLoadFieldFromMemory(
     EnvironmentType * env_types,
-    string var_symbol)
+    string var_symbol,
+    ExpDefinition * var_exp)
 {
-    string var_jasmin_type = "";
-    AbstractType * var_type = m_env_exp->GetExpDefinition(var_symbol)->GetType();
-
-    if (var_type->IsIntType())
-    {
-        var_jasmin_type = "I";
-    }
-    if (var_type->IsBooleanType())
-    {
-        var_jasmin_type = "Z";
-    }
-    if (var_type->IsFloatType())
-    {
-        var_jasmin_type = "F";
-    }
-    if (var_type->IsClassType())
-    {
-        var_jasmin_type = "L" + ((ClassType *) var_type)->m_class_name + ";";
-    }
+    AbstractType * var_type = var_exp->GetType();
 
     output_file << "    aload_0" << endl;
     output_file
         << "    getfield "
         << m_env_exp->m_englobing_class << "/" << var_symbol
-        << " " << var_jasmin_type
+        << " " << var_type->JasminSymbol()
         << endl;
 }
 
@@ -144,9 +135,7 @@ void GeneratorEnvironment::GenStoreLocalInMemory(
 void GeneratorEnvironment::GenStoreFieldInMemory(
     EnvironmentType * env_types,
     string var_symbol)
-{
-
-}
+{}
 
 int GeneratorEnvironment::GetLocalMemoryLocation(string var_symbol)
 {

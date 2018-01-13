@@ -28,6 +28,14 @@ void DeclParam::Display(string tab)
     m_param_name->Display(tab + "--");
 }
 
+void DeclParam::CodeGenDeclParam(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    AbstractType * param_type = env_types->GetType(m_param_type->m_symbol);
+    gen_env->output_file << param_type->JasminSymbol();
+}
+
 ///////////// PRIVATE METHODS /////////////
 
 void DeclParam::AddTypeToSignature(

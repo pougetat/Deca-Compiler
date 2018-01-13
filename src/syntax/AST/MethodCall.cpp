@@ -76,9 +76,33 @@ AbstractType * MethodCall::VerifyExpr(
 void MethodCall::CodeGenExpr(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
-{}
+{
+    string selection_class_name = 
+        ((ClassType *) m_selection_expr->m_expr_type)->m_class_name;
+    EnvironmentExp * class_env_exp = 
+        env_types->GetClassEnvExp(
+            selection_class_name
+        );
+    AbstractType * return_type = 
+        class_env_exp->GetExpDefinition(m_method_identifier->m_symbol)->GetType();
 
-// PRIVATE METHODS
+    m_selection_expr->CodeGenExpr(env_types, gen_env);
+
+    gen_env->output_file
+        << "    invokevirtual " << selection_class_name << "/"
+        << m_method_identifier->m_symbol;
+
+    gen_env->output_file << "(";
+    for (AbstractExpr * method_arg : *m_method_args)
+    {
+        gen_env->output_file << method_arg->m_expr_type->JasminSymbol();
+    }
+    gen_env->output_file << ")";
+
+    gen_env->output_file << return_type->JasminSymbol() << endl;
+}
+
+///////////// PRIVATE METHODS /////////////
 
 ExpDefinition * MethodCall::VerifyClassHasMethod(
     EnvironmentType * env_types,

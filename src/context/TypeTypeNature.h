@@ -4,8 +4,6 @@
 #include "AbstractTypeNature.h"
 
 class TypeTypeNature : public AbstractTypeNature
-{
-
-};
+{};
 
 #endif

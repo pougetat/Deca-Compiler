@@ -8,10 +8,6 @@
 class GeneratorEnvironment
 {
     public:
-        
-        int m_num_vars = 0;
-
-        int m_num_labels = 0;
 
         ofstream output_file;
 
@@ -33,14 +29,20 @@ class GeneratorEnvironment
 
     private:
 
+        int m_num_vars = 0;
+
+        int m_num_labels = 0;
+
         void GenLoadLocalFromMemory(
             EnvironmentType * env_types,
-            string var_symbol
+            string var_symbol,
+            ExpDefinition * var_exp
         );
 
         void GenLoadFieldFromMemory(
             EnvironmentType * env_types,
-            string var_symbol
+            string var_symbol,
+            ExpDefinition * var_exp
         );
 
         void GenStoreLocalInMemory(

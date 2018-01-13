@@ -75,6 +75,8 @@ void DeclField::CodeGenDeclField(
     EnvironmentType * env_types,
     GeneratorEnvironment * gen_env)
 {
+    AbstractType * field_type = env_types->GetType(m_field_type->m_symbol);
+    
     gen_env->output_file << ".field ";
     
     if (m_field_visibility == VISIBILITY_PRIVATE)
@@ -87,27 +89,7 @@ void DeclField::CodeGenDeclField(
     }
     
     gen_env->output_file << m_field_name->m_symbol;
-
-    AbstractType * var_type = env_types->GetType(m_field_type->m_symbol);
-    string var_jasmin_type = "";
-
-    if (var_type->IsFloatType())
-    {
-        var_jasmin_type = "F";
-    }
-    if (var_type->IsBooleanType())
-    {
-        var_jasmin_type = "Z";
-    }
-    if (var_type->IsIntType())
-    {
-        var_jasmin_type = "I";
-    }
-    if (var_type->IsClassType())
-    {
-        var_jasmin_type = "L" + m_field_type->m_symbol + ";";
-    }
-    gen_env->output_file << " " << var_jasmin_type << endl;
+    gen_env->output_file << " " << field_type->JasminSymbol() << endl;
 }
 
 void DeclField::CodeGenFieldInit(
@@ -116,31 +98,12 @@ void DeclField::CodeGenFieldInit(
     string class_name)
 {
     AbstractType * var_type = env_types->GetType(m_field_type->m_symbol);
-    string var_jasmin_type = "";
     
     m_init->CodeGenExpr(env_types, gen_env, var_type);
-
-    if (var_type->IsIntType())
-    {
-        var_jasmin_type = "I";
-    }
-    if (var_type->IsBooleanType())
-    {
-        var_jasmin_type = "Z";
-    }
-    if (var_type->IsFloatType())
-    {
-        var_jasmin_type = "F";
-    }
-    if (var_type->IsClassType())
-    {
-        var_jasmin_type = "L" + m_field_type->m_symbol + ";";
-    }
-
     gen_env->output_file 
         << "    putfield " 
         << class_name << "/" << m_field_name->m_symbol
-        << " " << var_jasmin_type << endl;
+        << " " << var_type->JasminSymbol() << endl;
 }
 
 ///////////// PRIVATE METHODS /////////////

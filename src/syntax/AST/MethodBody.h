@@ -30,6 +30,11 @@ class MethodBody
         );
 
         void Display(string tab);
+
+        void CodeGenMethodBody(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

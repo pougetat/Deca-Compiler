@@ -65,6 +65,11 @@ class DeclMethod {
             EnvironmentType * env_types,
             Identifier * class_name
         );
+
+        void CodeGenMethodHeader(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
 };
 
 #endif

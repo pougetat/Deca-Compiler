@@ -97,11 +97,7 @@ void DeclClass::CodeGenDeclClass(
 {
     CodeGenClassHeader(env_types, gen_env);
     CodeGenClassConstructor(env_types, gen_env);
-
-    for (DeclMethod * decl_method : *m_class_methods)
-    {
-        decl_method->CodeGenDeclMethod(env_types, gen_env);
-    }
+    CodeGenClassMethods(env_types, gen_env);
 }
 
 ///////////// PRIVATE METHODS /////////////
@@ -196,4 +192,27 @@ void DeclClass::CodeGenClassConstructor(
 
     gen_env->output_file << "    return" << endl;
     gen_env->output_file << ".end method" << endl;
+}
+
+void DeclClass::CodeGenClassMethods(
+    EnvironmentType * env_types,
+    GeneratorEnvironment * gen_env)
+{
+    for (DeclMethod * decl_method : *m_class_methods)
+    {
+        string file_name = m_class_name->m_symbol + ".j";
+        
+        EnvironmentExp * method_env_exp = 
+            ((MethodExpNature *) env_types
+                ->GetClassEnvExp(m_class_name->m_symbol)
+                ->GetExpDefinition(decl_method->m_name->m_symbol)
+                ->GetTypeNature())->GetMethodEnv();
+        
+        GeneratorEnvironment * method_gen_env = new GeneratorEnvironment(
+            method_env_exp,
+            &file_name
+        );
+
+        decl_method->CodeGenDeclMethod(env_types, method_gen_env);
+    }
 }

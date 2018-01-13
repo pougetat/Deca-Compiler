@@ -44,3 +44,8 @@ string IntType::Symbol()
 {
     return string("int");
 }
+
+string IntType::JasminSymbol()
+{
+    return string("I");
+}

@@ -25,6 +25,8 @@ class EnvironmentExp
 
         EnvironmentExp * GetParentEnv();
 
+        EnvironmentExp * GetMethodEnv(string method_name);
+
         void InsertExpDefinition(string symbol, ExpDefinition * exp_def);
 
         bool ContainsSymbol(string symbol);

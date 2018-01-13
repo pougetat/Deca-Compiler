@@ -44,3 +44,8 @@ string NullType::Symbol()
 {
     return string("null");
 }
+
+string NullType::JasminSymbol()
+{
+    return NULL;
+}

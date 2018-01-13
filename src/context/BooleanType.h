@@ -24,6 +24,8 @@ class BooleanType : public AbstractType
         bool IsSameType(AbstractType * other_type);
 
         string Symbol();
+
+        string JasminSymbol();
 };
 
 #endif

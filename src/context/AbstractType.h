@@ -26,6 +26,8 @@ class AbstractType
         virtual bool IsSameType(AbstractType * other_type) = 0;
         
         virtual string Symbol() = 0;
+
+        virtual string JasminSymbol() = 0;
 };
 
 #endif

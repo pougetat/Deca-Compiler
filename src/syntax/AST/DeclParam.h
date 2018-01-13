@@ -19,6 +19,11 @@ class DeclParam
 
         void Display(string tab);
 
+        void CodeGenDeclParam(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
+
     private:
 
         void AddTypeToSignature(

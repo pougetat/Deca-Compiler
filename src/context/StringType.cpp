@@ -44,3 +44,8 @@ string StringType::Symbol()
 {
     return string("string");
 }
+
+string StringType::JasminSymbol()
+{
+    return string("Ljava/lang/String;");
+}

@@ -7,6 +7,7 @@
 
 #include "../../context/EnvironmentExp.h"
 #include "../../context/ClassTypeNature.h"
+#include "../../context/MethodExpNature.h"
 #include "../../context/ClassType.h"
 
 #include "../../generator/GeneratorEnvironment.h"
@@ -61,6 +62,11 @@ class DeclClass {
         );
 
         void CodeGenClassConstructor(
+            EnvironmentType * env_types,
+            GeneratorEnvironment * gen_env
+        );
+
+        void CodeGenClassMethods(
             EnvironmentType * env_types,
             GeneratorEnvironment * gen_env
         );
