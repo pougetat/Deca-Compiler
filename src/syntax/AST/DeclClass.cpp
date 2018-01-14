@@ -11,7 +11,7 @@ void DeclClass::VerifyClassName(EnvironmentType * env_types)
 
     if (m_parent_class_name == NULL)
     {
-        m_parent_class_name = new Identifier("Object");
+        m_parent_class_name = new Identifier("java/lang/Object");
     }
 
     AddClassToEnvTypes(env_types, m_parent_class_name->m_symbol);
@@ -155,15 +155,7 @@ void DeclClass::CodeGenClassHeader(
     GeneratorEnvironment * gen_env)
 {
     gen_env->output_file << ".class public " << m_class_name->m_symbol << endl;
-
-    if (m_parent_class_name->m_symbol == "Object")
-    {
-        gen_env->output_file << ".super java/lang/Object" << endl;
-    }
-    else
-    {
-        gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
-    }
+    gen_env->output_file << ".super " << m_parent_class_name->m_symbol << endl;
 
     for (DeclField * decl_field : *m_class_fields)
     {
@@ -181,7 +173,7 @@ void DeclClass::CodeGenClassConstructor(
     gen_env->output_file << "    .limit locals 10" << endl;
     gen_env->output_file << "    aload_0" << endl;
     gen_env->output_file
-        << "    invokespecial java/lang/Object/<init>()V"
+        << "    invokespecial " << m_parent_class_name->m_symbol << "/<init>()V"
         << endl;
 
     for (DeclField * decl_field : *m_class_fields)

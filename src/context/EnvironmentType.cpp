@@ -42,10 +42,10 @@ EnvironmentType::EnvironmentType()
     );
     m_env_types->insert(
         pair<string, TypeDefinition *>(
-            "Object",
+            "java/lang/Object",
             new TypeDefinition(
-                new ClassTypeNature("", "Object"),
-                new ClassType("Object")
+                new ClassTypeNature("", "java/lang/Object"),
+                new ClassType("java/lang/Object")
             )
         )
     );
